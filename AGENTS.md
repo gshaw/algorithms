@@ -32,8 +32,9 @@ an algorithm exists. The site has its own copy of everything it serves.
 mise run install   # bundle install
 mise run dev       # serve on :4007 with livereload
 mise run check     # build + spell + markdownlint + internal links
-mise run deploy    # check, then wrangler deploy
-mise run verify    # curl the live site after a deploy
+mise run deploy    # guard, check, wrangler deploy, verify
+mise run verify    # curl the live site
+mise run deploy-status  # is main live?
 ```
 
 **Read the counts, not just the exit code.** html-proofer prints `Ran on N files` and
@@ -42,8 +43,11 @@ cspell prints `Files checked: N`. A green run over zero files checked nothing.
 ## Deploys
 
 A Worker named `algorithms` serves `_site` as static files, with no script
-(`wrangler.jsonc`). `mise run deploy` builds and deploys from a Mac; nothing deploys on
-push yet. GitHub Actions runs `mise run -c check` on pushes and PRs.
+(`wrangler.jsonc`). Nothing deploys on push. **Deploy with `mise run deploy`**, never
+`wrangler deploy` by hand: `scripts/deploy-guard.sh` refuses unless the branch is `main`,
+the tree is clean and `main` equals `origin/main`. Then it runs `check` (which builds),
+deploys tagged with the commit, and runs `verify`. The rule is in
+[Workshop's deploy note](https://github.com/gshaw/Workshop/blob/main/Tooling/deploy.md). GitHub Actions runs `mise run -c check` on pushes and PRs.
 
 `Gemfile` and `Gemfile.lock` are identical to Gerry's other Jekyll sites; change them
 together.

@@ -13,9 +13,12 @@ mise install       # Ruby, Node, cspell, markdownlint, html-proofer, wrangler
 mise run install   # bundle install
 mise run dev       # http://localhost:4007 with livereload
 mise run check     # build, spell check, markdown lint, internal links
-mise run deploy    # check, then deploy the Worker
+mise run deploy    # guard, check, deploy the Worker, verify
 mise run verify    # check the live site
+mise run deploy-status  # is main live?
 ```
+
+Deploy with `mise run deploy`. It refuses unless you're on a clean `main` that matches GitHub's, then checks, deploys and runs `mise run verify`. Nothing else ships to production. The rule is in [Workshop's deploy note](https://github.com/gshaw/Workshop/blob/main/Tooling/deploy.md).
 
 ## Licence
 
