@@ -75,7 +75,10 @@ layout: page
   <table>
     <thead><tr><th>Case</th><th>Input</th><th>Expected</th></tr></thead>
     <tbody>
+      {%- assign shown = 0 %}
       {%- for case in data.cases %}
+      {%- unless case.tags contains "published" or case.tags contains "edge" or case.tags contains "invalid" or case.tags contains "hand" %}{% continue %}{% endunless %}
+      {%- assign shown = shown | plus: 1 %}
       <tr>
         <td><code>{{ case.id }}</code><small>{{ case.operation }} · {{ case.tags | join: ", " }}</small></td>
         <td>{%- for pair in case.input %}<code>{{ pair[0] }}</code> {{ pair[1] | jsonify }}{% unless forloop.last %}<br>{% endunless %}{% endfor -%}</td>
@@ -85,6 +88,9 @@ layout: page
     </tbody>
   </table>
 </div>
+{%- assign hidden = data.cases.size | minus: shown %}
+{% if hidden > 0 %}<p class="muted">Plus {{ hidden }} cases at random points, from the reference program, in <a href="/{{ page.slug }}/vectors.json">vectors.json</a>.</p>{% endif %}
+
 
 <h2>Implementations</h2>
 <div class="fields compact">
