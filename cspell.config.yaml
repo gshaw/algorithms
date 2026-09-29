@@ -11,6 +11,7 @@ ignorePaths:
   - "vendor"
   - "Gemfile.lock"
   - "assets/css/pico.min.css"
+  - "wmm/sources" # NOAA's files, verbatim
 words:
   - gshaw
   - jsonify # Liquid filter
@@ -20,10 +21,14 @@ words:
   - Segoe # the diagrams' fallback font
   - lede # the subtitle class
   - pico
+  - Ellip # NOAA's WMM library, called by scripts/wmm/reference.c
+  - coefs # NOAA's WMM library
   # Standards, authorities and authors.
   - Karney
   - Krüger
   - Meeus
+  - Boneh # a WMM2025 report author
+  - Chulliat # a WMM2025 report author
   - IAMSAR
   - IERS # International Earth Rotation and Reference Systems Service
   - MGRS
