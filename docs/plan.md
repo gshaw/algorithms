@@ -140,7 +140,11 @@ In the order the apps will ask. Each waits for an app that needs it.
 
 ## Open
 
-- **Distance on a sphere or the ellipsoid.** #3 recommends the sphere, matching Turf, so a
-  map and its numbers agree.
-- **Zone padding in MGRS display**: `04Q` or `4Q`. #2.
 - **ODbL**, before any time zone or border data.
+
+## Settled
+
+- **2026-09-29. Bearings measure on a sphere**, radius 6,371,008.8 m, matching Turf, so a
+  map and its numbers agree. Switching to the ellipsoid means regenerating the file. #3.
+- **2026-09-29. MGRS in the test data is GeographicLib's form**: zone padded, no spaces,
+  like `04QFJ1234567890`. How to space it for a person is the display's call. #2.

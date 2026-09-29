@@ -18,9 +18,9 @@
 - name: Bearings
   slug: bearings
   gives: Distance and bearing, degrees and mils, compass points, true, magnetic and grid north
-  standard: Great circle on a sphere, proposed
+  standard: Great circle on a sphere, FM 3-25.26 and Bowditch
   checked_against: GeographicLib's GeodSolve
-  status: planned
+  status: published
   issue: 3
 - name: Astronomical time
   slug: astronomical-time
