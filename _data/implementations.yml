@@ -1,8 +1,7 @@
-# One entry per implementation repo. Each algorithm's result will come from the
-# repo's own conformance.json once the checker exists (issue #1). An algorithm
-# with no result shows as incomplete. planned: the repo doesn't exist yet, so
-# it isn't linked.
+# One entry per implementation repo. Its results come from the repo's own
+# conformance.json, copied into _data/conformance/ by `mise run results`. An
+# algorithm with no result, or one against older test data, shows as incomplete.
+# planned: the repo doesn't exist yet, so it isn't linked.
 - repo: gshaw/algorithms-swift
   language: Swift
   planned: true
-  results: {}

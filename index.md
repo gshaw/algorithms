@@ -48,8 +48,10 @@ Each is a public repo anyone can fork. `mise install` sets up its tools and `mis
     <tbody>
       {%- for implementation in site.data.implementations %}
       {%- assign passing = 0 %}
-      {%- for algorithm in site.data.algorithms %}{% if implementation.results[algorithm.slug].status == "passes" %}{% assign passing = passing | plus: 1 %}{% endif %}{% endfor %}
-      <tr><td>{{ implementation.repo }}<small>{{ implementation.language }}</small></td><td class="status">{% include status.html status="incomplete" %} · {{ passing }} of {{ site.data.algorithms.size }} pass</td></tr>
+      {%- assign failing = 0 %}
+      {%- for algorithm in site.data.algorithms %}{% include result.html implementation=implementation slug=algorithm.slug %}{% if result_status == "passes" %}{% assign passing = passing | plus: 1 %}{% elsif result_status == "fails" %}{% assign failing = failing | plus: 1 %}{% endif %}{% endfor %}
+      {%- if failing > 0 %}{% assign overall = "fails" %}{% elsif passing == site.data.algorithms.size %}{% assign overall = "passes" %}{% else %}{% assign overall = "incomplete" %}{% endif %}
+      <tr><td>{% if implementation.planned %}{{ implementation.repo }}{% else %}<a href="https://github.com/{{ implementation.repo }}">{{ implementation.repo }}</a>{% endif %}<small>{{ implementation.language }}</small></td><td class="status">{% include status.html status=overall %} · {{ passing }} of {{ site.data.algorithms.size }} pass</td></tr>
       {%- endfor %}
     </tbody>
   </table>

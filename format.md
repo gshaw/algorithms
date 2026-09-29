@@ -84,19 +84,37 @@ A case expecting refusal has `"expected": { "error": "outOfRange" }`. The errors
 
 ## Implementations
 
-An implementation is a public repo that follows one contract, so it can be checked the same way in any language.
+An implementation is a public repo that follows one contract, so it can be checked the same way in any language. [algorithms-template](https://github.com/gshaw/algorithms-template) is a GitHub template with the contract already wired up; [algorithms-swift](https://github.com/gshaw/algorithms-swift) is a worked example.
 
-- `mise install` sets up its tools.
-- `mise run evaluate` reads cases on standard input, one JSON object per line, and writes one result per line. It never sees `expected`.
+- `mise install` sets up its tools, including the checker, `algorithms-check`, from [this repo's releases](https://github.com/gshaw/algorithms/releases):
+
+  ```toml
+  [tools]
+  "github:gshaw/algorithms" = { version = "latest", exe = "algorithms-check" }
+  ```
+
+- `mise run evaluate` reads cases on standard input, one JSON object per line, and writes one result per line in any order. It never sees `expected`. It runs once per algorithm, and answers `notImplemented` for an algorithm it doesn't have.
 
   ```text
-  in:  {"algorithm":"wmm","id":"noaa-1","operation":"field","input":{"latitudeInDegrees":80,…}}
-  out: {"id":"noaa-1","output":{"magneticDeclinationInDegrees":-1.28,…}}
-  out: {"id":"invalid-1","error":"outOfRange"}
+  in:  {"algorithm":"wmm","id":"noaa-table-1","operation":"field","input":{"latitudeInDegrees":80,…}}
+  out: {"id":"noaa-table-1","output":{"magneticDeclinationInDegrees":1.28,…}}
+  out: {"id":"invalid-after-2030","error":"outOfRange"}
   out: {"id":"utm-1","error":"notImplemented"}
   ```
 
-- `mise run test` runs the checker against the current files and prints each case's result.
-- Its CI runs the checker weekly and on every push, and publishes the result as `conformance.json`.
+- `mise run test` runs `algorithms-check`, which feeds every published file to `mise run evaluate`, prints each case's result and writes `conformance.json`. It skips placeholder files.
+- Its CI runs the check weekly and on every push, and commits `conformance.json` to the root of `main`, where this site reads it.
 
-An algorithm with every case passing **passes**. One with a failing case **fails**. One with any `notImplemented` case is **incomplete**.
+  ```json
+  {
+    "checker": "0.1.0",
+    "source": "https://algorithms.gshaw.ca/algorithms.json",
+    "results": {
+      "wmm": { "status": "passes", "publishedDate": "2026-09-29", "cases": 135, "passed": 135, "failed": 0, "notImplemented": 0 }
+    }
+  }
+  ```
+
+An algorithm with every case passing **passes**. One with a failing case **fails**. One with any `notImplemented` case is **incomplete**. A result against an older `publishedDate` counts as incomplete until the check runs again.
+
+`algorithms-check -h` lists its options: `-only wmm` checks one algorithm, and `-source` takes a directory of test files for working offline.

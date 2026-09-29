@@ -92,12 +92,12 @@ layout: page
     <thead><tr><th>Repo</th><th>Status</th></tr></thead>
     <tbody>
       {%- for implementation in site.data.implementations %}
-      {%- assign result = implementation.results[page.slug] %}
+      {%- include result.html implementation=implementation slug=page.slug %}
       <tr>
         <td>{% if implementation.planned %}{{ implementation.repo }}{% else %}<a href="https://github.com/{{ implementation.repo }}">{{ implementation.repo }}</a>{% endif %}<small>{{ implementation.language }}</small></td>
         <td class="status">
-          {%- if result.status == "passes" %}{% include status.html status="passes" %}
-          {%- elsif result.status == "fails" %}{% include status.html status="fails" %} {{ result.failed }} of {{ data.cases.size }}
+          {%- if result_status == "passes" %}{% include status.html status="passes" %}
+          {%- elsif result_status == "fails" %}{% include status.html status="fails" %} {{ result_failed }} of {{ data.cases.size }}
           {%- else %}{% include status.html status="incomplete" %}{% endif -%}
         </td>
       </tr>
