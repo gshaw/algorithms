@@ -17,6 +17,9 @@ import subprocess
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "lib"))
+import vectors_json  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[2]
 LOG = ROOT / "utm-mgrs" / "sources" / "geoconvert.txt"
 VECTORS = ROOT / "_data" / "vectors" / "utm-mgrs.json"
@@ -281,7 +284,7 @@ def main():
     if data.get("cases") != cases:
         data["publishedDate"] = datetime.date.today().isoformat()
     data["cases"] = cases
-    VECTORS.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
+    VECTORS.write_text(vectors_json.dumps(data))
     print(f"Wrote {len(cases)} cases to {VECTORS.relative_to(ROOT)}")
 
 

@@ -42,8 +42,13 @@ run = ["gofmt -l . | (! grep .)", "go vet ./...", "go test ./..."]
 dir = "checker"
 run = "go run . -source ../_data/vectors -out ''"
 
+# Every published vectors.json must equal its source; see scripts/check-vectors.py.
+[tasks.vectors]
+depends = ["build"]
+run = "python3 scripts/check-vectors.py"
+
 [tasks.check]
-depends = ["spell", "markdownlint", "links", "checker"]
+depends = ["spell", "markdownlint", "links", "checker", "vectors"]
 
 # A Worker serving _site as static files, on algorithms.gshaw.ca. See wrangler.jsonc.
 # The one way to production; see Workshop's Tooling/deploy.md. check builds _site,

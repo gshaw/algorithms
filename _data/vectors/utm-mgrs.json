@@ -565,7 +565,7 @@
         "edge"
       ],
       "input": {
-        "latitudeInDegrees": -1e-07,
+        "latitudeInDegrees": -1.0e-07,
         "longitudeInDegrees": 10.0
       },
       "expected": {
@@ -1003,7 +1003,7 @@
         "edge"
       ],
       "input": {
-        "latitudeInDegrees": -1e-07,
+        "latitudeInDegrees": -1.0e-07,
         "longitudeInDegrees": 10.0,
         "precisionInDigits": 5
       },
