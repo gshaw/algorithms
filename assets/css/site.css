@@ -96,3 +96,62 @@ footer.page {
   font-size: 0.875em;
   border-top: var(--pico-border-width) solid var(--pico-muted-border-color);
 }
+
+/* The way home, above the title on every page but the home page. Each link is
+   a 44px tap target; the negative margins keep it compact. */
+nav.crumbs {
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 0.875rem;
+  margin: -0.7rem 0 -0.45rem;
+}
+nav.crumbs a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.7rem 0;
+  color: var(--pico-muted-color);
+  text-decoration: none;
+}
+nav.crumbs a:hover,
+nav.crumbs a:focus-visible {
+  color: var(--pico-primary);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+nav.crumbs img {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+nav.crumbs + h1 {
+  margin-top: 0;
+}
+
+/* An algorithm's page. Its field tables share one first-column width, so they
+   line up down the page. The last row has no rule: the next heading draws one. */
+.headline {
+  font-size: 1.15em;
+}
+.fields table {
+  table-layout: fixed;
+}
+.fields td:first-child,
+.fields th:first-child {
+  width: 14em;
+}
+.fields tr:last-child > * {
+  border-bottom: 0;
+}
+.fields code {
+  overflow-wrap: anywhere;
+}
+figure.diagram img {
+  max-width: 32rem;
+  width: 100%;
+}
+@media (max-width: 40rem) {
+  .fields td:first-child,
+  .fields th:first-child {
+    width: 40%;
+  }
+}

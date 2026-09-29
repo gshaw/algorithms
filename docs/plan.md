@@ -49,19 +49,25 @@ for a number.
 At `algorithms.gshaw.ca/{name}/`, with its test data at `/{name}/vectors.json`. Jekyll
 builds the page from the file, so the two can't drift.
 
-1. **Title**: what it computes, in plain words.
-2. **Subtitle**: the standard, whose it is, its licence.
-3. **Headline**: the number of cases, and the expiry date if there is one.
-4. **Inputs** and **Outputs**: a unit in every name, and the range each takes.
-5. **Accuracy**: each output's tolerance and why.
-6. **Edge cases**: the named cases and what's right for each.
-7. **For agents**: a short brief to paste into an agent, naming the method and the
+1. **Breadcrumb**: back to the home page.
+2. **Title**: what it computes, in plain words.
+3. **Subtitle**: the standard, whose it is, its licence.
+4. **Headline**: the number of cases, and the expiry date if there is one.
+5. **What it is**: the problem in plain words, for someone who hasn't met it, with a
+   diagram where one explains it better than words. LandNav's declination help sheet is
+   the model. Diagrams are SVGs in `assets/diagrams/`, drawn for light and dark.
+6. **Inputs** and **Outputs**: a unit in every name, and the range each takes.
+7. **Accuracy**: each output's tolerance and why.
+8. **Edge cases**: the named cases and what's right for each.
+9. **For agents**: a short brief to paste into an agent, naming the method and the
    traps. A paragraph, not code.
-8. **Implementations**: one row per repo, with its language and whether it passes, fails
-   or is incomplete on the current data.
-9. **History**: each version of the file and what changed.
-10. **Source**: each source by role (standard, test values, reference program), with its
+10. **Implementations**: one row per repo, with its language and whether it passes, fails
+    or is incomplete on the current data.
+11. **History**: each version of the file and what changed.
+12. **Source**: each source by role (standard, test values, reference program), with its
     credit verbatim.
+
+Each planned algorithm has a placeholder page now, with the parts that are known.
 
 ## The test file
 

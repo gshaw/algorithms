@@ -5,7 +5,14 @@
 
 <body>
   <main class="container">
-    <h1><a href="/"><img alt="" src="{{ site.icon }}" width="64" height="64"></a>{{ page.title }}</h1>
+    {% if page.url == "/" -%}
+    <h1><img alt="" src="{{ site.icon }}" width="64" height="64">{{ page.title }}</h1>
+    {%- else -%}
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/"><img alt="" src="{{ site.icon }}" width="64" height="64">{{ site.title }}</a>
+    </nav>
+    <h1>{{ page.title }}</h1>
+    {%- endif %}
 
     {% if page.subtitle %}<p class="lede">{{ page.subtitle }}</p>{% endif %}
 

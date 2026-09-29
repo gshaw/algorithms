@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 320" role="img" aria-label="Magnetic declination: the angle from true north to magnetic north, 15 degrees east in this example">
+  <style>
+    text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; fill: #1f2937; }
+    .bg { fill: #ffffff; }
+    .ink { stroke: #1f2937; fill: none; }
+    .fill { fill: #1f2937; }
+    .muted { stroke: #6b7280; fill: none; }
+    .mutedfill { fill: #6b7280; }
+    text.muted { fill: #6b7280; stroke: none; }
+    .accent { stroke: #16a34a; fill: none; }
+    .accentfill { fill: #16a34a; }
+    text.accent { fill: #15803d; stroke: none; }
+    .small { font-size: 13px; }
+    .band1 { fill: #bfdbfe; } .band2 { fill: #93c5fd; } .band3 { fill: #60a5fa; } .band4 { fill: #3b82f6; } .night { fill: #1e3a8a; }
+    .day { fill: #fef9c3; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; }
+      .bg { fill: #161b22; }
+      .ink { stroke: #e5e7eb; }
+      .fill { fill: #e5e7eb; }
+      .muted { stroke: #9ca3af; } .mutedfill { fill: #9ca3af; } text.muted { fill: #9ca3af; }
+      .accent { stroke: #4ade80; } .accentfill { fill: #4ade80; } text.accent { fill: #4ade80; }
+      .band1 { fill: #1e3a5f; } .band2 { fill: #1b3354; } .band3 { fill: #172a47; } .band4 { fill: #12213a; } .night { fill: #0b1220; }
+      .day { fill: #3b3a1e; }
+    }
+  </style>
+  <rect class="bg" width="420" height="320" rx="12"/>
+  <!-- Base at (210, 280). True north straight up; magnetic north rotated 15° clockwise. -->
+  <line class="muted" x1="210" y1="280" x2="210" y2="70" stroke-width="2"/>
+  <path class="mutedfill" d="M210 58 l-7 16 h14 z"/>
+  <text class="muted" x="210" y="40" text-anchor="middle">True north</text>
+  <g transform="rotate(15 210 280)">
+    <line class="accent" x1="210" y1="280" x2="210" y2="70" stroke-width="2.5"/>
+    <path class="accentfill" d="M210 58 l-7 16 h14 z"/>
+  </g>
+  <text class="accent" x="275" y="62">Magnetic north</text>
+  <!-- Arc of radius 150 from 0° to 15°. -->
+  <path class="ink" d="M210 130 A150 150 0 0 1 248.8 135.1" stroke-width="1.5"/>
+  <text x="258" y="150">Declination</text>
+  <text x="258" y="168">15° E</text>
+  <text class="muted small" x="20" y="300">East declination is positive. The needle points east of true north.</text>
+</svg>

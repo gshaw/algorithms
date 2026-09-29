@@ -53,7 +53,8 @@ together.
 - `_config.yml` holds the site name, description, icon, repo URL and author; the layout
   reads them. Its `exclude` keeps the repo's docs off the site.
 - `_layouts/page.html` and `_includes/head.html` are the only layout.
-- `_data/algorithms.yml` lists the algorithms in build order, with their status and issue.
+- `_data/algorithms.yml` lists the algorithms in build order, with their slug, status and issue. Each has a page at `/{slug}/index.md`.
+- `assets/diagrams/` holds the pages' diagrams: hand-written SVGs with their own light and dark colours. Add one only where it explains something words don't.
 - `assets/css/pico.min.css` is Pico 2.1.1, copied in. `assets/css/site.css` holds the site's own rules; `table.ref` stacks a table below 64rem.
 - `icon.svg` is the source of `favicon.192x192.png` and `apple-touch-icon.png`.
 

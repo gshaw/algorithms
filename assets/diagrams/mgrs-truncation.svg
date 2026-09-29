@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 320" role="img" aria-label="An MGRS reference names the south-west corner of the square the point is in: truncate, never round">
+    <style>
+    text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; fill: #1f2937; }
+    .bg { fill: #ffffff; }
+    .ink { stroke: #1f2937; fill: none; }
+    .fill { fill: #1f2937; }
+    .muted { stroke: #6b7280; fill: none; }
+    .mutedfill { fill: #6b7280; }
+    text.muted { fill: #6b7280; stroke: none; }
+    .accent { stroke: #16a34a; fill: none; }
+    .accentfill { fill: #16a34a; }
+    text.accent { fill: #15803d; stroke: none; }
+    .small { font-size: 13px; }
+    .band1 { fill: #bfdbfe; } .band2 { fill: #93c5fd; } .band3 { fill: #60a5fa; } .band4 { fill: #3b82f6; } .night { fill: #1e3a8a; }
+    .day { fill: #fef9c3; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; }
+      .bg { fill: #161b22; }
+      .ink { stroke: #e5e7eb; }
+      .fill { fill: #e5e7eb; }
+      .muted { stroke: #9ca3af; } .mutedfill { fill: #9ca3af; } text.muted { fill: #9ca3af; }
+      .accent { stroke: #4ade80; } .accentfill { fill: #4ade80; } text.accent { fill: #4ade80; }
+      .band1 { fill: #1e3a5f; } .band2 { fill: #1b3354; } .band3 { fill: #172a47; } .band4 { fill: #12213a; } .night { fill: #0b1220; }
+      .day { fill: #3b3a1e; }
+    }
+  </style>
+  <rect class="bg" width="460" height="320" rx="12"/>
+  <!-- Four 1 m squares, 100 px each, around easting 85234 to 85236 and northing 71664 to 71666. -->
+  <g class="muted" stroke-width="1.5">
+    <rect x="60" y="40" width="200" height="200"/>
+    <line x1="160" y1="40" x2="160" y2="240"/>
+    <line x1="60" y1="140" x2="260" y2="140"/>
+  </g>
+  <text class="muted small" x="160" y="262" text-anchor="middle">85235</text>
+  <text class="muted small" x="60" y="262" text-anchor="middle">85234</text>
+  <text class="muted small" x="260" y="262" text-anchor="middle">85236</text>
+  <text class="muted small" x="52" y="244" text-anchor="end">71665</text>
+  <text class="muted small" x="52" y="144" text-anchor="end">71666</text>
+  <!-- The point at 85234.9, 71665.8 -->
+  <circle class="accentfill" cx="150" cy="160" r="6"/>
+  <text class="accent small" x="166" y="178">85234.9, 71665.8</text>
+  <circle class="fill" cx="60" cy="240" r="5"/>
+  <path class="accent" d="M144 166 L68 234" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="300" y="100">Truncate:</text>
+  <text x="300" y="120" class="accent">85234 71665</text>
+  <text x="300" y="160">Not round:</text>
+  <text x="300" y="180" class="muted">85235 71666</text>
+  <text class="muted small" x="20" y="300">A reference names the south-west corner of the square the point is in.</text>
+</svg>

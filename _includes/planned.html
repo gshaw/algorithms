@@ -1,0 +1,3 @@
+{% assign algorithm = site.data.algorithms | where: "slug", include.slug | first -%}
+<p class="muted">{{ algorithm.standard }} · {{ algorithm.authority }}</p>
+<p class="headline"><strong>Planned.</strong> No test data yet: the work is in <a href="{{ site.repo }}/issues/{{ algorithm.issue }}">issue #{{ algorithm.issue }}</a>. This page shows what it will hold.</p>

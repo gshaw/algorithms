@@ -1,24 +1,28 @@
 # One entry per algorithm, in the order they're built. status is planned until the
 # test data is published; issue is where the work is tracked until then.
 - name: Magnetic declination
+  slug: wmm
   gives: Declination, inclination and field strength for a place and date
   standard: WMM2025
   authority: NOAA and BGS
   status: planned
   issue: 1
 - name: UTM and MGRS
+  slug: utm-mgrs
   gives: Grid references both ways, grid convergence, and typed coordinates parsed
   standard: Karney's Transverse Mercator
   authority: NGA, with GeographicLib as the reference program
   status: planned
   issue: 2
 - name: Bearings
+  slug: bearings
   gives: Distance and bearing, degrees and mils, compass points, true, magnetic and grid north
   standard: Great circle on a sphere
   authority: GeographicLib as the reference program
   status: planned
   issue: 3
 - name: Sun and moon
+  slug: sun-moon
   gives: Rise, set, twilight, position, illumination and phase
   standard: Meeus, Astronomical Algorithms
   authority: USNO as the reference
