@@ -44,6 +44,7 @@ run = [
   "scripts/deploy-guard.sh",
   "wrangler deploy --tag $(git rev-parse HEAD | cut -c1-12)",
   "mise run verify",
+  'echo "✅ $(git rev-parse --short HEAD) is live on algorithms.gshaw.ca and verified."',
 ]
 
 [tasks.verify]
