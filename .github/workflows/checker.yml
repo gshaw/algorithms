@@ -32,4 +32,7 @@ jobs:
       - name: Release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" checker/dist/*.tar.gz --title "Checker $GITHUB_REF_NAME" --notes "algorithms-check $GITHUB_REF_NAME. Install with mise: \"github:gshaw/algorithms\" = { version = \"latest\", exe = \"algorithms-check\" }"
+        run: |
+          gh release create "$GITHUB_REF_NAME" checker/dist/*.tar.gz \
+            --title "Checker $GITHUB_REF_NAME" \
+            --notes 'algorithms-check. Install with mise: "github:gshaw/algorithms" = { version = "latest", exe = "algorithms-check" }'
