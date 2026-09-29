@@ -6,6 +6,8 @@ node = "24.4.1"
 "npm:markdownlint-cli2" = "0.22.1"
 "npm:wrangler" = "4.143.1"
 "gem:html-proofer" = "5.2.1"
+# The checker, in checker/. Released by tagging vX.Y.Z; see .github/workflows/checker.yml.
+go = "1.27.1"
 
 [tasks.install]
 run = "bundle install"
@@ -30,8 +32,18 @@ out=$(markdownlint-cli2 '**/*.md' 2>&1) && echo "Markdown lint passed" || { echo
 depends = ["build"]
 run = "htmlproofer _site --disable-external --no-check-internal-hash"
 
+[tasks.checker]
+dir = "checker"
+shell = "bash -c"
+run = ["gofmt -l . | (! grep .)", "go vet ./...", "go test ./..."]
+
+# Runs the checker from source over the local test files: mise run checker-run -- <command>
+[tasks.checker-run]
+dir = "checker"
+run = "go run . -source ../_data/vectors -out ''"
+
 [tasks.check]
-depends = ["spell", "markdownlint", "links"]
+depends = ["spell", "markdownlint", "links", "checker"]
 
 # A Worker serving _site as static files, on algorithms.gshaw.ca. See wrangler.jsonc.
 # The one way to production; see Workshop's Tooling/deploy.md. check builds _site,
@@ -55,6 +67,10 @@ echo "algorithms.gshaw.ca is up"
 test "$(curl -s -o /dev/null -w '%{http_code}' https://algorithms.gshaw.ca/no-such-page/)" = 404
 echo "404 page works"
 """
+
+# Copies each implementation's conformance.json into _data/conformance/. Commit the change.
+[tasks.results]
+run = "scripts/results.sh"
 
 [tasks.deploy-status]
 run = "scripts/deploy-status.sh"

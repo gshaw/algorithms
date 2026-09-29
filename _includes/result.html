@@ -1,0 +1,14 @@
+{%- comment -%}
+  One implementation's status on one algorithm, from its conformance.json in
+  _data/conformance. A result against older test data doesn't count: the status is
+  always against the current file. Sets result_status and result_failed.
+{%- endcomment -%}
+{%- assign result_key = include.implementation.repo | replace: "/", "-" -%}
+{%- assign result = site.data.conformance[result_key].results[include.slug] -%}
+{%- assign result_data = site.data.vectors[include.slug] -%}
+{%- assign result_status = "incomplete" -%}
+{%- assign result_failed = 0 -%}
+{%- if result and result.publishedDate == result_data.publishedDate -%}
+  {%- assign result_status = result.status -%}
+  {%- assign result_failed = result.failed -%}
+{%- endif -%}
