@@ -8,7 +8,7 @@ Sunrise, magnetic declination, grid references and bearings are pure functions: 
 
 ## Algorithms
 
-<table class="stacked">
+<table class="ref">
   <thead>
     <tr>
       <th>Algorithm</th>
@@ -22,8 +22,8 @@ Sunrise, magnetic declination, grid references and bearings are pure functions: 
     <tr>
       <td>{{ algorithm.name }}</td>
       <td>{{ algorithm.gives }}</td>
-      <td>{{ algorithm.standard }}<small>{{ algorithm.authority }}</small></td>
-      <td>{% if algorithm.status == "planned" %}<a href="{{ site.repo }}/issues/{{ algorithm.issue }}">Planned</a>{% endif %}</td>
+      <td data-label="Standard">{{ algorithm.standard }}<small>{{ algorithm.authority }}</small></td>
+      <td data-label="Status">{% if algorithm.status == "planned" %}<a href="{{ site.repo }}/issues/{{ algorithm.issue }}">Planned</a>{% endif %}</td>
     </tr>
     {% endfor %}
   </tbody>
