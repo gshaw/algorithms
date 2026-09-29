@@ -1,51 +1,58 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 340" role="img" aria-label="True, grid and magnetic north, and the three angles between them">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 345" role="img" aria-label="True north, grid north 5 degrees east of it, and magnetic north 20 degrees east of true, with grid convergence, the G-M angle and declination marked between them">
   <style>
     text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; fill: #1f2937; }
-    .bg { fill: #ffffff; }
-    .ink { stroke: #1f2937; fill: none; }
-    .fill { fill: #1f2937; }
-    .muted { stroke: #6b7280; fill: none; }
-    .mutedfill { fill: #6b7280; }
-    text.muted { fill: #6b7280; stroke: none; }
-    .accent { stroke: #2a78d6; fill: none; }
-    .accentfill { fill: #2a78d6; }
-    text.accent { fill: #2a78d6; stroke: none; }
-    .small { font-size: 13px; }
-    .band1 { fill: #bfdbfe; } .band2 { fill: #93c5fd; } .band3 { fill: #60a5fa; } .band4 { fill: #3b82f6; } .night { fill: #1e3a8a; }
-    .day { fill: #fef9c3; }
+    line, path, circle, ellipse, polyline { stroke-linecap: round; stroke-linejoin: round; }
+    .card { fill: #f6f8fa; }
+    .frame { fill: none; stroke: #d0d7de; }
+    .ink { stroke: #1f2937; fill: none; } .inkfill { fill: #1f2937; }
+    .muted { stroke: #6b7280; fill: none; } .mutedfill { fill: #6b7280; } text.muted { fill: #6b7280; stroke: none; }
+    .hair { stroke: #d0d7de; fill: none; } .hairfill { fill: #d0d7de; }
+    .accent { stroke: #2a78d6; fill: none; } .accentfill { fill: #2a78d6; } text.accent { fill: #2a78d6; stroke: none; }
+    .wash { fill: #2a78d6; fill-opacity: 0.14; }
+    .sun { fill: #eda100; }
+    .ground { fill: #eef1f4; }
+    .moondark { fill: #d0d7de; } .rim { stroke: #9aa5b1; fill: none; }
+    .halo { paint-order: stroke; stroke: #f6f8fa; stroke-width: 5px; stroke-linejoin: round; }
+    .dash { stroke-dasharray: 3 3; stroke-linecap: butt; }
+    .small { font-size: 13px; } .strong { font-weight: 600; } .big { font-size: 26px; font-weight: 600; }
+    .caps { font-size: 11px; letter-spacing: 0.08em; font-weight: 600; }
+    .day { fill: #fdf3d4; } .civil { fill: #d7e6f8; } .nautical { fill: #a6c6ee; } .astro { fill: #5b8fd4; } .night { fill: #1d3a6b; }
+    text.deep { fill: #ffffff; }
     @media (prefers-color-scheme: dark) {
       text { fill: #e5e7eb; }
-      .bg { fill: #161b22; }
-      .ink { stroke: #e5e7eb; }
-      .fill { fill: #e5e7eb; }
+      .card { fill: #161b22; }
+      .frame { stroke: #30363d; }
+      .ink { stroke: #e5e7eb; } .inkfill { fill: #e5e7eb; }
       .muted { stroke: #9aa5b1; } .mutedfill { fill: #9aa5b1; } text.muted { fill: #9aa5b1; }
+      .hair { stroke: #3a414b; } .hairfill { fill: #3a414b; }
       .accent { stroke: #6aa7ee; } .accentfill { fill: #6aa7ee; } text.accent { fill: #6aa7ee; }
-      .band1 { fill: #1e3a5f; } .band2 { fill: #1b3354; } .band3 { fill: #172a47; } .band4 { fill: #12213a; } .night { fill: #0b1220; }
-      .day { fill: #3b3a1e; }
+      .wash { fill: #6aa7ee; fill-opacity: 0.2; }
+      .ground { fill: #1c232d; }
+      .moondark { fill: #3a414b; } .rim { stroke: #6b7280; }
+      .day { fill: #3a3320; } .civil { fill: #2b4a78; } .nautical { fill: #1f365a; } .astro { fill: #15243e; } .night { fill: #0a1222; }
+      text.deep { fill: #e5e7eb; }
+      .halo { stroke: #161b22; }
     }
   </style>
-  <rect class="bg" width="460" height="340" rx="12"/>
-  <line class="muted" x1="200" y1="290" x2="200" y2="80" stroke-width="2"/>
-  <text class="muted" x="194" y="78" text-anchor="end">★ True north</text>
-  <g transform="rotate(5 200 290)">
-    <line class="ink" x1="200" y1="290" x2="200" y2="80" stroke-width="2"/>
-    <path class="fill" d="M200 70 l-6 14 h12 z"/>
-  </g>
-  <text x="228" y="80">Grid north</text>
-  <g transform="rotate(20 200 290)">
-    <line class="accent" x1="200" y1="290" x2="200" y2="80" stroke-width="2.5"/>
-    <path class="accentfill" d="M200 70 l-7 14 h7 z"/>
-  </g>
-  <text class="accent" x="275" y="100">Magnetic north</text>
-  <!-- Arcs: convergence 0-5° at r=190, G-M angle 5-18° at r=160, declination 0-18° at r=120 -->
-  <path class="ink" d="M200 100 A190 190 0 0 1 216.6 100.7" stroke-width="1.5"/>
-  <path class="accent" d="M213.9 130.6 A160 160 0 0 1 254.7 139.6" stroke-width="1.5"/>
-  <path class="muted" d="M200 170 A120 120 0 0 1 241.0 177.2" stroke-width="1.5"/>
-  <text x="20" y="120" class="small">Grid convergence</text>
-  <text x="20" y="136" class="small muted">true to grid, 5° here</text>
-  <text x="300" y="150" class="small accent">G-M angle</text>
-  <text x="300" y="166" class="small muted">grid to magnetic, 15° here</text>
-  <text x="248" y="200" class="small">Declination</text>
-  <text x="248" y="216" class="small muted">true to magnetic, 20° here</text>
-  <text class="muted small" x="20" y="320">Example values. Each angle is signed: east of its reference is positive.</text>
+  <rect class="card" width="560" height="345" rx="12"/>
+  <path class="wash" d="M170 305 L184.4 140.6 A165 165 0 0 1 226.4 150 Z"/>
+  <line class="muted" x1="170" y1="305" x2="170" y2="67" stroke-width="2"/>
+  <text x="170" y="52" class="muted" text-anchor="middle" style="font-size:18px">★</text>
+  <text x="158" y="36" class="muted" text-anchor="end">True north</text>
+  <line class="ink" x1="170" y1="305" x2="190.9" y2="65.9" stroke-width="2"/><path class="inkfill" d="M191.8 56 L185.2 68.4 L196.1 69.4 Z"/>
+  <text x="196" y="40">Grid north</text>
+  <line class="accent" x1="170" y1="305" x2="252.1" y2="79.5" stroke-width="2.5"/><path class="accentfill" d="M255.5 70.1 L245.9 80.4 L251.1 82.3 Z"/>
+  <text x="262" y="70" class="accent">Magnetic north</text>
+  <path class="ink" d="M170 90 A215 215 0 0 1 188.7 90.8" stroke-width="1.5"/>
+  <path class="accent" d="M184.4 140.6 A165 165 0 0 1 226.4 150" stroke-width="1.5"/>
+  <path class="muted" d="M170 195 A110 110 0 0 1 207.6 201.6" stroke-width="1.5"/>
+  <line class="hair" x1="192.7" y1="91.8" x2="256" y2="100" stroke-width="1"/>
+  <text x="262" y="106">Grid convergence</text>
+  <text x="262" y="123" class="small muted">true to grid, 5°</text>
+  <text x="262" y="160" class="accent">G-M angle</text>
+  <text x="262" y="177" class="small muted">grid to magnetic, 15°</text>
+  <text x="262" y="214">Declination</text>
+  <text x="262" y="231" class="small muted">true to magnetic, 20°</text>
+  <circle class="inkfill" cx="170" cy="305" r="4"/>
+  <text x="20" y="330" class="muted small">Example values, drawn to scale. East of the reference is positive.</text>
 </svg>

@@ -1,52 +1,63 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 350" role="img" aria-label="Azimuth is measured clockwise from north along the horizon; altitude is measured up from the horizon">
-    <style>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 368" role="img" aria-label="Azimuth is measured clockwise from north along the horizon; altitude is measured up from the horizon">
+  <style>
     text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; fill: #1f2937; }
-    .bg { fill: #ffffff; }
-    .ink { stroke: #1f2937; fill: none; }
-    .fill { fill: #1f2937; }
-    .muted { stroke: #6b7280; fill: none; }
-    .mutedfill { fill: #6b7280; }
-    text.muted { fill: #6b7280; stroke: none; }
-    .accent { stroke: #2a78d6; fill: none; }
-    .accentfill { fill: #2a78d6; }
-    text.accent { fill: #2a78d6; stroke: none; }
-    .small { font-size: 13px; }
-    .band1 { fill: #bfdbfe; } .band2 { fill: #93c5fd; } .band3 { fill: #60a5fa; } .band4 { fill: #3b82f6; } .night { fill: #1e3a8a; }
-    .day { fill: #fef9c3; }
+    line, path, circle, ellipse, polyline { stroke-linecap: round; stroke-linejoin: round; }
+    .card { fill: #f6f8fa; }
+    .frame { fill: none; stroke: #d0d7de; }
+    .ink { stroke: #1f2937; fill: none; } .inkfill { fill: #1f2937; }
+    .muted { stroke: #6b7280; fill: none; } .mutedfill { fill: #6b7280; } text.muted { fill: #6b7280; stroke: none; }
+    .hair { stroke: #d0d7de; fill: none; } .hairfill { fill: #d0d7de; }
+    .accent { stroke: #2a78d6; fill: none; } .accentfill { fill: #2a78d6; } text.accent { fill: #2a78d6; stroke: none; }
+    .wash { fill: #2a78d6; fill-opacity: 0.14; }
+    .sun { fill: #eda100; }
+    .ground { fill: #eef1f4; }
+    .moondark { fill: #d0d7de; } .rim { stroke: #9aa5b1; fill: none; }
+    .halo { paint-order: stroke; stroke: #f6f8fa; stroke-width: 5px; stroke-linejoin: round; }
+    .dash { stroke-dasharray: 3 3; stroke-linecap: butt; }
+    .small { font-size: 13px; } .strong { font-weight: 600; } .big { font-size: 26px; font-weight: 600; }
+    .caps { font-size: 11px; letter-spacing: 0.08em; font-weight: 600; }
+    .day { fill: #fdf3d4; } .civil { fill: #d7e6f8; } .nautical { fill: #a6c6ee; } .astro { fill: #5b8fd4; } .night { fill: #1d3a6b; }
+    text.deep { fill: #ffffff; }
     @media (prefers-color-scheme: dark) {
       text { fill: #e5e7eb; }
-      .bg { fill: #161b22; }
-      .ink { stroke: #e5e7eb; }
-      .fill { fill: #e5e7eb; }
+      .card { fill: #161b22; }
+      .frame { stroke: #30363d; }
+      .ink { stroke: #e5e7eb; } .inkfill { fill: #e5e7eb; }
       .muted { stroke: #9aa5b1; } .mutedfill { fill: #9aa5b1; } text.muted { fill: #9aa5b1; }
+      .hair { stroke: #3a414b; } .hairfill { fill: #3a414b; }
       .accent { stroke: #6aa7ee; } .accentfill { fill: #6aa7ee; } text.accent { fill: #6aa7ee; }
-      .band1 { fill: #1e3a5f; } .band2 { fill: #1b3354; } .band3 { fill: #172a47; } .band4 { fill: #12213a; } .night { fill: #0b1220; }
-      .day { fill: #3b3a1e; }
+      .wash { fill: #6aa7ee; fill-opacity: 0.2; }
+      .ground { fill: #1c232d; }
+      .moondark { fill: #3a414b; } .rim { stroke: #6b7280; }
+      .day { fill: #3a3320; } .civil { fill: #2b4a78; } .nautical { fill: #1f365a; } .astro { fill: #15243e; } .night { fill: #0a1222; }
+      text.deep { fill: #e5e7eb; }
+      .halo { stroke: #161b22; }
     }
   </style>
-  <rect class="bg" width="500" height="350" rx="12"/>
-  <!-- Horizon as an ellipse seen from above and behind. Observer at the centre. -->
-  <ellipse class="muted" cx="230" cy="220" rx="180" ry="55" stroke-width="1.5"/>
-  <text x="230" y="158" text-anchor="middle" class="small muted">N</text>
-  <text x="422" y="224" class="small muted">E</text>
-  <text x="230" y="292" text-anchor="middle" class="small muted">S</text>
-  <text x="30" y="224" class="small muted">W</text>
-  <circle class="fill" cx="230" cy="220" r="4"/>
-  <text x="222" y="238" text-anchor="end" class="small">You</text>
-  <!-- A body at azimuth 120°: foot on the horizon at (385.9, 247.5), body above it. -->
-  <line class="muted" x1="230" y1="220" x2="230" y2="165" stroke-width="1" stroke-dasharray="3 3"/>
-  <line class="muted" x1="230" y1="220" x2="385.9" y2="247.5" stroke-width="1" stroke-dasharray="3 3"/>
-  <line class="muted" x1="385.9" y1="247.5" x2="385.9" y2="110" stroke-width="1" stroke-dasharray="3 3"/>
-  <line class="accent" x1="230" y1="220" x2="385.9" y2="110" stroke-width="2"/>
-  <circle cx="385.9" cy="110" r="10" fill="#eda100"/>
-  <!-- Azimuth: along the horizon from N clockwise to the foot. -->
-  <path class="ink" d="M230 165 A180 55 0 0 1 385.9 247.5" stroke-width="2.5"/>
-  <text x="395" y="282" class="small">Azimuth 120°</text>
-  <text x="395" y="297" class="small muted">clockwise</text>
-  <text x="395" y="312" class="small muted">from north</text>
-  <!-- Altitude: from the horizon line up to the sight line. -->
-  <path class="accent" d="M299 232.2 A70 70 0 0 0 287.2 179.6" stroke-width="2"/>
-  <text x="240" y="98" class="small accent">Altitude 35°</text>
-  <text x="240" y="113" class="small muted">up from the horizon</text>
-  <text class="muted small" x="20" y="336">Every sky position becomes these two angles for a place on the ground.</text>
+  <rect class="card" width="560" height="368" rx="12"/>
+  <ellipse class="ground" cx="250" cy="222" rx="195" ry="62"/>
+  <ellipse class="hair" cx="250" cy="222" rx="195" ry="62" stroke-width="1.5"/>
+  <path class="wash" d="M250 222 L250 160 L263.6 160.2 L277.1 160.6 L290.5 161.4 L303.7 162.4 L316.7 163.7 L329.3 165.4 L341.5 167.3 L353.3 169.4 L364.6 171.8 L375.3 174.5 L385.5 177.4 L394.9 180.5 L403.7 183.8 L411.7 187.3 L418.9 191 L425.3 194.8 L430.8 198.8 L435.5 202.8 L439.2 207 L442 211.2 L443.9 215.5 L444.9 219.8 L444.9 224.2 L443.9 228.5 L442 232.8 L439.2 237 L435.5 241.2 L430.8 245.2 L425.3 249.2 L418.9 253 Z"/>
+  <path class="accent" d="M250 160 L263.6 160.2 L277.1 160.6 L290.5 161.4 L303.7 162.4 L316.7 163.7 L329.3 165.4 L341.5 167.3 L353.3 169.4 L364.6 171.8 L375.3 174.5 L385.5 177.4 L394.9 180.5 L403.7 183.8 L411.7 187.3 L418.9 191 L425.3 194.8 L430.8 198.8 L435.5 202.8 L439.2 207 L442 211.2 L443.9 215.5 L444.9 219.8 L444.9 224.2 L443.9 228.5 L442 232.8 L439.2 237 L435.5 241.2 L430.8 245.2 L425.3 249.2 L418.9 253" stroke-width="2.5"/>
+  <circle class="mutedfill" cx="250" cy="160" r="2.5"/>
+  <text x="250" y="150" class="small muted strong" text-anchor="middle">N</text>
+  <circle class="mutedfill" cx="445" cy="222" r="2.5"/>
+  <text x="457" y="227" class="small muted strong" text-anchor="middle">E</text>
+  <circle class="mutedfill" cx="250" cy="284" r="2.5"/>
+  <text x="250" y="304" class="small muted strong" text-anchor="middle">S</text>
+  <circle class="mutedfill" cx="55" cy="222" r="2.5"/>
+  <text x="43" y="227" class="small muted strong" text-anchor="middle">W</text>
+  <line class="muted dash" x1="250" y1="222" x2="250" y2="160" stroke-width="1"/>
+  <line class="muted dash" x1="250" y1="222" x2="418.9" y2="253" stroke-width="1"/>
+  <line class="muted dash" x1="418.9" y1="253" x2="418.9" y2="108" stroke-width="1"/>
+  <line class="ink" x1="250" y1="222" x2="418.9" y2="96" stroke-width="2"/>
+  <path class="accent" d="M352.3 240.8 A104 104 0 0 0 333.4 159.8" stroke-width="2"/>
+  <circle class="sun" cx="418.9" cy="96" r="11"/>
+  <circle class="inkfill" cx="250" cy="222" r="4"/>
+  <text x="240" y="242" class="small" text-anchor="end">You</text>
+  <text x="364" y="186" class="accent strong halo">Altitude 35°</text>
+  <text x="364" y="203" class="small muted halo">up from the horizon</text>
+  <text x="400" y="308" class="accent strong">Azimuth 120°</text>
+  <text x="400" y="325" class="small muted">clockwise from north</text>
+  <text x="20" y="352" class="muted small">Every sky position becomes these two angles for a place on the ground.</text>
 </svg>

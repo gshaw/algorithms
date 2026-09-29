@@ -1,42 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 320" role="img" aria-label="Magnetic declination: the angle from true north to magnetic north, 15 degrees east in this example">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 300" role="img" aria-label="Magnetic declination: the angle from true north to magnetic north, 15 degrees east in this example">
   <style>
     text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; fill: #1f2937; }
-    .bg { fill: #ffffff; }
-    .ink { stroke: #1f2937; fill: none; }
-    .fill { fill: #1f2937; }
-    .muted { stroke: #6b7280; fill: none; }
-    .mutedfill { fill: #6b7280; }
-    text.muted { fill: #6b7280; stroke: none; }
-    .accent { stroke: #2a78d6; fill: none; }
-    .accentfill { fill: #2a78d6; }
-    text.accent { fill: #2a78d6; stroke: none; }
-    .small { font-size: 13px; }
-    .band1 { fill: #bfdbfe; } .band2 { fill: #93c5fd; } .band3 { fill: #60a5fa; } .band4 { fill: #3b82f6; } .night { fill: #1e3a8a; }
-    .day { fill: #fef9c3; }
+    line, path, circle, ellipse, polyline { stroke-linecap: round; stroke-linejoin: round; }
+    .card { fill: #f6f8fa; }
+    .frame { fill: none; stroke: #d0d7de; }
+    .ink { stroke: #1f2937; fill: none; } .inkfill { fill: #1f2937; }
+    .muted { stroke: #6b7280; fill: none; } .mutedfill { fill: #6b7280; } text.muted { fill: #6b7280; stroke: none; }
+    .hair { stroke: #d0d7de; fill: none; } .hairfill { fill: #d0d7de; }
+    .accent { stroke: #2a78d6; fill: none; } .accentfill { fill: #2a78d6; } text.accent { fill: #2a78d6; stroke: none; }
+    .wash { fill: #2a78d6; fill-opacity: 0.14; }
+    .sun { fill: #eda100; }
+    .ground { fill: #eef1f4; }
+    .moondark { fill: #d0d7de; } .rim { stroke: #9aa5b1; fill: none; }
+    .halo { paint-order: stroke; stroke: #f6f8fa; stroke-width: 5px; stroke-linejoin: round; }
+    .dash { stroke-dasharray: 3 3; stroke-linecap: butt; }
+    .small { font-size: 13px; } .strong { font-weight: 600; } .big { font-size: 26px; font-weight: 600; }
+    .caps { font-size: 11px; letter-spacing: 0.08em; font-weight: 600; }
+    .day { fill: #fdf3d4; } .civil { fill: #d7e6f8; } .nautical { fill: #a6c6ee; } .astro { fill: #5b8fd4; } .night { fill: #1d3a6b; }
+    text.deep { fill: #ffffff; }
     @media (prefers-color-scheme: dark) {
       text { fill: #e5e7eb; }
-      .bg { fill: #161b22; }
-      .ink { stroke: #e5e7eb; }
-      .fill { fill: #e5e7eb; }
+      .card { fill: #161b22; }
+      .frame { stroke: #30363d; }
+      .ink { stroke: #e5e7eb; } .inkfill { fill: #e5e7eb; }
       .muted { stroke: #9aa5b1; } .mutedfill { fill: #9aa5b1; } text.muted { fill: #9aa5b1; }
+      .hair { stroke: #3a414b; } .hairfill { fill: #3a414b; }
       .accent { stroke: #6aa7ee; } .accentfill { fill: #6aa7ee; } text.accent { fill: #6aa7ee; }
-      .band1 { fill: #1e3a5f; } .band2 { fill: #1b3354; } .band3 { fill: #172a47; } .band4 { fill: #12213a; } .night { fill: #0b1220; }
-      .day { fill: #3b3a1e; }
+      .wash { fill: #6aa7ee; fill-opacity: 0.2; }
+      .ground { fill: #1c232d; }
+      .moondark { fill: #3a414b; } .rim { stroke: #6b7280; }
+      .day { fill: #3a3320; } .civil { fill: #2b4a78; } .nautical { fill: #1f365a; } .astro { fill: #15243e; } .night { fill: #0a1222; }
+      text.deep { fill: #e5e7eb; }
+      .halo { stroke: #161b22; }
     }
   </style>
-  <rect class="bg" width="420" height="320" rx="12"/>
-  <!-- Base at (210, 280). True north straight up; magnetic north rotated 15° clockwise. -->
-  <line class="muted" x1="210" y1="280" x2="210" y2="70" stroke-width="2"/>
-  <path class="mutedfill" d="M210 58 l-7 16 h14 z"/>
-  <text class="muted" x="210" y="40" text-anchor="middle">True north</text>
-  <g transform="rotate(15 210 280)">
-    <line class="accent" x1="210" y1="280" x2="210" y2="70" stroke-width="2.5"/>
-    <path class="accentfill" d="M210 58 l-7 16 h14 z"/>
-  </g>
-  <text class="accent" x="275" y="62">Magnetic north</text>
-  <!-- Arc of radius 150 from 0° to 15°. -->
-  <path class="ink" d="M210 130 A150 150 0 0 1 248.8 135.1" stroke-width="1.5"/>
-  <text x="258" y="150">Declination</text>
-  <text x="258" y="168">15° E</text>
-  <text class="muted small" x="20" y="300">East declination is positive. The needle points east of true north.</text>
+  <rect class="card" width="560" height="300" rx="12"/>
+  <line class="muted" x1="280" y1="262" x2="280" y2="67" stroke-width="2"/><path class="mutedfill" d="M280 57 L274.5 70 L285.5 70 Z"/>
+  <text x="280" y="38" class="muted" text-anchor="middle">True north</text>
+  <path class="wash" d="M280 262 L280 112 A150 150 0 0 1 318.8 117.1 Z"/>
+  <path class="accent" d="M280 112 A150 150 0 0 1 318.8 117.1" stroke-width="1.5"/>
+  <line class="accent" x1="280" y1="262" x2="330.5" y2="73.6" stroke-width="2.5"/><path class="accentfill" d="M333.1 64 L324.4 75.1 L335 78 Z"/>
+  <text x="338" y="58" class="accent">Magnetic north</text>
+  <text x="326" y="140">Declination</text>
+  <text x="326" y="160" class="accent strong">15° E</text>
+  <circle class="inkfill" cx="280" cy="262" r="4"/>
+  <text x="20" y="288" class="muted small">East declination is positive: the needle points east of true north.</text>
 </svg>

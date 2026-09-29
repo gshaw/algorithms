@@ -1,52 +1,60 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 330" role="img" aria-label="Sunrise, sunset and the three twilights, by how far the sun's centre is below the horizon">
-    <style>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 326" role="img" aria-label="Bands below the horizon: civil twilight to 6 degrees, nautical to 12, astronomical to 18, then night">
+  <style>
     text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; fill: #1f2937; }
-    .bg { fill: #ffffff; }
-    .ink { stroke: #1f2937; fill: none; }
-    .fill { fill: #1f2937; }
-    .muted { stroke: #6b7280; fill: none; }
-    .mutedfill { fill: #6b7280; }
-    text.muted { fill: #6b7280; stroke: none; }
-    .accent { stroke: #2a78d6; fill: none; }
-    .accentfill { fill: #2a78d6; }
-    text.accent { fill: #2a78d6; stroke: none; }
-    .small { font-size: 13px; }
-    .band1 { fill: #bfdbfe; } .band2 { fill: #93c5fd; } .band3 { fill: #60a5fa; } .band4 { fill: #3b82f6; } .night { fill: #1e3a8a; }
-    .day { fill: #fef9c3; }
+    line, path, circle, ellipse, polyline { stroke-linecap: round; stroke-linejoin: round; }
+    .card { fill: #f6f8fa; }
+    .frame { fill: none; stroke: #d0d7de; }
+    .ink { stroke: #1f2937; fill: none; } .inkfill { fill: #1f2937; }
+    .muted { stroke: #6b7280; fill: none; } .mutedfill { fill: #6b7280; } text.muted { fill: #6b7280; stroke: none; }
+    .hair { stroke: #d0d7de; fill: none; } .hairfill { fill: #d0d7de; }
+    .accent { stroke: #2a78d6; fill: none; } .accentfill { fill: #2a78d6; } text.accent { fill: #2a78d6; stroke: none; }
+    .wash { fill: #2a78d6; fill-opacity: 0.14; }
+    .sun { fill: #eda100; }
+    .ground { fill: #eef1f4; }
+    .moondark { fill: #d0d7de; } .rim { stroke: #9aa5b1; fill: none; }
+    .halo { paint-order: stroke; stroke: #f6f8fa; stroke-width: 5px; stroke-linejoin: round; }
+    .dash { stroke-dasharray: 3 3; stroke-linecap: butt; }
+    .small { font-size: 13px; } .strong { font-weight: 600; } .big { font-size: 26px; font-weight: 600; }
+    .caps { font-size: 11px; letter-spacing: 0.08em; font-weight: 600; }
+    .day { fill: #fdf3d4; } .civil { fill: #d7e6f8; } .nautical { fill: #a6c6ee; } .astro { fill: #5b8fd4; } .night { fill: #1d3a6b; }
+    text.deep { fill: #ffffff; }
     @media (prefers-color-scheme: dark) {
       text { fill: #e5e7eb; }
-      .bg { fill: #161b22; }
-      .ink { stroke: #e5e7eb; }
-      .fill { fill: #e5e7eb; }
+      .card { fill: #161b22; }
+      .frame { stroke: #30363d; }
+      .ink { stroke: #e5e7eb; } .inkfill { fill: #e5e7eb; }
       .muted { stroke: #9aa5b1; } .mutedfill { fill: #9aa5b1; } text.muted { fill: #9aa5b1; }
+      .hair { stroke: #3a414b; } .hairfill { fill: #3a414b; }
       .accent { stroke: #6aa7ee; } .accentfill { fill: #6aa7ee; } text.accent { fill: #6aa7ee; }
-      .band1 { fill: #1e3a5f; } .band2 { fill: #1b3354; } .band3 { fill: #172a47; } .band4 { fill: #12213a; } .night { fill: #0b1220; }
-      .day { fill: #3b3a1e; }
+      .wash { fill: #6aa7ee; fill-opacity: 0.2; }
+      .ground { fill: #1c232d; }
+      .moondark { fill: #3a414b; } .rim { stroke: #6b7280; }
+      .day { fill: #3a3320; } .civil { fill: #2b4a78; } .nautical { fill: #1f365a; } .astro { fill: #15243e; } .night { fill: #0a1222; }
+      text.deep { fill: #e5e7eb; }
+      .halo { stroke: #161b22; }
     }
   </style>
-  <rect class="bg" width="520" height="330" rx="12"/>
-  <!-- Vertical scale: 10 px per degree. Horizon at y=70. -->
-  <rect class="day" x="20" y="20" width="480" height="50"/>
-  <rect class="band1" x="20" y="70" width="480" height="60"/>
-  <rect class="band2" x="20" y="130" width="480" height="60"/>
-  <rect class="band3" x="20" y="190" width="480" height="60"/>
-  <rect class="night" x="20" y="250" width="480" height="40"/>
-  <line class="ink" x1="20" y1="70" x2="500" y2="70" stroke-width="2"/>
-  <text x="30" y="50">Day</text>
-  <text x="494" y="64" class="small" text-anchor="end">Horizon 0°</text>
-  <text x="30" y="105">Civil twilight</text>
-  <text x="30" y="165">Nautical twilight</text>
-  <text x="30" y="225">Astronomical twilight</text>
-  <text x="30" y="276" style="fill:#e5e7eb">Night</text>
-  <text x="494" y="124" class="small" text-anchor="end">−6°</text>
-  <text x="494" y="184" class="small" text-anchor="end">−12°</text>
-  <text x="494" y="244" class="small" text-anchor="end" style="fill:#e5e7eb">−18°</text>
-  <line class="ink" x1="20" y1="130" x2="500" y2="130" stroke-width="1"/>
-  <line class="ink" x1="20" y1="190" x2="500" y2="190" stroke-width="1"/>
-  <line class="ink" x1="20" y1="250" x2="500" y2="250" stroke-width="1"/>
-  <!-- The sun's centre at −0.833°: 8 px below the horizon. -->
-  <circle cx="200" cy="78" r="12" fill="#eda100"/>
-  <line class="ink" x1="216" y1="84" x2="236" y2="92" stroke-width="1"/>
-  <text x="242" y="98" class="small">Rise and set: centre at −0.833°</text>
-  <text class="muted small" x="20" y="312">Altitude of the sun's centre. −0.833° is refraction (34′) plus the sun's radius (16′).</text>
+  <rect class="card" width="560" height="326" rx="12"/>
+  <rect class="day" x="76" y="20" width="464" height="44"/>
+  <text x="90" y="47">Day</text>
+  <rect class="civil" x="76" y="64" width="464" height="60"/>
+  <text x="90" y="99">Civil twilight</text>
+  <rect class="nautical" x="76" y="124" width="464" height="60"/>
+  <text x="90" y="159">Nautical twilight</text>
+  <rect class="astro" x="76" y="184" width="464" height="60"/>
+  <text x="90" y="219" class="deep">Astronomical twilight</text>
+  <rect class="night" x="76" y="244" width="464" height="50"/>
+  <text x="90" y="274" class="deep">Night</text>
+  <circle class="sun" cx="300" cy="72.3" r="12"/>
+  <line class="ink" x1="68" y1="64" x2="540" y2="64" stroke-width="2"/>
+  <line class="ink" x1="68" y1="124" x2="76" y2="124" stroke-width="1.5"/>
+  <text x="62" y="129" class="small" text-anchor="end">−6°</text>
+  <line class="ink" x1="68" y1="184" x2="76" y2="184" stroke-width="1.5"/>
+  <text x="62" y="189" class="small" text-anchor="end">−12°</text>
+  <line class="ink" x1="68" y1="244" x2="76" y2="244" stroke-width="1.5"/>
+  <text x="62" y="249" class="small" text-anchor="end">−18°</text>
+  <text x="62" y="69" class="small strong" text-anchor="end">0°</text>
+  <line class="ink" x1="316" y1="78.3" x2="334" y2="86.3" stroke-width="1"/>
+  <text x="340" y="92.3" class="small">Rise and set: centre at −0.833°</text>
+  <text x="20" y="310" class="muted small">Altitude of the sun's centre. −0.833° is refraction (34′) plus the sun's radius (16′).</text>
 </svg>
