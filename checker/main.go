@@ -397,6 +397,20 @@ func judge(c testCase, a answer, tolerances map[string]string) []string {
 }
 
 func matches(got, want any, tolerance string) bool {
+	if wantText, ok := want.(string); ok && tolerance != "" {
+		// An instant, like riseUtc: its tolerance is in seconds.
+		gotText, ok := got.(string)
+		if !ok {
+			return false
+		}
+		wantTime, err1 := time.Parse(time.RFC3339, wantText)
+		gotTime, err2 := time.Parse(time.RFC3339, gotText)
+		if err1 != nil || err2 != nil {
+			return false
+		}
+		limit, _ := strconv.ParseFloat(tolerance, 64)
+		return math.Abs(gotTime.Sub(wantTime).Seconds()) <= limit
+	}
 	wantNumber, wantIsNumber := want.(float64)
 	if !wantIsNumber {
 		return got == want

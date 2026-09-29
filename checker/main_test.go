@@ -24,6 +24,12 @@ func TestMatches(t *testing.T) {
 		{"caution", "caution", "", true},
 		{"none", "caution", "", false},
 		{true, true, "", true},
+		{"2026-09-29T14:10:35Z", "2026-09-29T14:10:00Z", "60", true},
+		{"2026-09-29T14:11:01Z", "2026-09-29T14:10:00Z", "60", false},
+		{nil, "2026-09-29T14:10:00Z", "60", false},
+		{"2026-09-29T14:10:00Z", nil, "60", false},
+		{nil, nil, "60", true},
+		{"soon", "2026-09-29T14:10:00Z", "60", false},
 	}
 	for _, c := range cases {
 		if got := matches(c.got, c.want, c.tolerance); got != c.ok {
