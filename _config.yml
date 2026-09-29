@@ -1,0 +1,27 @@
+# Site settings
+title: Algorithms
+description: Test data for the calculations an app does on the device, from the authorities' own published values.
+url: https://algorithms.gshaw.ca
+icon: /icon.svg
+repo: https://github.com/gshaw/algorithms
+start_year: 2026
+author:
+  name: Gerry Shaw
+  url: https://gshaw.ca
+
+# Build settings
+markdown: kramdown
+
+kramdown:
+  input: GFM
+
+# The repo's own docs and tooling stay off the site.
+exclude:
+  - AGENTS.md
+  - CLAUDE.md
+  - README.md
+  - LICENSE
+  - LICENSE-DATA
+  - docs
+  - cspell.config.yaml
+  - wrangler.jsonc

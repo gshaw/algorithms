@@ -1,0 +1,30 @@
+$schema: "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json"
+version: "0.2"
+language: en,en-GB
+allowCompoundWords: true
+ignorePaths:
+  - ".git"
+  - ".claude"
+  - ".wrangler"
+  - "_site"
+  - ".jekyll-cache"
+  - "vendor"
+  - "Gemfile.lock"
+  - "assets/css/pico.min.css"
+words:
+  - gshaw
+  - kramdown
+  - pico
+  # Standards, authorities and authors.
+  - Karney
+  - Krüger
+  - Meeus
+  - IAMSAR
+  - MGRS
+  - NOAA
+  - NCEI
+  - USNO
+  # Other names.
+  - humidex
+  - Tobler
+  - tzdb

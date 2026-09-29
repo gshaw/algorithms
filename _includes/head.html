@@ -1,0 +1,39 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.url == "/" %}{{ site.title }}{% else %}{{ page.title }} · {{ site.title }}{% endif %}</title>
+  {% assign description = page.description | default: site.description -%}
+  {% assign canonical = page.url | remove: ".html" | absolute_url -%}
+  <meta name="description" content="{{ description | escape }}">
+  <link rel="canonical" href="{{ canonical }}">
+
+  <meta property="og:title" content="{{ page.title | escape }}">
+  <meta property="og:description" content="{{ description | escape }}">
+  <meta property="og:url" content="{{ canonical }}">
+  <meta property="og:image" content="{{ '/favicon.192x192.png' | absolute_url }}">
+
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="icon" sizes="192x192" href="/favicon.192x192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="/assets/css/pico.min.css">
+  <style>
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin-bottom: 0.2em
+    }
+    h1 img {
+      vertical-align: middle;
+      margin-right: 0.3em
+    }
+    .muted,
+    td small {
+      color: var(--muted-color)
+    }
+    td small {
+      display: block
+    }
+  </style>
+</head>

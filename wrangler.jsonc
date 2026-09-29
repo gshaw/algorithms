@@ -1,0 +1,14 @@
+// The site is static: Jekyll builds _site and this Worker serves it, with no
+// script of its own. The custom domain gets its DNS record and certificate on
+// the first deploy.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "algorithms",
+  "compatibility_date": "2026-09-29",
+  "assets": {
+    "directory": "./_site",
+    "not_found_handling": "404-page",
+  },
+  "routes": [{ "pattern": "algorithms.gshaw.ca", "custom_domain": true }],
+  "workers_dev": false,
+}

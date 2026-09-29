@@ -1,0 +1,45 @@
+[tools]
+# Ruby matches the other Jekyll sites so Gemfile and Gemfile.lock stay identical.
+ruby = "3.4.4"
+node = "24.4.1"
+"npm:cspell" = "9.1.5"
+"npm:markdownlint-cli2" = "0.22.1"
+"npm:wrangler" = "4.143.1"
+"gem:html-proofer" = "5.2.1"
+
+[tasks.install]
+run = "bundle install"
+
+[tasks.dev]
+run = "bundle exec jekyll serve --livereload --livereload-port 35707 --open-url --port 4007"
+
+[tasks.build]
+run = "bundle exec jekyll build --quiet"
+
+[tasks.spell]
+run = "cspell lint --no-progress ."
+
+[tasks.markdownlint]
+run = """
+out=$(markdownlint-cli2 '**/*.md' 2>&1) && echo "Markdown lint passed" || { echo "$out"; exit 1; }
+"""
+
+# Internal links only. External sites rate-limit and flake; check them by hand
+# with `htmlproofer _site` when it matters.
+[tasks.links]
+depends = ["build"]
+run = "htmlproofer _site --disable-external --no-check-internal-hash"
+
+[tasks.check]
+depends = ["spell", "markdownlint", "links"]
+
+# A Worker serving _site as static files, on algorithms.gshaw.ca. See wrangler.jsonc.
+[tasks.deploy]
+depends = ["check"]
+run = "wrangler deploy"
+
+[tasks.verify]
+run = """
+curl -fsS https://algorithms.gshaw.ca/ | grep -q "<title>Algorithms" && echo "algorithms.gshaw.ca is up"
+test "$(curl -s -o /dev/null -w '%{http_code}' https://algorithms.gshaw.ca/no-such-page/)" = 404 && echo "404 page works"
+"""
