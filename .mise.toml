@@ -34,12 +34,26 @@ run = "htmlproofer _site --disable-external --no-check-internal-hash"
 depends = ["spell", "markdownlint", "links"]
 
 # A Worker serving _site as static files, on algorithms.gshaw.ca. See wrangler.jsonc.
+# The one way to production; see Workshop's Tooling/deploy.md. check builds _site,
+# the guard runs again in case it changed a tracked file, and the version is
+# tagged with the commit for deploy-status.
 [tasks.deploy]
-depends = ["check"]
-run = "wrangler deploy"
+run = [
+  "scripts/deploy-guard.sh",
+  "mise run check",
+  "scripts/deploy-guard.sh",
+  "wrangler deploy --tag $(git rev-parse HEAD | cut -c1-12)",
+  "mise run verify",
+]
 
 [tasks.verify]
 run = """
-curl -fsS https://algorithms.gshaw.ca/ | grep -q "<title>Algorithms" && echo "algorithms.gshaw.ca is up"
-test "$(curl -s -o /dev/null -w '%{http_code}' https://algorithms.gshaw.ca/no-such-page/)" = 404 && echo "404 page works"
+set -e
+curl -fsS https://algorithms.gshaw.ca/ | grep -q "<title>Algorithms"
+echo "algorithms.gshaw.ca is up"
+test "$(curl -s -o /dev/null -w '%{http_code}' https://algorithms.gshaw.ca/no-such-page/)" = 404
+echo "404 page works"
 """
+
+[tasks.deploy-status]
+run = "scripts/deploy-status.sh"
