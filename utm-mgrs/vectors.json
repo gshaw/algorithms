@@ -1,0 +1,5 @@
+---
+layout: null
+permalink: /utm-mgrs/vectors.json
+---
+{{ site.data.vectors["utm-mgrs"] | jsonify }}

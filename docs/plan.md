@@ -67,7 +67,9 @@ builds the page from the file, so the two can't drift.
 12. **Source**: each source by role (standard, test values, reference program), with its
     credit verbatim.
 
-Each planned algorithm has a placeholder page now, with the parts that are known.
+Each planned algorithm has a preview page now, built from a placeholder test file in
+`_data/vectors/` that says it's a placeholder, so the finished layout can be reviewed. Each
+file is replaced by the real one when its issue lands.
 
 ## The test file
 
@@ -81,10 +83,12 @@ Each planned algorithm has a placeholder page now, with the parts that are known
   "sources": [
     { "role": "test values", "name": "WMM2025 test values", "url": "…", "licence": "Public domain" }
   ],
-  "tolerances": { "declinationInDegrees": 0.01 },
+  "tolerances": { "declinationInDegrees": "0.01" },
+  "history": [{ "version": 1, "publishedAt": "2026-10-01", "change": "NOAA's test values and the edge cases" }],
   "cases": [
     {
       "id": "noaa-1",
+      "operation": "field",
       "tags": ["published"],
       "input": { "latitudeInDegrees": 80, "longitudeInDegrees": 0, "heightInKilometers": 0, "decimalYear": 2025.0 },
       "expected": { "declinationInDegrees": 0.0 }
@@ -94,7 +98,9 @@ Each planned algorithm has a placeholder page now, with the parts that are known
 ```
 
 The values above are placeholders; #1 fills in real ones. `tags` says where a case came
-from (`published`, `reference`, `hand`) and what it tests (`edge`, `polar`). A new version
+from (`published`, `reference`, `hand`) and what it tests (`edge`, `polar`). `operation`
+names what to compute, for an algorithm with more than one. Tolerances are decimal
+strings, so `0.000001` never shows as `1e-06`. A new version
 may add cases, change a tolerance or rename a field. There are no compatibility rules:
 implementations are checked against the current file only.
 

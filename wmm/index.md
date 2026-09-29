@@ -1,10 +1,9 @@
 ---
 title: Magnetic declination
 description: Test data for magnetic declination from the World Magnetic Model 2025.
-layout: page
+layout: algorithm
+slug: wmm
 ---
-
-{% include planned.html slug="wmm" %}
 
 ## What it is
 
@@ -57,15 +56,6 @@ A compass doesn't point to true north. **True north** is fixed: along a meridian
 
 </div>
 
-{% include implementations.html %}
+## For agents
 
-## Source
-
-<div class="fields" markdown="1">
-
-| Role | Source |
-| --- | --- |
-| Standard | The US/UK World Magnetic Model for 2025–2030, NOAA NCEI and the British Geological Survey. Public domain. |
-| Test values | The test values NOAA publishes with the model |
-
-</div>
+Implement WMM2025 from its coefficient file, as the spherical harmonic expansion to degree 12 in the NOAA report's notation. Convert geodetic input to geocentric before the expansion, and back after. Return declination east positive. Compute grid variation only above 55° N and below 55° S, and set `blackout` from the horizontal intensity. Pass every case in `vectors.json` within its tolerance; never loosen a tolerance to pass.

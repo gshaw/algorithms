@@ -13,6 +13,7 @@ ignorePaths:
   - "assets/css/pico.min.css"
 words:
   - gshaw
+  - jsonify # Liquid filter
   - kramdown
   - Nanoteslas # WMM field units, in field names
   - Segoe # the diagrams' fallback font

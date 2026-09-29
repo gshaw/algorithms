@@ -1,0 +1,101 @@
+{
+  "placeholder": "Made-up values to show the page layout. This is not test data.",
+  "algorithm": "utm-mgrs",
+  "version": 1,
+  "publishedAt": "2026-01-01",
+  "earthModel": "WGS84",
+  "sources": [
+    {
+      "role": "Standard",
+      "name": "Universal Grids and Grid Reference Systems",
+      "by": "NGA",
+      "url": "https://earth-info.nga.mil/",
+      "licence": "Public domain"
+    },
+    {
+      "role": "Reference program",
+      "name": "GeoConvert, GeographicLib 2.7",
+      "by": "Charles Karney",
+      "url": "https://geographiclib.sourceforge.io/",
+      "licence": "MIT"
+    }
+  ],
+  "tolerances": {
+    "eastingInMeters": "0.001",
+    "northingInMeters": "0.001",
+    "convergenceInDegrees": "0.000001",
+    "mgrs": "exact"
+  },
+  "history": [
+    {
+      "version": 1,
+      "publishedAt": "2026-01-01",
+      "change": "Placeholder: the first version"
+    }
+  ],
+  "cases": [
+    {
+      "id": "placeholder-1",
+      "operation": "toMgrs",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": 11.11,
+        "longitudeInDegrees": 22.22,
+        "precision": 5
+      },
+      "expected": {
+        "mgrs": "00X XX 12345 67890"
+      }
+    },
+    {
+      "id": "placeholder-2",
+      "operation": "toUtm",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": 11.11,
+        "longitudeInDegrees": 22.22
+      },
+      "expected": {
+        "zone": 99,
+        "hemisphere": "N",
+        "eastingInMeters": 123456.789,
+        "northingInMeters": 1234567.891,
+        "convergenceInDegrees": 0.123456
+      }
+    },
+    {
+      "id": "placeholder-3",
+      "operation": "toMgrs",
+      "tags": [
+        "edge",
+        "hand"
+      ],
+      "input": {
+        "latitudeInDegrees": 60.5,
+        "longitudeInDegrees": 5.5,
+        "precision": 1
+      },
+      "expected": {
+        "mgrs": "00X XX 1 2"
+      }
+    },
+    {
+      "id": "placeholder-4",
+      "operation": "parse",
+      "tags": [
+        "hand"
+      ],
+      "input": {
+        "text": "49°23.85'N 123°12.21'W"
+      },
+      "expected": {
+        "latitudeInDegrees": 12.3456789,
+        "longitudeInDegrees": -98.7654321
+      }
+    }
+  ]
+}

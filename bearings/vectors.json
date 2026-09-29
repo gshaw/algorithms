@@ -1,0 +1,5 @@
+---
+layout: null
+permalink: /bearings/vectors.json
+---
+{{ site.data.vectors["bearings"] | jsonify }}

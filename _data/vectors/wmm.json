@@ -1,0 +1,106 @@
+{
+  "placeholder": "Made-up values to show the page layout. This is not test data.",
+  "algorithm": "wmm",
+  "version": 1,
+  "publishedAt": "2026-01-01",
+  "expiresAt": "2029-12-31",
+  "earthModel": "WGS84",
+  "sources": [
+    {
+      "role": "Standard",
+      "name": "The US/UK World Magnetic Model for 2025–2030",
+      "by": "NOAA NCEI and the British Geological Survey",
+      "url": "https://www.ncei.noaa.gov/products/world-magnetic-model",
+      "licence": "Public domain"
+    },
+    {
+      "role": "Test values",
+      "name": "WMM2025 test values",
+      "by": "NOAA NCEI",
+      "url": "https://www.ncei.noaa.gov/products/world-magnetic-model",
+      "licence": "Public domain"
+    }
+  ],
+  "tolerances": {
+    "declinationInDegrees": "0.01",
+    "inclinationInDegrees": "0.01",
+    "fInNanoteslas": "1.000000"
+  },
+  "history": [
+    {
+      "version": 1,
+      "publishedAt": "2026-01-01",
+      "change": "Placeholder: the first version"
+    }
+  ],
+  "cases": [
+    {
+      "id": "placeholder-1",
+      "operation": "field",
+      "tags": [
+        "published"
+      ],
+      "input": {
+        "latitudeInDegrees": 11.11,
+        "longitudeInDegrees": 22.22,
+        "heightInKilometers": 0,
+        "decimalYear": 2025.0
+      },
+      "expected": {
+        "declinationInDegrees": 1.23,
+        "inclinationInDegrees": 4.56,
+        "fInNanoteslas": 12345.6
+      }
+    },
+    {
+      "id": "placeholder-2",
+      "operation": "field",
+      "tags": [
+        "published"
+      ],
+      "input": {
+        "latitudeInDegrees": -33.33,
+        "longitudeInDegrees": 44.44,
+        "heightInKilometers": 100,
+        "decimalYear": 2027.5
+      },
+      "expected": {
+        "declinationInDegrees": -7.89,
+        "inclinationInDegrees": -10.11,
+        "fInNanoteslas": 23456.7
+      }
+    },
+    {
+      "id": "placeholder-3",
+      "operation": "field",
+      "tags": [
+        "edge",
+        "polar"
+      ],
+      "input": {
+        "latitudeInDegrees": 86.5,
+        "longitudeInDegrees": 140,
+        "heightInKilometers": 0,
+        "decimalYear": 2026.0
+      },
+      "expected": {
+        "declinationInDegrees": 12.34,
+        "blackout": "unreliable"
+      }
+    },
+    {
+      "id": "placeholder-4",
+      "operation": "decimalYear",
+      "tags": [
+        "edge",
+        "hand"
+      ],
+      "input": {
+        "date": "2028-02-29"
+      },
+      "expected": {
+        "decimalYear": 2028.1234
+      }
+    }
+  ]
+}

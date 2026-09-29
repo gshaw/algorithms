@@ -1,0 +1,90 @@
+---
+layout: page
+---
+{%- assign algorithm = site.data.algorithms | where: "slug", page.slug | first -%}
+{%- assign data = site.data.vectors[page.slug] -%}
+<p class="muted">{{ algorithm.standard }} · {{ algorithm.authority }}</p>
+
+{% if data.placeholder -%}
+<p class="preview"><strong>Preview.</strong> The test data isn't published yet; the work is in <a href="{{ site.repo }}/issues/{{ algorithm.issue }}">issue #{{ algorithm.issue }}</a>. Every value under Test data, Implementations and History is made up to show how the finished page will look.</p>
+{%- endif %}
+
+<p class="headline"><strong>{{ data.cases.size }} cases</strong>{% if data.expiresAt %} · valid until {{ data.expiresAt }}{% endif %} · <a href="/{{ page.slug }}/vectors.json">vectors.json</a></p>
+
+{{ content }}
+
+<h2>Test data</h2>
+<p>Version {{ data.version }}, published {{ data.publishedAt }}. Earth model: {{ data.earthModel }}.</p>
+<div class="fields">
+  <table>
+    <thead><tr><th>Output</th><th>Tolerance</th></tr></thead>
+    <tbody>
+      {%- for pair in data.tolerances %}
+      <tr><td><code>{{ pair[0] }}</code></td><td>{% if pair[1] == "exact" %}Exact{% else %}± {{ pair[1] }}{% endif %}</td></tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="fields cases">
+  <table>
+    <thead><tr><th>Case</th><th>Input → expected</th></tr></thead>
+    <tbody>
+      {%- for case in data.cases %}
+      <tr>
+        <td><code>{{ case.id }}</code><small>{{ case.operation }} · {{ case.tags | join: ", " }}</small></td>
+        <td>
+          {%- for pair in case.input %}<code>{{ pair[0] }}</code> {{ pair[1] | jsonify }}<br>{% endfor -%}
+          <span class="arrow">→</span>
+          {%- for pair in case.expected %} <code>{{ pair[0] }}</code> {{ pair[1] | jsonify }}{% unless forloop.last %}<br>{% endunless %}{% endfor %}
+        </td>
+      </tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+</div>
+
+<h2>Implementations</h2>
+<div class="fields">
+  <table>
+    <thead><tr><th>Repo</th><th>Status on version {{ data.version }}</th></tr></thead>
+    <tbody>
+      {%- for implementation in site.data.implementations %}
+      {%- assign result = implementation.results[page.slug] %}
+      <tr>
+        <td>{% if implementation.placeholder %}{{ implementation.repo }}{% else %}<a href="https://github.com/{{ implementation.repo }}">{{ implementation.repo }}</a>{% endif %}<small>{{ implementation.language }}</small></td>
+        <td>
+          {%- if result.status == "passes" %}<span class="passes">Passes</span>
+          {%- elsif result.status == "fails" %}<span class="fails">Fails {{ result.failed }} of {{ data.cases.size }}</span>
+          {%- else %}<span class="incomplete">Incomplete</span>{% endif -%}
+        </td>
+      </tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+</div>
+<p class="muted">Each is a public repo that runs this page's test data with <code>mise run test</code>. See <a href="/#implementations">how implementations work</a>.</p>
+
+<h2>History</h2>
+<div class="fields">
+  <table>
+    <tbody>
+      {%- for entry in data.history %}
+      <tr><td>{{ entry.publishedAt }}</td><td>Version {{ entry.version }}: {{ entry.change }}</td></tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+</div>
+
+<h2>Source</h2>
+<div class="fields">
+  <table>
+    <tbody>
+      {%- for source in data.sources %}
+      <tr><td>{{ source.role }}</td><td>{% if source.url != "" %}<a href="{{ source.url }}">{{ source.name }}</a>{% else %}{{ source.name }}{% endif %}<small>{% if source.by != "" %}{{ source.by }} · {% endif %}{{ source.licence }}</small></td></tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+</div>
+
+<p><a href="/{{ page.slug }}/vectors.json">vectors.json</a></p>

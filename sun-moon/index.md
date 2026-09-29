@@ -1,10 +1,9 @@
 ---
 title: Sun and moon
 description: Test data for sunrise, sunset, twilight, the sun's and moon's positions, and the moon's phase.
-layout: page
+layout: algorithm
+slug: sun-moon
 ---
-
-{% include planned.html slug="sun-moon" %}
 
 ## What it is
 
@@ -41,15 +40,6 @@ layout: page
 
 </div>
 
-{% include implementations.html %}
+## For agents
 
-## Source
-
-<div class="fields" markdown="1">
-
-| Role | Source |
-| --- | --- |
-| Method | Meeus, *Astronomical Algorithms*, 2nd edition, 1998 |
-| Reference | The US Naval Observatory's Astronomical Applications API. Public domain. |
-
-</div>
+Follow Meeus, *Astronomical Algorithms*. Find events in the window given, 24 hours from a UTC start, never in a local calendar day. Use −0.833° for sunrise and sunset, −6°, −12° and −18° for twilight, and the moon's parallax and semi-diameter for moonrise. When the sun or moon doesn't cross the altitude in the window, return no time and say whether it stayed up or down. Pass every case in `vectors.json` within its tolerance.

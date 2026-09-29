@@ -1,0 +1,22 @@
+# One entry per implementation repo. Each algorithm's result comes from the repo's
+# own conformance.json; until the checker exists, these are placeholders to show
+# the layout. Delete them when the first real implementation is listed.
+- repo: placeholder/swift-example
+  language: Swift
+  placeholder: true
+  results:
+    wmm: { status: passes }
+    utm-mgrs: { status: passes }
+    bearings: { status: fails, failed: 1 }
+- repo: placeholder/rust-example
+  language: Rust
+  placeholder: true
+  results:
+    wmm: { status: fails, failed: 2 }
+    sun-moon: { status: passes }
+- repo: placeholder/kotlin-example
+  language: Kotlin
+  placeholder: true
+  results:
+    utm-mgrs: { status: incomplete }
+    sun-moon: { status: incomplete }

@@ -1,0 +1,99 @@
+{
+  "placeholder": "Made-up values to show the page layout. This is not test data.",
+  "algorithm": "bearings",
+  "version": 1,
+  "publishedAt": "2026-01-01",
+  "earthModel": "Sphere, radius 6,371,008.8 m",
+  "sources": [
+    {
+      "role": "Reference program",
+      "name": "GeodSolve, GeographicLib 2.7",
+      "by": "Charles Karney",
+      "url": "https://geographiclib.sourceforge.io/",
+      "licence": "MIT"
+    },
+    {
+      "role": "Definitions",
+      "name": "Mils and compass points, written from their definitions",
+      "by": "",
+      "url": "",
+      "licence": "CC0"
+    }
+  ],
+  "tolerances": {
+    "distanceInMeters": "0.001",
+    "bearingInDegrees": "0.000001",
+    "text": "exact"
+  },
+  "history": [
+    {
+      "version": 1,
+      "publishedAt": "2026-01-01",
+      "change": "Placeholder: the first version"
+    }
+  ],
+  "cases": [
+    {
+      "id": "placeholder-1",
+      "operation": "inverse",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "fromLatitudeInDegrees": 11.11,
+        "fromLongitudeInDegrees": 22.22,
+        "toLatitudeInDegrees": 33.33,
+        "toLongitudeInDegrees": 44.44
+      },
+      "expected": {
+        "distanceInMeters": 1234567.891,
+        "bearingInDegrees": 12.345678
+      }
+    },
+    {
+      "id": "placeholder-2",
+      "operation": "formatDegrees",
+      "tags": [
+        "edge",
+        "hand"
+      ],
+      "input": {
+        "bearingInDegrees": 359.6
+      },
+      "expected": {
+        "text": "000°"
+      }
+    },
+    {
+      "id": "placeholder-3",
+      "operation": "turn",
+      "tags": [
+        "edge",
+        "hand"
+      ],
+      "input": {
+        "fromInDegrees": 350,
+        "toInDegrees": 10
+      },
+      "expected": {
+        "turnInDegrees": 20,
+        "direction": "right"
+      }
+    },
+    {
+      "id": "placeholder-4",
+      "operation": "compassPoint",
+      "tags": [
+        "hand"
+      ],
+      "input": {
+        "bearingInDegrees": 11.25,
+        "points": 32,
+        "style": "words"
+      },
+      "expected": {
+        "text": "north by east"
+      }
+    }
+  ]
+}

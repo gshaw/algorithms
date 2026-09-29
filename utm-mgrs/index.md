@@ -1,10 +1,9 @@
 ---
 title: UTM and MGRS
 description: Test data for UTM and MGRS grid references, grid convergence and coordinate parsing.
-layout: page
+layout: algorithm
+slug: utm-mgrs
 ---
-
-{% include planned.html slug="utm-mgrs" %}
 
 ## What it is
 
@@ -53,15 +52,6 @@ layout: page
 
 </div>
 
-{% include implementations.html %}
+## For agents
 
-## Source
-
-<div class="fields" markdown="1">
-
-| Role | Source |
-| --- | --- |
-| Standard | NGA's definition of UTM and MGRS, and Karney's Transverse Mercator (2011) |
-| Reference program | `GeoConvert` from GeographicLib, MIT |
-
-</div>
+Implement the Transverse Mercator projection with the Krüger series to sixth order, as in Karney (2011), on WGS84, with a scale of 0.9996 on each zone's central meridian. Simpler textbook formulas drift near zone edges and fail the tolerances. Apply the Norway and Svalbard zone exceptions, and use UPS beyond 84° N and 80° S. Truncate MGRS digits; never round. Pass every case in `vectors.json` within its tolerance.

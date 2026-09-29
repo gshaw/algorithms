@@ -1,0 +1,5 @@
+---
+layout: null
+permalink: /wmm/vectors.json
+---
+{{ site.data.vectors["wmm"] | jsonify }}

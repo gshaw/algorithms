@@ -155,3 +155,32 @@ figure.diagram img {
     width: 40%;
   }
 }
+
+/* A page built from placeholder data says so, loudly. */
+.preview {
+  padding: 0.75rem 1rem;
+  border-radius: var(--pico-border-radius);
+  background: #fef3c7;
+  color: #78350f;
+}
+.preview a {
+  color: inherit;
+}
+@media (prefers-color-scheme: dark) {
+  .preview {
+    background: #422006;
+    color: #fde68a;
+  }
+}
+.passes {
+  color: #16a34a;
+}
+.fails {
+  color: #dc2626;
+}
+.incomplete {
+  color: var(--pico-muted-color);
+}
+.cases .arrow {
+  color: var(--pico-muted-color);
+}

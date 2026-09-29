@@ -1,10 +1,9 @@
 ---
 title: Bearings
 description: Test data for distance and bearing, degrees and mils, compass points, and true, magnetic and grid north.
-layout: page
+layout: algorithm
+slug: bearings
 ---
-
-{% include planned.html slug="bearings" %}
 
 ## What it is
 
@@ -42,15 +41,6 @@ A bearing is only meaningful with its north. A map has three: **true north** alo
 
 </div>
 
-{% include implementations.html %}
+## For agents
 
-## Source
-
-<div class="fields" markdown="1">
-
-| Role | Source |
-| --- | --- |
-| Reference program | `GeodSolve` from GeographicLib, MIT, on a sphere of radius 6,371,008.8 m |
-| Mils and compass points | Written from their definitions |
-
-</div>
+Measure on a sphere of radius 6,371,008.8 m, not the ellipsoid, so distances match Turf and the map. Normalize every bearing into [0°, 360°) after rounding, not before, so 359.6° writes as `000°`. Take declination and convergence as signed inputs, east positive, and convert as true = magnetic + declination and grid = true − convergence. Pass every case in `vectors.json`; text must match exactly.
