@@ -21,7 +21,7 @@ layout: page
 
 <h2>What it is</h2>
 {{ content }}
-{% if page.diagram %}<figure class="diagram"><img src="/assets/diagrams/{{ page.diagram.file }}" alt="{{ page.diagram.alt }}"></figure>{% endif %}
+{% if page.diagram %}<figure class="diagram"><object type="image/svg+xml" data="/assets/diagrams/{{ page.diagram.file }}" role="img" aria-label="{{ page.diagram.alt }}">{{ page.diagram.alt }}</object></figure>{% endif %}
 {% if page.points %}<ul>{% for point in page.points %}<li>{{ point | markdownify | remove: "<p>" | remove: "</p>" | strip }}</li>{% endfor %}</ul>{% endif %}
 
 <h2>Operations</h2>
