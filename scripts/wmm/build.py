@@ -22,7 +22,7 @@ import vectors_json  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCES = ROOT / "wmm" / "sources"
-VECTORS = ROOT / "_data" / "vectors" / "wmm.json"
+VECTORS = ROOT / "wmm" / "vectors.json"
 
 
 def number(text):
@@ -241,6 +241,29 @@ def verify():
         print(f"  {field} {off:.6f} of ±{tolerances[field]:g}")
 
 
+# Why a case exists, for the reader of the file and the page's list of edge cases.
+NOTES = {
+    "noaa-table-1": "NOAA's Table 6. Grid variation equals declination on the prime meridian.",
+    "noaa-table-2": "At the equator grid variation is null: NOAA prints NaN.",
+    "noaa-table-3": "Longitude 240 is −120: grid variation is declination plus longitude, wrapped to −180 to 180.",
+    "noaa-points-1": "Near the north magnetic pole: horizontal intensity under 2000 nT, blackout unreliable, declination still given.",
+    "noaa-points-2": "Horizontal intensity under 6000 nT: blackout caution.",
+    "reference-north-pole-2026": "The geographic north pole: longitude is undefined, so NOAA takes the limit along longitude 0. Blackout unreliable.",
+    "reference-south-pole-2026": "The geographic south pole, along longitude 0.",
+    "reference-first-instant": "2025.0, the model's first instant.",
+    "reference-last-instant": "2030.0, the model's last instant: still computed.",
+    "reference-grid-variation-55n": "Exactly 55° N, where grid variation starts: declination minus longitude.",
+    "reference-grid-variation-55s": "Exactly 55° S: declination plus longitude.",
+    "reference-date-2025-01-01": "1 January is a whole year.",
+    "reference-date-2028-02-29": "A leap day: 2028 + 59/366.",
+    "reference-date-2028-12-31": "The last day of a leap year: 2028 + 365/366.",
+    "reference-date-2100-03-01": "2100 isn't a leap year: 2100 + 59/365.",
+    "reference-date-2000-03-01": "2000 was a leap year: 2000 + 60/366.",
+    "reference-date-2027-02-29": "Doesn't exist: invalidInput.",
+    "invalid-before-2025": "Before the model's first instant: outOfRange, as NOAA's software refuses it.",
+    "invalid-after-2030": "After the model's last instant: outOfRange.",
+}
+
 def build():
     data = json.loads(VECTORS.read_text())
     cases = table_cases() + points_cases() + reference_cases() + invalid_cases()
@@ -249,6 +272,7 @@ def build():
     if data.get("cases") != cases:
         data["publishedDate"] = datetime.date.today().isoformat()
     data["cases"] = cases
+    vectors_json.add_notes(data["cases"], NOTES)
     VECTORS.write_text(vectors_json.dumps(data))
     print(f"Wrote {len(cases)} cases to {VECTORS.relative_to(ROOT)}")
 

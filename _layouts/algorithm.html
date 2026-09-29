@@ -52,13 +52,41 @@ layout: page
 </div>
 
 <h2>Edge cases</h2>
-{% include fields.html head="Case,What's right" rows=page.edge_cases %}
+{%- comment %} Every case in the file with a note, in the file's order. {% endcomment %}
+{%- assign noted = data.cases | where_exp: "case", "case.note" %}
+<div class="fields">
+  <table>
+    <thead><tr><th>Case</th><th>What it tests</th></tr></thead>
+    <tbody>
+      {%- for case in noted %}
+      <tr><td><code>{{ case.id }}</code><small>{{ case.operation }}</small></td><td>{{ case.note }}</td></tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+</div>
+<p class="muted">Their inputs and expected values are in <a href="/{{ page.slug }}/vectors.json">vectors.json</a>; search for the case's id.</p>
 
 <h2>For agents</h2>
 {{ page.agents | markdownify }}
 
 <h2>Test data</h2>
-<p>In <a href="/{{ page.slug }}/vectors.json">vectors.json</a>, published {{ data.publishedDate }}. Earth model: {{ data.earthModel }}. How to read it: <a href="/format/">Test data format</a>.</p>
+<p><a href="/{{ page.slug }}/vectors.json">vectors.json</a> holds {{ data.cases.size }} cases, published {{ data.publishedDate }}. Earth model: {{ data.earthModel }}. How to read it: <a href="/format/">Test data format</a>.</p>
+{%- assign tagNames = "published,reference,hand,edge,polar,invalid" | split: "," %}
+<div class="fields">
+  <table>
+    <thead><tr><th>Operation</th><th>Cases</th></tr></thead>
+    <tbody>
+      {%- for operation in data.operations %}
+      {%- assign cases = data.cases | where: "operation", operation.id %}
+      <tr>
+        <td><code>{{ operation.id }}</code></td>
+        <td>{{ cases.size }}<small>{% assign first = true %}{% for tag in tagNames %}{% assign tagged = cases | where_exp: "case", "case.tags contains tag" %}{% if tagged.size > 0 %}{% unless first %} · {% endunless %}{{ tagged.size }} {{ tag }}{% assign first = false %}{% endif %}{% endfor %}</small></td>
+      </tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+</div>
+<p class="muted">Tags say where each value came from: <a href="/format/#cases">what they mean</a>.</p>
 <div class="fields compact">
   <table>
     <thead><tr><th>Field</th><th>Tolerance</th></tr></thead>
@@ -70,27 +98,6 @@ layout: page
   </table>
 </div>
 <p class="muted">Every other field is compared exactly.</p>
-
-<div class="fields cases">
-  <table>
-    <thead><tr><th>Case</th><th>Input</th><th>Expected</th></tr></thead>
-    <tbody>
-      {%- assign shown = 0 %}
-      {%- for case in data.cases %}
-      {%- unless case.tags contains "published" or case.tags contains "edge" or case.tags contains "invalid" or case.tags contains "hand" %}{% continue %}{% endunless %}
-      {%- assign shown = shown | plus: 1 %}
-      <tr>
-        <td><code>{{ case.id }}</code><small>{{ case.operation }} · {{ case.tags | join: ", " }}</small></td>
-        <td>{%- for pair in case.input %}<code>{{ pair[0] }}</code> {{ pair[1] | jsonify }}{% unless forloop.last %}<br>{% endunless %}{% endfor -%}</td>
-        <td>{%- for pair in case.expected %}<code>{{ pair[0] }}</code> {{ pair[1] | jsonify }}{% unless forloop.last %}<br>{% endunless %}{% endfor -%}</td>
-      </tr>
-      {%- endfor %}
-    </tbody>
-  </table>
-</div>
-{%- assign hidden = data.cases.size | minus: shown %}
-{% if hidden > 0 %}<p class="muted">Plus {{ hidden }} cases at random points, from the reference program, in <a href="/{{ page.slug }}/vectors.json">vectors.json</a>.</p>{% endif %}
-
 
 <h2>Implementations</h2>
 <div class="fields compact">

@@ -29,7 +29,7 @@ ROOT = Path(__file__).resolve().parents[2]
 SOURCES = ROOT / "astronomical-time" / "sources"
 USNO_LOG = SOURCES / "usno.jsonl"
 ERFA_LOG = SOURCES / "erfa.txt"
-VECTORS = ROOT / "_data" / "vectors" / "astronomical-time.json"
+VECTORS = ROOT / "astronomical-time" / "vectors.json"
 OFFLINE = "--offline" in sys.argv
 
 usno_cache = {}
@@ -256,6 +256,25 @@ def invalid_cases():
     ]
 
 
+# Why a case exists, for the reader of the file and the page's list of edge cases.
+NOTES = {
+    "usno-julian-day-j2000": "The J2000 epoch: 2451545.0.",
+    "usno-julian-day-julian-last-day": "1582-10-04 in the Julian calendar is followed by 1582-10-15 in the Gregorian.",
+    "usno-julian-day-gregorian-first-day": "The Gregorian calendar's first day: 2299160.5.",
+    "usno-julian-day-year-0-leap-day": "Year 0 is 1 BC, a Julian leap year.",
+    "usno-julian-day-julian-day-zero": "Noon on 1 January 4713 BC, written -4712: Julian day 0.",
+    "usno-julian-day-century-not-leap": "1900 isn't a Gregorian leap year.",
+    "usno-julian-day-century-leap": "2000 is.",
+    "usno-calendar-date-zero": "Julian day 0 is -4712-01-01 in the Julian calendar.",
+    "usno-calendar-date-just-before-midnight": "A fraction just under .5 is still the day before.",
+    "usno-sidereal-greenwich-j2000": "Greenwich mean sidereal time at the J2000 epoch.",
+    "usno-sidereal-date-line": "At 180°, local is Greenwich plus 12 hours, wrapped.",
+    "erfa-horizontal-below-horizon": "Below the horizon: a negative altitude, not an error.",
+    "erfa-horizontal-south-pole-observer": "At a pole azimuth is undefined: only altitude is compared.",
+    "invalid-julian-day-nonexistent-date": "1582-10-10 never happened: invalidInput.",
+    "invalid-delta-t-before-1973": "Before USNO's observed table: outOfRange.",
+}
+
 def main():
     delta, last_prediction = delta_t_cases()
     cases = julian_day_cases() + calendar_date_cases() + sidereal_cases() + delta + horizontal_cases() + invalid_cases()
@@ -270,6 +289,7 @@ def main():
     if data.get("cases") != cases:
         data["publishedDate"] = datetime.date.today().isoformat()
     data["cases"] = cases
+    vectors_json.add_notes(data["cases"], NOTES)
     VECTORS.write_text(vectors_json.dumps(data))
     print(f"Wrote {len(cases)} cases to {VECTORS.relative_to(ROOT)}; ΔT predictions end {last_prediction}")
 

@@ -27,7 +27,7 @@ from generate import DATES, PLACES, SHIFTED, iso  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCES = ROOT / "moon" / "sources"
-VECTORS = ROOT / "_data" / "vectors" / "moon.json"
+VECTORS = ROOT / "moon" / "vectors.json"
 usno = USNO(SOURCES / "usno.jsonl")
 dropped = []
 NAMES = ["new", "waxingCrescent", "firstQuarter", "waxingGibbous", "full", "waningGibbous", "lastQuarter", "waningCrescent"]
@@ -213,6 +213,18 @@ def invalid_cases():
     ]
 
 
+# Why a case exists, for the reader of the file and the page's list of edge cases.
+NOTES = {
+    "usno-events-vancouver-2026-09-21": "No moonrise in this UTC day: riseUtc is null, not the next day's.",
+    "usno-events-alert-2026-03-21": "The moon stays up all day.",
+    "usno-events-alert-2026-08-21": "The moon stays down all day.",
+    "usno-events-tonga-local-day": "A window from local midnight across the date line.",
+    "skyfield-phase-at-first-quarter-2026-03-25": "Exactly at first quarter: firstQuarter, not a neighbour.",
+    "skyfield-phase-at-full-moon-2026-03-03": "Exactly at full moon.",
+    "skyfield-phase-at-new-moon-2026-03-19": "Exactly at new moon: almost nothing lit.",
+    "usno-next-phases-2026-03-16": "The four phases come in order from the start, crossing into April.",
+}
+
 def main():
     sky = Sky()
     try:
@@ -228,6 +240,7 @@ def main():
     if data.get("cases") != cases:
         data["publishedDate"] = datetime.date.today().isoformat()
     data["cases"] = cases
+    vectors_json.add_notes(data["cases"], NOTES)
     VECTORS.write_text(vectors_json.dumps(data))
     print(f"Wrote {len(cases)} cases to {VECTORS.relative_to(ROOT)}; left out where USNO and Skyfield disagree: {dropped}")
 

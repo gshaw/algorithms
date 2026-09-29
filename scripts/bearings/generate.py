@@ -33,7 +33,7 @@ import vectors_json  # noqa: E402
 ROOT = Path(__file__).resolve().parents[2]
 SOURCES = ROOT / "bearings" / "sources"
 LOG = SOURCES / "geodsolve.txt"
-VECTORS = ROOT / "_data" / "vectors" / "bearings.json"
+VECTORS = ROOT / "bearings" / "vectors.json"
 SPHERE = "-e 6371008.8 0 -p 6"
 
 OFFLINE = "--offline" in sys.argv
@@ -315,6 +315,32 @@ def invalid_cases():
     ]
 
 
+# Why a case exists, for the reader of the file and the page's list of edge cases.
+NOTES = {
+    "edge-inverse-across-antimeridian": "179.5° to −179.5° is 110 km east, not most of the way round.",
+    "edge-inverse-due-north": "Bearing left out: 0 and 360 are both right.",
+    "edge-inverse-same-point": "Distance 0; the bearing is undefined.",
+    "edge-inverse-antipodes": "Half the circumference; every bearing is right, so none is compared.",
+    "edge-inverse-from-north-pole": "From a pole the bearing depends on the convention, so only distance is compared.",
+    "edge-inverse-one-metre": "Short distances keep their precision.",
+    "edge-destination-over-the-pole": "Due north past the pole comes down the other side: longitude −170.",
+    "fm-3-25-26-figure-6-10": "FM 3-25.26: magnetic 210° with a 12° east G-M angle is grid 222°.",
+    "fm-3-25-26-figure-6-12": "FM 3-25.26: grid 2° with a 16° east G-M angle wraps to magnetic 346°.",
+    "fm-3-25-26-figure-6-15": "FM 3-25.26: magnetic 5° with a 12° west G-M angle wraps to grid 353°.",
+    "hand-convert-north-1": "True = magnetic + declination.",
+    "hand-convert-north-15": "True = grid + convergence.",
+    "hand-back-azimuth-180": "The back azimuth of 180° is 0°, not 360°.",
+    "hand-turn-350-to-10": "Across north: 20° right, not 340° left.",
+    "hand-turn-0-to-180": "Exactly 180° is right, by this file's rule.",
+    "hand-turn-90-to-90": "No turn: direction none.",
+    "hand-format-degrees-0-5": "Half up: 0.5° is 001°.",
+    "hand-format-degrees-359-6": "Round, then wrap: 359.6° is 000°, never 360°.",
+    "hand-format-mils-359-98": "6399.64 mils rounds to 6400, which wraps to 0000.",
+    "bowditch-points-16-11-25": "Half-way between N and NNE goes clockwise: NNE.",
+    "bowditch-points-32-11-25": "Bowditch's abbreviation: N by E.",
+    "bowditch-points-4-359-9": "Just west of north is still N.",
+}
+
 def main():
     if OFFLINE:
         read_log()
@@ -332,6 +358,7 @@ def main():
     if data.get("cases") != cases:
         data["publishedDate"] = datetime.date.today().isoformat()
     data["cases"] = cases
+    vectors_json.add_notes(data["cases"], NOTES)
     VECTORS.write_text(vectors_json.dumps(data))
     print(f"Wrote {len(cases)} cases to {VECTORS.relative_to(ROOT)}")
 
