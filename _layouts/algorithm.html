@@ -12,7 +12,12 @@ layout: page
 </blockquote>
 {%- endif %}
 
-<p class="headline">{% include status.html status=algorithm.status %} · {{ data.cases.size }} cases{% if data.expiresDate %} · valid until {{ data.expiresDate }}{% endif %}</p>
+{%- comment %} Amber from 90 days before the data expires, as of the build. {% endcomment -%}
+{%- if data.expiresDate -%}
+  {%- assign now = site.time | date: "%s" | plus: 0 -%}
+  {%- assign secondsLeft = data.expiresDate | date: "%s" | plus: 0 | minus: now -%}
+{%- endif -%}
+<p class="headline">{% include status.html status=algorithm.status %} · {{ data.cases.size }} cases{% if data.expiresDate %} · {% if secondsLeft < 0 %}<span class="dot avoid"></span>expired {{ data.expiresDate }}{% elsif secondsLeft < 7776000 %}<span class="dot caution"></span>valid until {{ data.expiresDate }}{% else %}valid until {{ data.expiresDate }}{% endif %}{% endif %}</p>
 
 <h2>What it is</h2>
 {{ content }}

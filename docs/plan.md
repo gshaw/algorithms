@@ -1,6 +1,6 @@
 # Plan
 
-**2026-09-29. The lander is live; no test data yet.** The first six algorithms are issues
+**2026-09-29. Magnetic declination has real test data; the other five are previews.** The first six algorithms are issues
 [#1](https://github.com/gshaw/algorithms/issues/1) to
 [#6](https://github.com/gshaw/algorithms/issues/6), in that order. Sun and moon were one
 algorithm; they split into astronomical time (the foundation both use), sun and moon, so a

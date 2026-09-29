@@ -6,7 +6,7 @@
   gives: Declination, inclination and field strength for a place and date
   standard: WMM2025, NOAA and BGS
   checked_against: NOAA's published test values
-  status: planned
+  status: published
   issue: 1
 - name: UTM and MGRS
   slug: utm-mgrs
