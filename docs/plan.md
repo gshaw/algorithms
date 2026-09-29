@@ -1,8 +1,8 @@
 # Plan
 
-**2026-09-29. Magnetic declination has real test data; the other five are previews.** The first six algorithms are issues
+**2026-09-29. All six algorithms have real test data, and algorithms-swift passes every one.** They were issues
 [#1](https://github.com/gshaw/algorithms/issues/1) to
-[#6](https://github.com/gshaw/algorithms/issues/6), in that order. Sun and moon were one
+[#6](https://github.com/gshaw/algorithms/issues/6), built in that order. Sun and moon were one
 algorithm; they split into astronomical time (the foundation both use), sun and moon, so a
 failing sunrise says whether the fault is underneath.
 
