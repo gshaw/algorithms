@@ -1,8 +1,8 @@
 {
   "placeholder": "Made-up values to show the page layout. This is not test data.",
   "algorithm": "bearings",
-  "publishedAt": "2026-01-01",
-  "earthModel": "Sphere, radius 6,371,008.8 m",
+  "publishedDate": "2026-01-01",
+  "earthModel": "Sphere, radius 6,371,008.8 m (proposed)",
   "sources": [
     {
       "role": "Reference program",
@@ -19,10 +19,126 @@
       "licence": "CC0"
     }
   ],
+  "operations": [
+    {
+      "id": "inverse",
+      "gives": "The distance and initial bearing between two points",
+      "inputs": [
+        "fromLatitudeInDegrees",
+        "fromLongitudeInDegrees",
+        "toLatitudeInDegrees",
+        "toLongitudeInDegrees"
+      ],
+      "outputs": [
+        "distanceInMeters",
+        "bearingInDegrees"
+      ]
+    },
+    {
+      "id": "destination",
+      "gives": "The point at a distance and bearing from another",
+      "inputs": [
+        "fromLatitudeInDegrees",
+        "fromLongitudeInDegrees",
+        "distanceInMeters",
+        "bearingInDegrees"
+      ],
+      "outputs": [
+        "toLatitudeInDegrees",
+        "toLongitudeInDegrees"
+      ]
+    },
+    {
+      "id": "backAzimuth",
+      "gives": "The reverse of a bearing",
+      "inputs": [
+        "bearingInDegrees"
+      ],
+      "outputs": [
+        "backAzimuthInDegrees"
+      ]
+    },
+    {
+      "id": "turn",
+      "gives": "The shortest turn from one bearing to another",
+      "inputs": [
+        "fromBearingInDegrees",
+        "toBearingInDegrees"
+      ],
+      "outputs": [
+        "turnInDegrees",
+        "direction"
+      ]
+    },
+    {
+      "id": "convertNorth",
+      "gives": "A bearing converted between true, magnetic and grid north",
+      "inputs": [
+        "bearingInDegrees",
+        "fromNorth",
+        "toNorth",
+        "magneticDeclinationInDegrees",
+        "convergenceInDegrees"
+      ],
+      "outputs": [
+        "convertedBearingInDegrees"
+      ]
+    },
+    {
+      "id": "formatBearing",
+      "gives": "A bearing written in degrees or mils",
+      "inputs": [
+        "bearingInDegrees",
+        "angleUnit"
+      ],
+      "outputs": [
+        "bearingText"
+      ]
+    },
+    {
+      "id": "compassPoint",
+      "gives": "The compass point nearest a bearing",
+      "inputs": [
+        "bearingInDegrees",
+        "pointCount",
+        "style"
+      ],
+      "outputs": [
+        "compassPointText"
+      ]
+    }
+  ],
+  "fields": {
+    "fromLatitudeInDegrees": "The start, −90 to 90",
+    "fromLongitudeInDegrees": "The start, −180 to 180",
+    "toLatitudeInDegrees": "The end, −90 to 90",
+    "toLongitudeInDegrees": "The end, −180 to 180",
+    "distanceInMeters": "Along the great circle",
+    "bearingInDegrees": "0 to 360, clockwise from north",
+    "backAzimuthInDegrees": "The bearing plus 180°, in 0 to 360",
+    "fromBearingInDegrees": "The heading now",
+    "toBearingInDegrees": "The heading wanted",
+    "turnInDegrees": "0 to 180",
+    "direction": "left or right",
+    "fromNorth": "true, magnetic or grid",
+    "toNorth": "true, magnetic or grid",
+    "magneticDeclinationInDegrees": "True to magnetic, east positive, from the magnetic model",
+    "convergenceInDegrees": "True to grid, east positive, from UTM",
+    "convertedBearingInDegrees": "0 to 360",
+    "angleUnit": "degrees, natoMils (6400), warsawPactMils (6000) or swedishMils (6300)",
+    "bearingText": "000° to 359°, or four-digit mils",
+    "pointCount": "4, 8, 16 or 32",
+    "style": "abbreviation or words",
+    "compassPointText": "Like NNE, NbE or north by east"
+  },
   "tolerances": {
     "distanceInMeters": "0.001",
     "bearingInDegrees": "0.000001",
-    "text": "exact"
+    "toLatitudeInDegrees": "0.0000001",
+    "toLongitudeInDegrees": "0.0000001",
+    "backAzimuthInDegrees": "0.000001",
+    "turnInDegrees": "0.000001",
+    "convertedBearingInDegrees": "0.000001"
   },
   "cases": [
     {
@@ -44,16 +160,17 @@
     },
     {
       "id": "placeholder-2",
-      "operation": "formatDegrees",
+      "operation": "formatBearing",
       "tags": [
         "edge",
         "hand"
       ],
       "input": {
-        "bearingInDegrees": 359.6
+        "bearingInDegrees": 359.6,
+        "angleUnit": "degrees"
       },
       "expected": {
-        "text": "000°"
+        "bearingText": "000°"
       }
     },
     {
@@ -64,8 +181,8 @@
         "hand"
       ],
       "input": {
-        "fromInDegrees": 350,
-        "toInDegrees": 10
+        "fromBearingInDegrees": 350,
+        "toBearingInDegrees": 10
       },
       "expected": {
         "turnInDegrees": 20,
@@ -80,11 +197,11 @@
       ],
       "input": {
         "bearingInDegrees": 11.25,
-        "points": 32,
+        "pointCount": 32,
         "style": "words"
       },
       "expected": {
-        "text": "north by east"
+        "compassPointText": "north by east"
       }
     }
   ]

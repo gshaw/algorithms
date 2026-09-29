@@ -1,23 +1,23 @@
 {
   "placeholder": "Made-up values to show the page layout. This is not test data.",
   "algorithm": "astronomical-time",
-  "publishedAt": "2026-01-01",
-  "expiresAt": "2027-12-31",
+  "publishedDate": "2026-01-01",
+  "expiresDate": "2027-12-31",
   "earthModel": "WGS84",
   "sources": [
     {
       "role": "Method",
-      "name": "Astronomical Algorithms, 2nd edition",
+      "name": "Astronomical Algorithms, 2nd edition, 1998",
       "by": "Jean Meeus",
       "url": "",
-      "licence": "Book"
+      "licence": ""
     },
     {
       "role": "ΔT",
       "name": "Earth orientation data",
       "by": "IERS",
       "url": "https://www.iers.org/",
-      "licence": "Free to use with credit"
+      "licence": "⚠️ Terms not checked yet"
     },
     {
       "role": "Reference",
@@ -27,10 +27,87 @@
       "licence": "Public domain"
     }
   ],
+  "operations": [
+    {
+      "id": "julianDay",
+      "gives": "The Julian day of an instant",
+      "inputs": [
+        "instantUtc"
+      ],
+      "outputs": [
+        "julianDay"
+      ]
+    },
+    {
+      "id": "calendarDate",
+      "gives": "The calendar date of a Julian day",
+      "inputs": [
+        "julianDay"
+      ],
+      "outputs": [
+        "date",
+        "calendar"
+      ]
+    },
+    {
+      "id": "deltaT",
+      "gives": "ΔT for a date",
+      "inputs": [
+        "decimalYear"
+      ],
+      "outputs": [
+        "deltaTInSeconds"
+      ]
+    },
+    {
+      "id": "siderealTime",
+      "gives": "Mean sidereal time at Greenwich and at a longitude",
+      "inputs": [
+        "instantUtc",
+        "longitudeInDegrees"
+      ],
+      "outputs": [
+        "greenwichSiderealTimeInHours",
+        "localSiderealTimeInHours"
+      ]
+    },
+    {
+      "id": "horizontal",
+      "gives": "A sky position as azimuth and altitude from a place",
+      "inputs": [
+        "rightAscensionInHours",
+        "declinationInDegrees",
+        "latitudeInDegrees",
+        "longitudeInDegrees",
+        "instantUtc"
+      ],
+      "outputs": [
+        "azimuthInDegrees",
+        "altitudeInDegrees"
+      ]
+    }
+  ],
+  "fields": {
+    "latitudeInDegrees": "−90 to 90, WGS84, north positive",
+    "longitudeInDegrees": "−180 to 180, WGS84, east positive",
+    "instantUtc": "An instant, ISO 8601 in UTC, like 2026-01-01T00:00:00Z",
+    "julianDay": "Days since noon UTC on 1 January 4713 BC, with a fraction",
+    "date": "A calendar date, YYYY-MM-DD, astronomical years (1 BC is 0000)",
+    "calendar": "gregorian from 1582-10-15, julian before",
+    "decimalYear": "The year plus the fraction elapsed",
+    "deltaTInSeconds": "Uniform time minus Earth-rotation time",
+    "greenwichSiderealTimeInHours": "0 to 24",
+    "localSiderealTimeInHours": "0 to 24",
+    "rightAscensionInHours": "0 to 24, a sky position's east–west angle",
+    "declinationInDegrees": "−90 to 90, a sky position's angle north of the celestial equator",
+    "azimuthInDegrees": "0 to 360, clockwise from north",
+    "altitudeInDegrees": "−90 to 90, up from the horizon"
+  },
   "tolerances": {
     "julianDay": "0.00001",
     "deltaTInSeconds": "1",
-    "siderealTimeInHours": "0.0001",
+    "greenwichSiderealTimeInHours": "0.0001",
+    "localSiderealTimeInHours": "0.0001",
     "azimuthInDegrees": "0.01",
     "altitudeInDegrees": "0.01"
   },
@@ -42,7 +119,7 @@
         "hand"
       ],
       "input": {
-        "instantUtc": "2026-01-01T00:00Z"
+        "instantUtc": "2026-01-01T00:00:00Z"
       },
       "expected": {
         "julianDay": 1234567.5
@@ -60,7 +137,7 @@
       },
       "expected": {
         "date": "1582-10-15",
-        "calendar": "Gregorian"
+        "calendar": "gregorian"
       }
     },
     {
@@ -87,7 +164,7 @@
         "declinationInDegrees": 45.6,
         "latitudeInDegrees": 11.11,
         "longitudeInDegrees": 22.22,
-        "instantUtc": "2026-01-01T00:00Z"
+        "instantUtc": "2026-01-01T00:00:00Z"
       },
       "expected": {
         "azimuthInDegrees": 123.45,

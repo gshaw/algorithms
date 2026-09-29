@@ -3,31 +3,48 @@ layout: page
 ---
 {%- assign algorithm = site.data.algorithms | where: "slug", page.slug | first -%}
 {%- assign data = site.data.vectors[page.slug] -%}
-<p class="muted">{{ algorithm.standard }} · {{ algorithm.authority }}</p>
+<p class="muted">{{ algorithm.standard }} · checked against {{ algorithm.checked_against }}</p>
 
 {% if data.placeholder -%}
 <blockquote class="alert warning">
   <p class="alert-title">Preview</p>
-  <p>The test data isn't published yet; the work is in <a href="{{ site.repo }}/issues/{{ algorithm.issue }}">issue #{{ algorithm.issue }}</a>. Every value under Test data is made up to show how the finished page will look.</p>
+  <p>The test data isn't published yet; the work is in <a href="{{ site.repo }}/issues/{{ algorithm.issue }}">issue #{{ algorithm.issue }}</a>. The case count, the expiry date and everything under Test data are made up to show how the finished page will look.</p>
 </blockquote>
 {%- endif %}
 
-<p class="headline"><strong>{{ data.cases.size }} cases</strong>{% if data.expiresAt %} · valid until {{ data.expiresAt }}{% endif %}</p>
+<p class="headline">{% include status.html status=algorithm.status %} · {{ data.cases.size }} cases{% if data.expiresDate %} · valid until {{ data.expiresDate }}{% endif %}</p>
 
 <h2>What it is</h2>
 {{ content }}
 {% if page.diagram %}<figure class="diagram"><img src="/assets/diagrams/{{ page.diagram.file }}" alt="{{ page.diagram.alt }}"></figure>{% endif %}
 {% if page.points %}<ul>{% for point in page.points %}<li>{{ point | markdownify | remove: "<p>" | remove: "</p>" | strip }}</li>{% endfor %}</ul>{% endif %}
 
-{% if page.operations -%}
 <h2>Operations</h2>
-{% include fields.html head="Operation,Gives" rows=page.operations %}
-{%- else -%}
-<h2>Inputs</h2>
-{% include fields.html head="Input,Meaning" rows=page.inputs %}
-<h2>Outputs</h2>
-{% include fields.html head="Output,Meaning" rows=page.outputs %}
-{%- endif %}
+<div class="fields">
+  <table>
+    <thead><tr><th>Operation</th><th>Gives</th></tr></thead>
+    <tbody>
+      {%- for operation in data.operations %}
+      <tr>
+        <td><code>{{ operation.id }}</code></td>
+        <td>{{ operation.gives }}<small>In: {% for name in operation.inputs %}<code>{{ name }}</code>{% unless forloop.last %}, {% endunless %}{% endfor %}<br>Out: {% for name in operation.outputs %}<code>{{ name }}</code>{% unless forloop.last %}, {% endunless %}{% endfor %}</small></td>
+      </tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+</div>
+
+<h2>Fields</h2>
+<div class="fields">
+  <table>
+    <thead><tr><th>Field</th><th>Meaning</th></tr></thead>
+    <tbody>
+      {%- for pair in data.fields %}
+      <tr><td><code>{{ pair[0] }}</code></td><td>{{ pair[1] }}</td></tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+</div>
 
 <h2>Edge cases</h2>
 {% include fields.html head="Case,What's right" rows=page.edge_cases %}
@@ -35,32 +52,29 @@ layout: page
 <h2>For agents</h2>
 {{ page.agents | markdownify }}
 
-
 <h2>Test data</h2>
-<p>{{ data.cases.size }} cases in <a href="/{{ page.slug }}/vectors.json">vectors.json</a>, published {{ data.publishedAt }}. Earth model: {{ data.earthModel }}.</p>
+<p>In <a href="/{{ page.slug }}/vectors.json">vectors.json</a>, published {{ data.publishedDate }}. Earth model: {{ data.earthModel }}. How to read it: <a href="/format/">Test data format</a>.</p>
 <div class="fields compact">
   <table>
-    <thead><tr><th>Output</th><th>Tolerance</th></tr></thead>
+    <thead><tr><th>Field</th><th>Tolerance</th></tr></thead>
     <tbody>
       {%- for pair in data.tolerances %}
-      <tr><td><code>{{ pair[0] }}</code></td><td>{% if pair[1] == "exact" %}Exact{% else %}± {{ pair[1] }}{% endif %}</td></tr>
+      <tr><td><code>{{ pair[0] }}</code></td><td>± {{ pair[1] }}{% if pair[0] contains "Utc" %} s{% endif %}</td></tr>
       {%- endfor %}
     </tbody>
   </table>
 </div>
+<p class="muted">Every other field is compared exactly.</p>
 
 <div class="fields cases">
   <table>
-    <thead><tr><th>Case</th><th>Input → expected</th></tr></thead>
+    <thead><tr><th>Case</th><th>Input</th><th>Expected</th></tr></thead>
     <tbody>
       {%- for case in data.cases %}
       <tr>
         <td><code>{{ case.id }}</code><small>{{ case.operation }} · {{ case.tags | join: ", " }}</small></td>
-        <td>
-          {%- for pair in case.input %}<code>{{ pair[0] }}</code> {{ pair[1] | jsonify }}<br>{% endfor -%}
-          <span class="arrow">→</span>
-          {%- for pair in case.expected %} <code>{{ pair[0] }}</code> {{ pair[1] | jsonify }}{% unless forloop.last %}<br>{% endunless %}{% endfor %}
-        </td>
+        <td>{%- for pair in case.input %}<code>{{ pair[0] }}</code> {{ pair[1] | jsonify }}{% unless forloop.last %}<br>{% endunless %}{% endfor -%}</td>
+        <td>{%- for pair in case.expected %}<code>{{ pair[0] }}</code> {{ pair[1] | jsonify }}{% unless forloop.last %}<br>{% endunless %}{% endfor -%}</td>
       </tr>
       {%- endfor %}
     </tbody>
@@ -76,27 +90,25 @@ layout: page
       {%- assign result = implementation.results[page.slug] %}
       <tr>
         <td>{% if implementation.planned %}{{ implementation.repo }}{% else %}<a href="https://github.com/{{ implementation.repo }}">{{ implementation.repo }}</a>{% endif %}<small>{{ implementation.language }}</small></td>
-        <td>
-          {%- if result.status == "passes" %}<span class="dot ok"></span>Passes
-          {%- elsif result.status == "fails" %}<span class="dot avoid"></span>Fails {{ result.failed }} of {{ data.cases.size }}
-          {%- else %}<span class="dot caution"></span>Incomplete{% endif -%}
+        <td class="status">
+          {%- if result.status == "passes" %}{% include status.html status="passes" %}
+          {%- elsif result.status == "fails" %}{% include status.html status="fails" %} {{ result.failed }} of {{ data.cases.size }}
+          {%- else %}{% include status.html status="incomplete" %}{% endif -%}
         </td>
       </tr>
       {%- endfor %}
     </tbody>
   </table>
 </div>
-<p class="muted">Each is a public repo that runs this page's test data with <code>mise run test</code>. See <a href="/#implementations">how implementations work</a>.</p>
-
+<p class="muted">Each is a public repo that runs this page's test data with <code>mise run test</code>. See <a href="/format/#implementations">how implementations work</a>.</p>
 
 <h2>Source</h2>
 <div class="fields">
   <table>
     <tbody>
       {%- for source in data.sources %}
-      <tr><td>{{ source.role }}</td><td>{% if source.url != "" %}<a href="{{ source.url }}">{{ source.name }}</a>{% else %}{{ source.name }}{% endif %}<small>{% if source.by != "" %}{{ source.by }} · {% endif %}{{ source.licence }}</small></td></tr>
+      <tr><td>{{ source.role }}</td><td>{% if source.url != "" %}<a href="{{ source.url }}">{{ source.name }}</a>{% else %}{{ source.name }}{% endif %}<small>{{ source.by }}{% if source.by != "" and source.licence != "" %} · {% endif %}{{ source.licence }}</small></td></tr>
       {%- endfor %}
     </tbody>
   </table>
 </div>
-

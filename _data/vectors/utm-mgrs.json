@@ -1,7 +1,7 @@
 {
   "placeholder": "Made-up values to show the page layout. This is not test data.",
   "algorithm": "utm-mgrs",
-  "publishedAt": "2026-01-01",
+  "publishedDate": "2026-01-01",
   "earthModel": "WGS84",
   "sources": [
     {
@@ -19,11 +19,92 @@
       "licence": "MIT"
     }
   ],
+  "operations": [
+    {
+      "id": "toUtm",
+      "gives": "UTM from a latitude and longitude",
+      "inputs": [
+        "latitudeInDegrees",
+        "longitudeInDegrees"
+      ],
+      "outputs": [
+        "zone",
+        "hemisphere",
+        "eastingInMeters",
+        "northingInMeters",
+        "convergenceInDegrees",
+        "pointScale"
+      ]
+    },
+    {
+      "id": "fromUtm",
+      "gives": "A latitude and longitude from UTM",
+      "inputs": [
+        "zone",
+        "hemisphere",
+        "eastingInMeters",
+        "northingInMeters"
+      ],
+      "outputs": [
+        "latitudeInDegrees",
+        "longitudeInDegrees"
+      ]
+    },
+    {
+      "id": "toMgrs",
+      "gives": "An MGRS reference from a latitude and longitude",
+      "inputs": [
+        "latitudeInDegrees",
+        "longitudeInDegrees",
+        "precisionInDigits"
+      ],
+      "outputs": [
+        "mgrs"
+      ]
+    },
+    {
+      "id": "fromMgrs",
+      "gives": "The latitude and longitude of the reference's square's centre",
+      "inputs": [
+        "mgrs"
+      ],
+      "outputs": [
+        "latitudeInDegrees",
+        "longitudeInDegrees"
+      ]
+    },
+    {
+      "id": "parse",
+      "gives": "A latitude and longitude from a typed coordinate: DD, DDM, DMS, UTM or MGRS",
+      "inputs": [
+        "text"
+      ],
+      "outputs": [
+        "latitudeInDegrees",
+        "longitudeInDegrees"
+      ]
+    }
+  ],
+  "fields": {
+    "latitudeInDegrees": "−90 to 90, WGS84, north positive",
+    "longitudeInDegrees": "−180 to 180, WGS84, east positive",
+    "zone": "1 to 60; 0 for UPS beyond 84° N and 80° S",
+    "hemisphere": "north or south",
+    "eastingInMeters": "Within the zone",
+    "northingInMeters": "From the equator in the north, from 10,000 km south of it in the south",
+    "convergenceInDegrees": "Grid convergence: the angle from true north to grid north, east positive",
+    "pointScale": "The grid's scale at the point; 0.9996 on the central meridian",
+    "precisionInDigits": "0 to 5 digits each for easting and northing; 5 is 1 m",
+    "mgrs": "A reference with spaces, like 10U DV 85234 71665",
+    "text": "A coordinate as a person types it"
+  },
   "tolerances": {
+    "latitudeInDegrees": "0.0000001",
+    "longitudeInDegrees": "0.0000001",
     "eastingInMeters": "0.001",
     "northingInMeters": "0.001",
     "convergenceInDegrees": "0.000001",
-    "mgrs": "exact"
+    "pointScale": "0.0000001"
   },
   "cases": [
     {
@@ -35,7 +116,7 @@
       "input": {
         "latitudeInDegrees": 11.11,
         "longitudeInDegrees": 22.22,
-        "precision": 5
+        "precisionInDigits": 5
       },
       "expected": {
         "mgrs": "00X XX 12345 67890"
@@ -53,7 +134,7 @@
       },
       "expected": {
         "zone": 99,
-        "hemisphere": "N",
+        "hemisphere": "north",
         "eastingInMeters": 123456.789,
         "northingInMeters": 1234567.891,
         "convergenceInDegrees": 0.123456
@@ -69,7 +150,7 @@
       "input": {
         "latitudeInDegrees": 60.5,
         "longitudeInDegrees": 5.5,
-        "precision": 1
+        "precisionInDigits": 1
       },
       "expected": {
         "mgrs": "00X XX 1 2"

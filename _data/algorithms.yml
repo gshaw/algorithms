@@ -1,44 +1,45 @@
 # One entry per algorithm, in the order they're built. status is planned until the
 # test data is published; issue is where the work is tracked until then.
+# standard: what defines the answer. checked_against: where the expected values come from.
 - name: Magnetic declination
   slug: wmm
   gives: Declination, inclination and field strength for a place and date
-  standard: WMM2025
-  authority: NOAA and BGS
+  standard: WMM2025, NOAA and BGS
+  checked_against: NOAA's published test values
   status: planned
   issue: 1
 - name: UTM and MGRS
   slug: utm-mgrs
   gives: Grid references both ways, grid convergence, and typed coordinates parsed
-  standard: Karney's Transverse Mercator
-  authority: NGA, with GeographicLib as the reference program
+  standard: NGA's UTM and MGRS
+  checked_against: GeographicLib's GeoConvert
   status: planned
   issue: 2
 - name: Bearings
   slug: bearings
   gives: Distance and bearing, degrees and mils, compass points, true, magnetic and grid north
-  standard: Great circle on a sphere
-  authority: GeographicLib as the reference program
+  standard: Great circle on a sphere, proposed
+  checked_against: GeographicLib's GeodSolve
   status: planned
   issue: 3
 - name: Astronomical time
   slug: astronomical-time
   gives: Julian day, ΔT, sidereal time, and a sky position as azimuth and altitude
   standard: Meeus, Astronomical Algorithms
-  authority: USNO and IERS as the reference
+  checked_against: USNO and IERS
   status: planned
   issue: 4
 - name: Sun
   slug: sun
   gives: Rise, set, transit, the three twilights, azimuth and altitude
   standard: Meeus, Astronomical Algorithms
-  authority: USNO as the reference
+  checked_against: USNO
   status: planned
   issue: 5
 - name: Moon
   slug: moon
   gives: Rise, set, transit, illumination, phase, and the dates of the next phases
   standard: Meeus, Astronomical Algorithms
-  authority: USNO as the reference
+  checked_against: USNO
   status: planned
   issue: 6
