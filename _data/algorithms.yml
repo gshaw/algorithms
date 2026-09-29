@@ -13,7 +13,7 @@
   gives: Grid references both ways, grid convergence, and typed coordinates parsed
   standard: NGA's UTM and MGRS
   checked_against: GeographicLib's GeoConvert
-  status: planned
+  status: published
   issue: 2
 - name: Bearings
   slug: bearings

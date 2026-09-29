@@ -12,6 +12,7 @@ ignorePaths:
   - "Gemfile.lock"
   - "assets/css/pico.min.css"
   - "wmm/sources" # NOAA's files, verbatim
+  - "utm-mgrs/sources" # GeoConvert's output, verbatim
 words:
   - gshaw
   - jsonify # Liquid filter
@@ -32,6 +33,7 @@ words:
   - IAMSAR
   - IERS # International Earth Rotation and Reference Systems Service
   - MGRS
+  - STND # NGA.STND.0037, the MGRS standard
   - NOAA
   - NCEI
   - USNO
