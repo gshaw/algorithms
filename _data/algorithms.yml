@@ -26,8 +26,8 @@
   slug: astronomical-time
   gives: Julian day, ΔT, sidereal time, and a sky position as azimuth and altitude
   standard: Meeus, Astronomical Algorithms
-  checked_against: USNO and IERS
-  status: planned
+  checked_against: USNO, IERS and ERFA
+  status: published
   issue: 4
 - name: Sun
   slug: sun
