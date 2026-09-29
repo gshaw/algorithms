@@ -1,0 +1,24 @@
+FM 3-25.26, Map Reading and Land Navigation, Headquarters, Department of the Army, 2001.
+Approved for public release: distribution is unlimited. Excerpts, verbatim from the PDF's text.
+
+      1 minute = 60 seconds.
+
+      b. Mil. Another unit of measure, the mil (abbreviated ), is used mainly in artillery, tank, and mortar gunnery.
+      The mil expresses the size of an angle formed when a circle is divided into 6,400 angles, with the vertex of the
+      angles at the center of the circle. A relationship can be established between degrees and mils. A circle equals
+      6400 mils divided by 360 degrees, or 17.78 mils per degree. To convert degrees to mils, multiply degrees by
+      17.78.
+
+      a. Back Azimuth. A back azimuth is the opposite direction of an azimuth. It is comparable to doing "about
+      face." To obtain a back azimuth from an azimuth, add 180 degrees if the azimuth is 180 degrees or less, or
+      subtract 180 degrees if the azimuth is 180 degrees or more (Figure 6-3). The back azimuth of 180 degrees may
+      be stated as 0 degrees or 360 degrees. For mils, if the azimuth is less than 3200 mils, add 3200 mils, if the
+      azimuth is more than 3200 mils, subtract 3200 mils.
+
+Figures 6-10 to 6-15 (pages 6-9 to 6-11), transcribed:
+6-10  Magnetic azimuth 210°, G-M angle 12° E: grid azimuth 222°
+6-11  Grid azimuth 303°, G-M angle 10° E: magnetic azimuth 293°
+6-12  Grid azimuth 2° (or 362°), G-M angle 16° E: magnetic azimuth 346°
+6-13  Magnetic azimuth 65°, G-M angle 8° W: grid azimuth 57°
+6-14  Grid azimuth 93°, G-M angle 14° W: magnetic azimuth 107°
+6-15  Magnetic azimuth 5° (or 365°), G-M angle 12° W: grid azimuth 353°

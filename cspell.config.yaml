@@ -13,6 +13,7 @@ ignorePaths:
   - "assets/css/pico.min.css"
   - "wmm/sources" # NOAA's files, verbatim
   - "utm-mgrs/sources" # GeoConvert's output, verbatim
+  - "bearings/sources" # GeodSolve's output and the manuals' text, verbatim
 words:
   - gshaw
   - jsonify # Liquid filter
