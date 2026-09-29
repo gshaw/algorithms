@@ -14,6 +14,7 @@ ignorePaths:
 words:
   - gshaw
   - kramdown
+  - lede # the subtitle class
   - pico
   # Standards, authorities and authors.
   - Karney
