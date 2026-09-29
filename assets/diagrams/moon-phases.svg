@@ -1,69 +1,99 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 215" role="img" aria-label="The eight phase names of the moon, with how much of it is lit">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 230" role="img" aria-label="Eight moons from new to waning crescent, each with its name and how much of it is lit, over a 29.5-day timeline">
   <style>
     text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; fill: #1f2937; }
-    .bg { fill: #ffffff; }
-    .ink { stroke: #1f2937; fill: none; }
-    .fill { fill: #1f2937; }
-    .muted { stroke: #6b7280; fill: none; }
-    .mutedfill { fill: #6b7280; }
-    text.muted { fill: #6b7280; stroke: none; }
-    .accent { stroke: #2a78d6; fill: none; }
-    .accentfill { fill: #2a78d6; }
-    text.accent { fill: #2a78d6; stroke: none; }
-    .small { font-size: 13px; }
-    .band1 { fill: #bfdbfe; } .band2 { fill: #93c5fd; } .band3 { fill: #60a5fa; } .band4 { fill: #3b82f6; } .night { fill: #1e3a8a; }
-    .day { fill: #fef9c3; }
+    line, path, circle, ellipse, polyline { stroke-linecap: round; stroke-linejoin: round; }
+    .card { fill: #f6f8fa; }
+    .frame { fill: none; stroke: #d0d7de; }
+    .ink { stroke: #1f2937; fill: none; } .inkfill { fill: #1f2937; }
+    .muted { stroke: #6b7280; fill: none; } .mutedfill { fill: #6b7280; } text.muted { fill: #6b7280; stroke: none; }
+    .hair { stroke: #d0d7de; fill: none; } .hairfill { fill: #d0d7de; }
+    .accent { stroke: #2a78d6; fill: none; } .accentfill { fill: #2a78d6; } text.accent { fill: #2a78d6; stroke: none; }
+    .wash { fill: #2a78d6; fill-opacity: 0.14; }
+    .sun { fill: #eda100; }
+    .ground { fill: #eef1f4; }
+    .moondark { fill: #d0d7de; } .rim { stroke: #9aa5b1; fill: none; }
+    .halo { paint-order: stroke; stroke: #f6f8fa; stroke-width: 5px; stroke-linejoin: round; }
+    .dash { stroke-dasharray: 3 3; stroke-linecap: butt; }
+    .small { font-size: 13px; } .strong { font-weight: 600; } .big { font-size: 26px; font-weight: 600; }
+    .caps { font-size: 11px; letter-spacing: 0.08em; font-weight: 600; }
+    .day { fill: #fdf3d4; } .civil { fill: #d7e6f8; } .nautical { fill: #a6c6ee; } .astro { fill: #5b8fd4; } .night { fill: #1d3a6b; }
+    text.deep { fill: #ffffff; }
     @media (prefers-color-scheme: dark) {
       text { fill: #e5e7eb; }
-      .bg { fill: #161b22; }
-      .ink { stroke: #e5e7eb; }
-      .fill { fill: #e5e7eb; }
+      .card { fill: #161b22; }
+      .frame { stroke: #30363d; }
+      .ink { stroke: #e5e7eb; } .inkfill { fill: #e5e7eb; }
       .muted { stroke: #9aa5b1; } .mutedfill { fill: #9aa5b1; } text.muted { fill: #9aa5b1; }
+      .hair { stroke: #3a414b; } .hairfill { fill: #3a414b; }
       .accent { stroke: #6aa7ee; } .accentfill { fill: #6aa7ee; } text.accent { fill: #6aa7ee; }
-      .band1 { fill: #1e3a5f; } .band2 { fill: #1b3354; } .band3 { fill: #172a47; } .band4 { fill: #12213a; } .night { fill: #0b1220; }
-      .day { fill: #3b3a1e; }
+      .wash { fill: #6aa7ee; fill-opacity: 0.2; }
+      .ground { fill: #1c232d; }
+      .moondark { fill: #3a414b; } .rim { stroke: #6b7280; }
+      .day { fill: #3a3320; } .civil { fill: #2b4a78; } .nautical { fill: #1f365a; } .astro { fill: #15243e; } .night { fill: #0a1222; }
+      text.deep { fill: #e5e7eb; }
+      .halo { stroke: #161b22; }
     }
-    .dark { fill: #d1d5db; } .lit { fill: #eda100; }
-    @media (prefers-color-scheme: dark) { .dark { fill: #374151; } }
   </style>
-  <rect class="bg" width="640" height="215" rx="12"/>
-  <circle cx="45" cy="60" r="26" class="dark"/>
-  <text x="45" y="112" text-anchor="middle" class="small">New</text>
-  <text x="45" y="146" text-anchor="middle" class="small muted">0%</text>
-  <circle cx="123" cy="60" r="26" class="dark"/>
-  <path class="lit" d="M123 34 A26 26 0 0 1 123 86 A13.0 26 0 0 0 123 34 Z"/>
-  <text x="123" y="112" text-anchor="middle" class="small">Waxing</text>
-  <text x="123" y="127" text-anchor="middle" class="small">crescent</text>
-  <text x="123" y="146" text-anchor="middle" class="small muted">25%</text>
-  <circle cx="201" cy="60" r="26" class="dark"/>
-  <path class="lit" d="M201 34 A26 26 0 0 1 201 86 A0.0 26 0 0 1 201 34 Z"/>
-  <text x="201" y="112" text-anchor="middle" class="small">First</text>
-  <text x="201" y="127" text-anchor="middle" class="small">quarter</text>
-  <text x="201" y="146" text-anchor="middle" class="small muted">50%</text>
-  <circle cx="279" cy="60" r="26" class="dark"/>
-  <path class="lit" d="M279 34 A26 26 0 0 1 279 86 A13.0 26 0 0 1 279 34 Z"/>
-  <text x="279" y="112" text-anchor="middle" class="small">Waxing</text>
-  <text x="279" y="127" text-anchor="middle" class="small">gibbous</text>
-  <text x="279" y="146" text-anchor="middle" class="small muted">75%</text>
-  <circle cx="357" cy="60" r="26" class="dark"/>
-  <circle cx="357" cy="60" r="26" class="lit"/>
-  <text x="357" y="112" text-anchor="middle" class="small">Full</text>
-  <text x="357" y="146" text-anchor="middle" class="small muted">100%</text>
-  <circle cx="435" cy="60" r="26" class="dark"/>
-  <path class="lit" d="M435 34 A26 26 0 0 0 435 86 A13.0 26 0 0 0 435 34 Z"/>
-  <text x="435" y="112" text-anchor="middle" class="small">Waning</text>
-  <text x="435" y="127" text-anchor="middle" class="small">gibbous</text>
-  <text x="435" y="146" text-anchor="middle" class="small muted">75%</text>
-  <circle cx="513" cy="60" r="26" class="dark"/>
-  <path class="lit" d="M513 34 A26 26 0 0 0 513 86 A0.0 26 0 0 0 513 34 Z"/>
-  <text x="513" y="112" text-anchor="middle" class="small">Last</text>
-  <text x="513" y="127" text-anchor="middle" class="small">quarter</text>
-  <text x="513" y="146" text-anchor="middle" class="small muted">50%</text>
-  <circle cx="591" cy="60" r="26" class="dark"/>
-  <path class="lit" d="M591 34 A26 26 0 0 0 591 86 A13.0 26 0 0 1 591 34 Z"/>
-  <text x="591" y="112" text-anchor="middle" class="small">Waning</text>
-  <text x="591" y="127" text-anchor="middle" class="small">crescent</text>
-  <text x="591" y="146" text-anchor="middle" class="small muted">25%</text>
-  <text class="muted small" x="20" y="180">About 29.5 days, left to right, as seen from the northern hemisphere.</text>
-  <text class="muted small" x="20" y="198">South of the equator the lit side is reversed.</text>
+  <rect class="card" width="560" height="230" rx="12"/>
+  <circle class="moondark" cx="48" cy="58" r="24"/>
+  <circle class="rim" cx="48" cy="58" r="24" stroke-width="1"/>
+  <text x="48" y="106" class="small" text-anchor="middle">New</text>
+  <text x="48" y="142" class="small muted" text-anchor="middle">0%</text>
+  <circle class="moondark" cx="114" cy="58" r="24"/>
+  <path class="sun" d="M114 34 A24 24 0 0 1 114 82 A12 24 0 0 0 114 34 Z"/>
+  <circle class="rim" cx="114" cy="58" r="24" stroke-width="1"/>
+  <text x="114" y="106" class="small" text-anchor="middle">Waxing</text>
+  <text x="114" y="121" class="small" text-anchor="middle">crescent</text>
+  <text x="114" y="142" class="small muted" text-anchor="middle">25%</text>
+  <circle class="moondark" cx="180" cy="58" r="24"/>
+  <path class="sun" d="M180 34 A24 24 0 0 1 180 82 A0 24 0 0 0 180 34 Z"/>
+  <circle class="rim" cx="180" cy="58" r="24" stroke-width="1"/>
+  <text x="180" y="106" class="small" text-anchor="middle">First</text>
+  <text x="180" y="121" class="small" text-anchor="middle">quarter</text>
+  <text x="180" y="142" class="small muted" text-anchor="middle">50%</text>
+  <circle class="moondark" cx="246" cy="58" r="24"/>
+  <path class="sun" d="M246 34 A24 24 0 0 1 246 82 A12 24 0 0 1 246 34 Z"/>
+  <circle class="rim" cx="246" cy="58" r="24" stroke-width="1"/>
+  <text x="246" y="106" class="small" text-anchor="middle">Waxing</text>
+  <text x="246" y="121" class="small" text-anchor="middle">gibbous</text>
+  <text x="246" y="142" class="small muted" text-anchor="middle">75%</text>
+  <circle class="moondark" cx="312" cy="58" r="24"/>
+  <circle class="sun" cx="312" cy="58" r="24"/>
+  <circle class="rim" cx="312" cy="58" r="24" stroke-width="1"/>
+  <text x="312" y="106" class="small" text-anchor="middle">Full</text>
+  <text x="312" y="142" class="small muted" text-anchor="middle">100%</text>
+  <circle class="moondark" cx="378" cy="58" r="24"/>
+  <path class="sun" d="M378 34 A24 24 0 0 0 378 82 A12 24 0 0 0 378 34 Z"/>
+  <circle class="rim" cx="378" cy="58" r="24" stroke-width="1"/>
+  <text x="378" y="106" class="small" text-anchor="middle">Waning</text>
+  <text x="378" y="121" class="small" text-anchor="middle">gibbous</text>
+  <text x="378" y="142" class="small muted" text-anchor="middle">75%</text>
+  <circle class="moondark" cx="444" cy="58" r="24"/>
+  <path class="sun" d="M444 34 A24 24 0 0 0 444 82 A0 24 0 0 1 444 34 Z"/>
+  <circle class="rim" cx="444" cy="58" r="24" stroke-width="1"/>
+  <text x="444" y="106" class="small" text-anchor="middle">Last</text>
+  <text x="444" y="121" class="small" text-anchor="middle">quarter</text>
+  <text x="444" y="142" class="small muted" text-anchor="middle">50%</text>
+  <circle class="moondark" cx="510" cy="58" r="24"/>
+  <path class="sun" d="M510 34 A24 24 0 0 0 510 82 A12 24 0 0 1 510 34 Z"/>
+  <circle class="rim" cx="510" cy="58" r="24" stroke-width="1"/>
+  <text x="510" y="106" class="small" text-anchor="middle">Waning</text>
+  <text x="510" y="121" class="small" text-anchor="middle">crescent</text>
+  <text x="510" y="142" class="small muted" text-anchor="middle">25%</text>
+  <line class="hair" x1="48" y1="166" x2="550" y2="166" stroke-width="1.5"/>
+  <path class="hairfill" d="M554 166 L545 162 L545 170 Z"/>
+  <line class="hair" x1="48" y1="162" x2="48" y2="170" stroke-width="1.5"/>
+  <line class="hair" x1="114" y1="162" x2="114" y2="170" stroke-width="1.5"/>
+  <line class="hair" x1="180" y1="162" x2="180" y2="170" stroke-width="1.5"/>
+  <line class="hair" x1="246" y1="162" x2="246" y2="170" stroke-width="1.5"/>
+  <line class="hair" x1="312" y1="162" x2="312" y2="170" stroke-width="1.5"/>
+  <line class="hair" x1="378" y1="162" x2="378" y2="170" stroke-width="1.5"/>
+  <line class="hair" x1="444" y1="162" x2="444" y2="170" stroke-width="1.5"/>
+  <line class="hair" x1="510" y1="162" x2="510" y2="170" stroke-width="1.5"/>
+  <text x="48" y="184" class="small muted" text-anchor="middle">day 0</text>
+  <text x="180" y="184" class="small muted" text-anchor="middle">7.4</text>
+  <text x="312" y="184" class="small muted" text-anchor="middle">14.8</text>
+  <text x="444" y="184" class="small muted" text-anchor="middle">22.1</text>
+  <text x="554" y="184" class="small muted" text-anchor="end">29.5</text>
+  <text x="20" y="214" class="muted small">Seen from the northern hemisphere. South of the equator the lit side is reversed.</text>
 </svg>

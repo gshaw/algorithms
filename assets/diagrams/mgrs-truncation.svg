@@ -1,49 +1,65 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 320" role="img" aria-label="An MGRS reference names the south-west corner of the square the point is in: truncate, never round">
-    <style>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 316" role="img" aria-label="A point at easting 85234.9 and northing 71665.8 has the reference 85234 71665, the corner of its square, not 85235 71666">
+  <style>
     text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; fill: #1f2937; }
-    .bg { fill: #ffffff; }
-    .ink { stroke: #1f2937; fill: none; }
-    .fill { fill: #1f2937; }
-    .muted { stroke: #6b7280; fill: none; }
-    .mutedfill { fill: #6b7280; }
-    text.muted { fill: #6b7280; stroke: none; }
-    .accent { stroke: #2a78d6; fill: none; }
-    .accentfill { fill: #2a78d6; }
-    text.accent { fill: #2a78d6; stroke: none; }
-    .small { font-size: 13px; }
-    .band1 { fill: #bfdbfe; } .band2 { fill: #93c5fd; } .band3 { fill: #60a5fa; } .band4 { fill: #3b82f6; } .night { fill: #1e3a8a; }
-    .day { fill: #fef9c3; }
+    line, path, circle, ellipse, polyline { stroke-linecap: round; stroke-linejoin: round; }
+    .card { fill: #f6f8fa; }
+    .frame { fill: none; stroke: #d0d7de; }
+    .ink { stroke: #1f2937; fill: none; } .inkfill { fill: #1f2937; }
+    .muted { stroke: #6b7280; fill: none; } .mutedfill { fill: #6b7280; } text.muted { fill: #6b7280; stroke: none; }
+    .hair { stroke: #d0d7de; fill: none; } .hairfill { fill: #d0d7de; }
+    .accent { stroke: #2a78d6; fill: none; } .accentfill { fill: #2a78d6; } text.accent { fill: #2a78d6; stroke: none; }
+    .wash { fill: #2a78d6; fill-opacity: 0.14; }
+    .sun { fill: #eda100; }
+    .ground { fill: #eef1f4; }
+    .moondark { fill: #d0d7de; } .rim { stroke: #9aa5b1; fill: none; }
+    .halo { paint-order: stroke; stroke: #f6f8fa; stroke-width: 5px; stroke-linejoin: round; }
+    .dash { stroke-dasharray: 3 3; stroke-linecap: butt; }
+    .small { font-size: 13px; } .strong { font-weight: 600; } .big { font-size: 26px; font-weight: 600; }
+    .caps { font-size: 11px; letter-spacing: 0.08em; font-weight: 600; }
+    .day { fill: #fdf3d4; } .civil { fill: #d7e6f8; } .nautical { fill: #a6c6ee; } .astro { fill: #5b8fd4; } .night { fill: #1d3a6b; }
+    text.deep { fill: #ffffff; }
     @media (prefers-color-scheme: dark) {
       text { fill: #e5e7eb; }
-      .bg { fill: #161b22; }
-      .ink { stroke: #e5e7eb; }
-      .fill { fill: #e5e7eb; }
+      .card { fill: #161b22; }
+      .frame { stroke: #30363d; }
+      .ink { stroke: #e5e7eb; } .inkfill { fill: #e5e7eb; }
       .muted { stroke: #9aa5b1; } .mutedfill { fill: #9aa5b1; } text.muted { fill: #9aa5b1; }
+      .hair { stroke: #3a414b; } .hairfill { fill: #3a414b; }
       .accent { stroke: #6aa7ee; } .accentfill { fill: #6aa7ee; } text.accent { fill: #6aa7ee; }
-      .band1 { fill: #1e3a5f; } .band2 { fill: #1b3354; } .band3 { fill: #172a47; } .band4 { fill: #12213a; } .night { fill: #0b1220; }
-      .day { fill: #3b3a1e; }
+      .wash { fill: #6aa7ee; fill-opacity: 0.2; }
+      .ground { fill: #1c232d; }
+      .moondark { fill: #3a414b; } .rim { stroke: #6b7280; }
+      .day { fill: #3a3320; } .civil { fill: #2b4a78; } .nautical { fill: #1f365a; } .astro { fill: #15243e; } .night { fill: #0a1222; }
+      text.deep { fill: #e5e7eb; }
+      .halo { stroke: #161b22; }
     }
   </style>
-  <rect class="bg" width="460" height="320" rx="12"/>
-  <!-- Four 1 m squares, 100 px each, around easting 85234 to 85236 and northing 71664 to 71666. -->
-  <g class="muted" stroke-width="1.5">
-    <rect x="60" y="40" width="200" height="200"/>
-    <line x1="160" y1="40" x2="160" y2="240"/>
-    <line x1="60" y1="140" x2="260" y2="140"/>
-  </g>
-  <text class="muted small" x="160" y="262" text-anchor="middle">85235</text>
-  <text class="muted small" x="60" y="262" text-anchor="middle">85234</text>
-  <text class="muted small" x="260" y="262" text-anchor="middle">85236</text>
-  <text class="muted small" x="52" y="244" text-anchor="end">71665</text>
-  <text class="muted small" x="52" y="144" text-anchor="end">71666</text>
-  <!-- The point at 85234.9, 71665.8 -->
-  <circle class="accentfill" cx="150" cy="160" r="6"/>
-  <text class="accent small" x="166" y="178">85234.9, 71665.8</text>
-  <circle class="fill" cx="60" cy="240" r="5"/>
-  <path class="accent" d="M144 166 L68 234" stroke-width="1.5" stroke-dasharray="4 3"/>
-  <text x="300" y="100">Truncate:</text>
-  <text x="300" y="120" class="accent">85234 71665</text>
-  <text x="300" y="160">Not round:</text>
-  <text x="300" y="180" class="muted">85235 71666</text>
-  <text class="muted small" x="20" y="300">A reference names the south-west corner of the square the point is in.</text>
+  <rect class="card" width="560" height="316" rx="12"/>
+  <rect class="wash" x="92" y="146" width="110" height="110"/>
+  <line class="hair" x1="92" y1="36" x2="92" y2="256" stroke-width="1.5"/>
+  <line class="hair" x1="92" y1="36" x2="312" y2="36" stroke-width="1.5"/>
+  <line class="hair" x1="202" y1="36" x2="202" y2="256" stroke-width="1.5"/>
+  <line class="hair" x1="92" y1="146" x2="312" y2="146" stroke-width="1.5"/>
+  <line class="hair" x1="312" y1="36" x2="312" y2="256" stroke-width="1.5"/>
+  <line class="hair" x1="92" y1="256" x2="312" y2="256" stroke-width="1.5"/>
+  <rect class="accent" x="92" y="146" width="110" height="110" stroke-width="2"/>
+  <text x="92" y="278" class="small muted" text-anchor="middle">85234</text>
+  <text x="202" y="278" class="small muted" text-anchor="middle">85235</text>
+  <text x="312" y="278" class="small muted" text-anchor="middle">85236</text>
+  <text x="82" y="41" class="small muted" text-anchor="end">71667</text>
+  <text x="82" y="151" class="small muted" text-anchor="end">71666</text>
+  <text x="82" y="261" class="small muted" text-anchor="end">71665</text>
+  <line class="accent dash" x1="186" y1="173" x2="98" y2="250" stroke-width="1.5"/>
+  <line class="muted dash" x1="195" y1="164" x2="197" y2="151" stroke-width="1"/>
+  <circle class="inkfill" cx="92" cy="256" r="5.5"/>
+  <circle class="card" cx="202" cy="146" r="5" style="stroke-width:1.5" /><circle class="muted" cx="202" cy="146" r="5" stroke-width="1.5"/>
+  <circle class="accentfill" cx="191" cy="168" r="6"/>
+  <text x="203" y="190" class="small accent halo">85234.9, 71665.8</text>
+  <text x="360" y="84" class="caps muted">TRUNCATE</text>
+  <text x="360" y="108" class="accent strong" style="font-size:18px">85234 71665</text>
+  <text x="360" y="127" class="small muted">the corner of its square</text>
+  <text x="360" y="176" class="caps muted">NOT ROUND</text>
+  <text x="360" y="200" class="muted" style="font-size:18px;text-decoration:line-through">85235 71666</text>
+  <text x="360" y="219" class="small muted">a square it isn't in</text>
+  <text x="20" y="300" class="muted small">A reference names the south-west corner of the square the point is in.</text>
 </svg>
