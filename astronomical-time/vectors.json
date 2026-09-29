@@ -1,0 +1,5 @@
+---
+layout: null
+permalink: /astronomical-time/vectors.json
+---
+{{ site.data.vectors["astronomical-time"] | jsonify }}

@@ -21,10 +21,24 @@
   authority: GeographicLib as the reference program
   status: planned
   issue: 3
-- name: Sun and moon
-  slug: sun-moon
-  gives: Rise, set, twilight, position, illumination and phase
+- name: Astronomical time
+  slug: astronomical-time
+  gives: Julian day, ΔT, sidereal time, and a sky position as azimuth and altitude
+  standard: Meeus, Astronomical Algorithms
+  authority: USNO and IERS as the reference
+  status: planned
+  issue: 4
+- name: Sun
+  slug: sun
+  gives: Rise, set, transit, the three twilights, azimuth and altitude
   standard: Meeus, Astronomical Algorithms
   authority: USNO as the reference
   status: planned
-  issue: 4
+  issue: 5
+- name: Moon
+  slug: moon
+  gives: Rise, set, transit, illumination, phase, and the dates of the next phases
+  standard: Meeus, Astronomical Algorithms
+  authority: USNO as the reference
+  status: planned
+  issue: 6

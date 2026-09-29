@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 215" role="img" aria-label="The eight phase names of the moon, with how much of it is lit">
+  <style>
+    text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; fill: #1f2937; }
+    .bg { fill: #ffffff; }
+    .ink { stroke: #1f2937; fill: none; }
+    .fill { fill: #1f2937; }
+    .muted { stroke: #6b7280; fill: none; }
+    .mutedfill { fill: #6b7280; }
+    text.muted { fill: #6b7280; stroke: none; }
+    .accent { stroke: #2a78d6; fill: none; }
+    .accentfill { fill: #2a78d6; }
+    text.accent { fill: #2a78d6; stroke: none; }
+    .small { font-size: 13px; }
+    .band1 { fill: #bfdbfe; } .band2 { fill: #93c5fd; } .band3 { fill: #60a5fa; } .band4 { fill: #3b82f6; } .night { fill: #1e3a8a; }
+    .day { fill: #fef9c3; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; }
+      .bg { fill: #161b22; }
+      .ink { stroke: #e5e7eb; }
+      .fill { fill: #e5e7eb; }
+      .muted { stroke: #9aa5b1; } .mutedfill { fill: #9aa5b1; } text.muted { fill: #9aa5b1; }
+      .accent { stroke: #6aa7ee; } .accentfill { fill: #6aa7ee; } text.accent { fill: #6aa7ee; }
+      .band1 { fill: #1e3a5f; } .band2 { fill: #1b3354; } .band3 { fill: #172a47; } .band4 { fill: #12213a; } .night { fill: #0b1220; }
+      .day { fill: #3b3a1e; }
+    }
+    .dark { fill: #d1d5db; } .lit { fill: #eda100; }
+    @media (prefers-color-scheme: dark) { .dark { fill: #374151; } }
+  </style>
+  <rect class="bg" width="640" height="215" rx="12"/>
+  <circle cx="45" cy="60" r="26" class="dark"/>
+  <text x="45" y="112" text-anchor="middle" class="small">New</text>
+  <text x="45" y="146" text-anchor="middle" class="small muted">0%</text>
+  <circle cx="123" cy="60" r="26" class="dark"/>
+  <path class="lit" d="M123 34 A26 26 0 0 1 123 86 A13.0 26 0 0 0 123 34 Z"/>
+  <text x="123" y="112" text-anchor="middle" class="small">Waxing</text>
+  <text x="123" y="127" text-anchor="middle" class="small">crescent</text>
+  <text x="123" y="146" text-anchor="middle" class="small muted">25%</text>
+  <circle cx="201" cy="60" r="26" class="dark"/>
+  <path class="lit" d="M201 34 A26 26 0 0 1 201 86 A0.0 26 0 0 1 201 34 Z"/>
+  <text x="201" y="112" text-anchor="middle" class="small">First</text>
+  <text x="201" y="127" text-anchor="middle" class="small">quarter</text>
+  <text x="201" y="146" text-anchor="middle" class="small muted">50%</text>
+  <circle cx="279" cy="60" r="26" class="dark"/>
+  <path class="lit" d="M279 34 A26 26 0 0 1 279 86 A13.0 26 0 0 1 279 34 Z"/>
+  <text x="279" y="112" text-anchor="middle" class="small">Waxing</text>
+  <text x="279" y="127" text-anchor="middle" class="small">gibbous</text>
+  <text x="279" y="146" text-anchor="middle" class="small muted">75%</text>
+  <circle cx="357" cy="60" r="26" class="dark"/>
+  <circle cx="357" cy="60" r="26" class="lit"/>
+  <text x="357" y="112" text-anchor="middle" class="small">Full</text>
+  <text x="357" y="146" text-anchor="middle" class="small muted">100%</text>
+  <circle cx="435" cy="60" r="26" class="dark"/>
+  <path class="lit" d="M435 34 A26 26 0 0 0 435 86 A13.0 26 0 0 0 435 34 Z"/>
+  <text x="435" y="112" text-anchor="middle" class="small">Waning</text>
+  <text x="435" y="127" text-anchor="middle" class="small">gibbous</text>
+  <text x="435" y="146" text-anchor="middle" class="small muted">75%</text>
+  <circle cx="513" cy="60" r="26" class="dark"/>
+  <path class="lit" d="M513 34 A26 26 0 0 0 513 86 A0.0 26 0 0 0 513 34 Z"/>
+  <text x="513" y="112" text-anchor="middle" class="small">Last</text>
+  <text x="513" y="127" text-anchor="middle" class="small">quarter</text>
+  <text x="513" y="146" text-anchor="middle" class="small muted">50%</text>
+  <circle cx="591" cy="60" r="26" class="dark"/>
+  <path class="lit" d="M591 34 A26 26 0 0 0 591 86 A13.0 26 0 0 1 591 34 Z"/>
+  <text x="591" y="112" text-anchor="middle" class="small">Waning</text>
+  <text x="591" y="127" text-anchor="middle" class="small">crescent</text>
+  <text x="591" y="146" text-anchor="middle" class="small muted">25%</text>
+  <text class="muted small" x="20" y="180">About 29.5 days, left to right, as seen from the northern hemisphere.</text>
+  <text class="muted small" x="20" y="198">South of the equator the lit side is reversed.</text>
+</svg>

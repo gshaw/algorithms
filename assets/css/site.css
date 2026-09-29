@@ -146,8 +146,11 @@ nav.crumbs + h1 {
   overflow-wrap: anywhere;
 }
 figure.diagram img {
-  max-width: 32rem;
+  max-width: 40rem;
   width: 100%;
+}
+td.status {
+  white-space: nowrap;
 }
 @media (max-width: 40rem) {
   .fields td:first-child,
@@ -172,15 +175,39 @@ figure.diagram img {
     color: #fde68a;
   }
 }
-.passes {
-  color: #16a34a;
-}
-.fails {
-  color: #dc2626;
-}
-.incomplete {
-  color: var(--pico-muted-color);
-}
 .cases .arrow {
   color: var(--pico-muted-color);
+}
+
+/* A status: a dot in its level's colour, ringed in ink so it holds on any
+   background, then the word. The levels are on /styles/. */
+.dot {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1.5px #0b0b0b;
+  margin-right: 0.45rem;
+  vertical-align: -0.05rem;
+}
+.dot.ok {
+  background: #1baf7a;
+}
+.dot.caution {
+  background: #e0a526;
+}
+.dot.avoid {
+  background: #d64545;
+}
+.dot.unknown {
+  background: #9aa5b1;
+}
+.swatch {
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  margin-right: 0.45em;
+  vertical-align: -0.1em;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1.5px #0b0b0b;
 }

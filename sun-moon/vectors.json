@@ -1,5 +1,0 @@
----
-layout: null
-permalink: /sun-moon/vectors.json
----
-{{ site.data.vectors["sun-moon"] | jsonify }}

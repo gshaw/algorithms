@@ -1,0 +1,18 @@
+{
+  "placeholder": "Made-up values to show the page layout. This is not test data.",
+  "algorithm": "sun",
+  "version": 1,
+  "publishedAt": "2026-01-01",
+  "earthModel": "WGS84",
+  "sources": [
+    { "role": "Method", "name": "Astronomical Algorithms, 2nd edition", "by": "Jean Meeus", "url": "", "licence": "Book" },
+    { "role": "Reference", "name": "Astronomical Applications API", "by": "US Naval Observatory", "url": "https://aa.usno.navy.mil/data/api", "licence": "Public domain" }
+  ],
+  "tolerances": { "timesInMinutes": "1", "azimuthInDegrees": "0.01", "altitudeInDegrees": "0.01" },
+  "history": [{ "version": 1, "publishedAt": "2026-01-01", "change": "Placeholder: the first version" }],
+  "cases": [
+    { "id": "placeholder-1", "operation": "events", "tags": ["reference"], "input": { "latitudeInDegrees": 11.11, "longitudeInDegrees": 22.22, "startUtc": "2026-01-01T00:00Z", "hours": 24 }, "expected": { "rise": "2026-01-01T01:23Z", "set": "2026-01-01T12:34Z", "nauticalDawn": "2026-01-01T00:12Z" } },
+    { "id": "placeholder-2", "operation": "events", "tags": ["edge", "polar"], "input": { "latitudeInDegrees": 82.5, "longitudeInDegrees": -62.3, "startUtc": "2026-06-21T00:00Z", "hours": 24 }, "expected": { "rise": null, "set": null, "alwaysUp": true } },
+    { "id": "placeholder-3", "operation": "position", "tags": ["reference"], "input": { "latitudeInDegrees": 11.11, "longitudeInDegrees": 22.22, "instantUtc": "2026-01-01T00:00Z" }, "expected": { "azimuthInDegrees": 123.45, "altitudeInDegrees": 12.34 } }
+  ]
+}

@@ -23,7 +23,7 @@ Sunrise, magnetic declination, grid references and bearings are pure functions: 
       <td><a href="/{{ algorithm.slug }}/">{{ algorithm.name }}</a></td>
       <td>{{ algorithm.gives }}</td>
       <td data-label="Standard">{{ algorithm.standard }}<small>{{ algorithm.authority }}</small></td>
-      <td data-label="Status">{% if algorithm.status == "planned" %}<a href="{{ site.repo }}/issues/{{ algorithm.issue }}">Planned</a>{% endif %}</td>
+      <td data-label="Status" class="status">{% if algorithm.status == "planned" %}<span class="dot unknown"></span>Planned{% else %}<span class="dot ok"></span>Published{% endif %}</td>
     </tr>
     {% endfor %}
   </tbody>

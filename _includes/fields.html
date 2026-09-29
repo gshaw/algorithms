@@ -1,0 +1,11 @@
+{%- assign head = include.head | split: "," -%}
+<div class="fields">
+  <table>
+    <thead><tr><th>{{ head[0] }}</th><th>{{ head[1] }}</th></tr></thead>
+    <tbody>
+      {%- for row in include.rows %}
+      <tr><td>{{ row[0] | markdownify | remove: "<p>" | remove: "</p>" | strip }}</td><td>{{ row[1] | markdownify | remove: "<p>" | remove: "</p>" | strip }}</td></tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+</div>

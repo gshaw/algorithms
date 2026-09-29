@@ -13,10 +13,13 @@
   placeholder: true
   results:
     wmm: { status: fails, failed: 2 }
-    sun-moon: { status: passes }
+    astronomical-time: { status: passes }
+    sun: { status: passes }
+    moon: { status: fails, failed: 1 }
 - repo: placeholder/kotlin-example
   language: Kotlin
   placeholder: true
   results:
     utm-mgrs: { status: incomplete }
-    sun-moon: { status: incomplete }
+    astronomical-time: { status: passes }
+    sun: { status: incomplete }

@@ -15,6 +15,7 @@ words:
   - gshaw
   - jsonify # Liquid filter
   - kramdown
+  - markdownify # Liquid filter
   - Nanoteslas # WMM field units, in field names
   - Segoe # the diagrams' fallback font
   - lede # the subtitle class
@@ -24,6 +25,7 @@ words:
   - Krüger
   - Meeus
   - IAMSAR
+  - IERS # International Earth Rotation and Reference Systems Service
   - MGRS
   - NOAA
   - NCEI

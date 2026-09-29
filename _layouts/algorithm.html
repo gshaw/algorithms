@@ -11,7 +11,27 @@ layout: page
 
 <p class="headline"><strong>{{ data.cases.size }} cases</strong>{% if data.expiresAt %} · valid until {{ data.expiresAt }}{% endif %} · <a href="/{{ page.slug }}/vectors.json">vectors.json</a></p>
 
+<h2>What it is</h2>
 {{ content }}
+{% if page.diagram %}<figure class="diagram"><img src="/assets/diagrams/{{ page.diagram.file }}" alt="{{ page.diagram.alt }}"></figure>{% endif %}
+{% if page.points %}<ul>{% for point in page.points %}<li>{{ point | markdownify | remove: "<p>" | remove: "</p>" | strip }}</li>{% endfor %}</ul>{% endif %}
+
+{% if page.operations -%}
+<h2>Operations</h2>
+{% include fields.html head="Operation,Gives" rows=page.operations %}
+{%- else -%}
+<h2>Inputs</h2>
+{% include fields.html head="Input,Meaning" rows=page.inputs %}
+<h2>Outputs</h2>
+{% include fields.html head="Output,Meaning" rows=page.outputs %}
+{%- endif %}
+
+<h2>Edge cases</h2>
+{% include fields.html head="Case,What's right" rows=page.edge_cases %}
+
+<h2>For agents</h2>
+{{ page.agents | markdownify }}
+
 
 <h2>Test data</h2>
 <p>Version {{ data.version }}, published {{ data.publishedAt }}. Earth model: {{ data.earthModel }}.</p>
@@ -54,9 +74,9 @@ layout: page
       <tr>
         <td>{% if implementation.placeholder %}{{ implementation.repo }}{% else %}<a href="https://github.com/{{ implementation.repo }}">{{ implementation.repo }}</a>{% endif %}<small>{{ implementation.language }}</small></td>
         <td>
-          {%- if result.status == "passes" %}<span class="passes">Passes</span>
-          {%- elsif result.status == "fails" %}<span class="fails">Fails {{ result.failed }} of {{ data.cases.size }}</span>
-          {%- else %}<span class="incomplete">Incomplete</span>{% endif -%}
+          {%- if result.status == "passes" %}<span class="dot ok"></span>Passes
+          {%- elsif result.status == "fails" %}<span class="dot avoid"></span>Fails {{ result.failed }} of {{ data.cases.size }}
+          {%- else %}<span class="dot caution"></span>Incomplete{% endif -%}
         </td>
       </tr>
       {%- endfor %}

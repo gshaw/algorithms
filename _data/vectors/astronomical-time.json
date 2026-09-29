@@ -1,0 +1,21 @@
+{
+  "placeholder": "Made-up values to show the page layout. This is not test data.",
+  "algorithm": "astronomical-time",
+  "version": 1,
+  "publishedAt": "2026-01-01",
+  "expiresAt": "2027-12-31",
+  "earthModel": "WGS84",
+  "sources": [
+    { "role": "Method", "name": "Astronomical Algorithms, 2nd edition", "by": "Jean Meeus", "url": "", "licence": "Book" },
+    { "role": "ΔT", "name": "Earth orientation data", "by": "IERS", "url": "https://www.iers.org/", "licence": "Free to use with credit" },
+    { "role": "Reference", "name": "Astronomical Applications API", "by": "US Naval Observatory", "url": "https://aa.usno.navy.mil/data/api", "licence": "Public domain" }
+  ],
+  "tolerances": { "julianDay": "0.00001", "deltaTInSeconds": "1", "siderealTimeInHours": "0.0001", "azimuthInDegrees": "0.01", "altitudeInDegrees": "0.01" },
+  "history": [{ "version": 1, "publishedAt": "2026-01-01", "change": "Placeholder: the first version" }],
+  "cases": [
+    { "id": "placeholder-1", "operation": "julianDay", "tags": ["hand"], "input": { "instantUtc": "2026-01-01T00:00Z" }, "expected": { "julianDay": 1234567.5 } },
+    { "id": "placeholder-2", "operation": "calendarDate", "tags": ["edge", "hand"], "input": { "julianDay": 1234567.5 }, "expected": { "date": "1582-10-15", "calendar": "Gregorian" } },
+    { "id": "placeholder-3", "operation": "deltaT", "tags": ["reference"], "input": { "decimalYear": 2026.0 }, "expected": { "deltaTInSeconds": 12.3 } },
+    { "id": "placeholder-4", "operation": "horizontal", "tags": ["reference"], "input": { "rightAscensionInHours": 1.23, "declinationInDegrees": 45.6, "latitudeInDegrees": 11.11, "longitudeInDegrees": 22.22, "instantUtc": "2026-01-01T00:00Z" }, "expected": { "azimuthInDegrees": 123.45, "altitudeInDegrees": 35.67 } }
+  ]
+}

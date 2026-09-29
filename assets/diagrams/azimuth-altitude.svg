@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 350" role="img" aria-label="Azimuth is measured clockwise from north along the horizon; altitude is measured up from the horizon">
+    <style>
+    text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; fill: #1f2937; }
+    .bg { fill: #ffffff; }
+    .ink { stroke: #1f2937; fill: none; }
+    .fill { fill: #1f2937; }
+    .muted { stroke: #6b7280; fill: none; }
+    .mutedfill { fill: #6b7280; }
+    text.muted { fill: #6b7280; stroke: none; }
+    .accent { stroke: #2a78d6; fill: none; }
+    .accentfill { fill: #2a78d6; }
+    text.accent { fill: #2a78d6; stroke: none; }
+    .small { font-size: 13px; }
+    .band1 { fill: #bfdbfe; } .band2 { fill: #93c5fd; } .band3 { fill: #60a5fa; } .band4 { fill: #3b82f6; } .night { fill: #1e3a8a; }
+    .day { fill: #fef9c3; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; }
+      .bg { fill: #161b22; }
+      .ink { stroke: #e5e7eb; }
+      .fill { fill: #e5e7eb; }
+      .muted { stroke: #9aa5b1; } .mutedfill { fill: #9aa5b1; } text.muted { fill: #9aa5b1; }
+      .accent { stroke: #6aa7ee; } .accentfill { fill: #6aa7ee; } text.accent { fill: #6aa7ee; }
+      .band1 { fill: #1e3a5f; } .band2 { fill: #1b3354; } .band3 { fill: #172a47; } .band4 { fill: #12213a; } .night { fill: #0b1220; }
+      .day { fill: #3b3a1e; }
+    }
+  </style>
+  <rect class="bg" width="500" height="350" rx="12"/>
+  <!-- Horizon as an ellipse seen from above and behind. Observer at the centre. -->
+  <ellipse class="muted" cx="230" cy="220" rx="180" ry="55" stroke-width="1.5"/>
+  <text x="230" y="158" text-anchor="middle" class="small muted">N</text>
+  <text x="422" y="224" class="small muted">E</text>
+  <text x="230" y="292" text-anchor="middle" class="small muted">S</text>
+  <text x="30" y="224" class="small muted">W</text>
+  <circle class="fill" cx="230" cy="220" r="4"/>
+  <text x="222" y="238" text-anchor="end" class="small">You</text>
+  <!-- A body at azimuth 120°: foot on the horizon at (385.9, 247.5), body above it. -->
+  <line class="muted" x1="230" y1="220" x2="230" y2="165" stroke-width="1" stroke-dasharray="3 3"/>
+  <line class="muted" x1="230" y1="220" x2="385.9" y2="247.5" stroke-width="1" stroke-dasharray="3 3"/>
+  <line class="muted" x1="385.9" y1="247.5" x2="385.9" y2="110" stroke-width="1" stroke-dasharray="3 3"/>
+  <line class="accent" x1="230" y1="220" x2="385.9" y2="110" stroke-width="2"/>
+  <circle cx="385.9" cy="110" r="10" fill="#eda100"/>
+  <!-- Azimuth: along the horizon from N clockwise to the foot. -->
+  <path class="ink" d="M230 165 A180 55 0 0 1 385.9 247.5" stroke-width="2.5"/>
+  <text x="395" y="282" class="small">Azimuth 120°</text>
+  <text x="395" y="297" class="small muted">clockwise</text>
+  <text x="395" y="312" class="small muted">from north</text>
+  <!-- Altitude: from the horizon line up to the sight line. -->
+  <path class="accent" d="M299 232.2 A70 70 0 0 0 287.2 179.6" stroke-width="2"/>
+  <text x="240" y="98" class="small accent">Altitude 35°</text>
+  <text x="240" y="113" class="small muted">up from the horizon</text>
+  <text class="muted small" x="20" y="336">Every sky position becomes these two angles for a place on the ground.</text>
+</svg>

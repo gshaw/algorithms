@@ -1,8 +1,10 @@
 # Plan
 
-**2026-09-29. The lander is live; no test data yet.** The first four algorithms are issues
+**2026-09-29. The lander is live; no test data yet.** The first six algorithms are issues
 [#1](https://github.com/gshaw/algorithms/issues/1) to
-[#4](https://github.com/gshaw/algorithms/issues/4), in that order.
+[#6](https://github.com/gshaw/algorithms/issues/6), in that order. Sun and moon were one
+algorithm; they split into astronomical time (the foundation both use), sun and moon, so a
+failing sunrise says whether the fault is underneath.
 
 **This site publishes test data for pure calculations, and links to implementations that
 pass it.** It has no implementation code of its own. An app copies an implementation into
@@ -18,7 +20,7 @@ at the end of 2024. The same maths shows up across the apps:
 | Dependency | In | Replaced by |
 | --- | --- | --- |
 | Geographic (vendored GeographicLib C++) | LandNav | UTM and MGRS, #2 |
-| SunCalc | LandNav, Tides, MarNav | Sun and moon, #4 |
+| SunCalc | LandNav, Tides, MarNav | Astronomical time, sun and moon, #4 to #6 |
 | A hand-copied WMM-2020 | LandNav, LandNav 2 | Magnetic declination, #1 |
 | SwiftTimeZoneLookup | Tides, MarNav | A time zone data file, later |
 | Polyline, Geoflash | MarNav | Encoded polyline and geohash, later |
@@ -46,8 +48,12 @@ for a number.
 
 ## An algorithm's page
 
-At `algorithms.gshaw.ca/{name}/`, with its test data at `/{name}/vectors.json`. Jekyll
-builds the page from the file, so the two can't drift.
+At `algorithms.gshaw.ca/{name}/`, with its test data at `/{name}/vectors.json`. **Every
+algorithm page is the same template**, `_layouts/algorithm.html`, with the same parts in the
+same order. A page supplies only its words: the explanation as its body, and its diagram,
+points, inputs and outputs (or operations), edge cases and agent brief as front matter. The
+test data, implementations, history and sources come from the test file, so the two can't
+drift. Colours and diagram rules are on the site's [Styles](https://algorithms.gshaw.ca/styles/) page.
 
 1. **Breadcrumb**: back to the home page.
 2. **Title**: what it computes, in plain words.
@@ -56,7 +62,8 @@ builds the page from the file, so the two can't drift.
 5. **What it is**: the problem in plain words, for someone who hasn't met it, with a
    diagram where one explains it better than words. LandNav's declination help sheet is
    the model. Diagrams are SVGs in `assets/diagrams/`, drawn for light and dark.
-6. **Inputs** and **Outputs**: a unit in every name, and the range each takes.
+6. **Inputs** and **Outputs**, or **Operations** for an algorithm with several: a unit in
+   every name, and the range each takes.
 7. **Accuracy**: each output's tolerance and why.
 8. **Edge cases**: the named cases and what's right for each.
 9. **For agents**: a short brief to paste into an agent, naming the method and the

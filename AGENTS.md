@@ -55,7 +55,8 @@ together.
 - `_layouts/page.html` and `_includes/head.html` are the only layout.
 - `_data/algorithms.yml` lists the algorithms in build order, with their slug, status and issue. Each has a page at `/{slug}/index.md`.
 - `_data/vectors/{slug}.json` is each algorithm's test file; `_layouts/algorithm.html` builds the page from it and `/{slug}/vectors.json` publishes it. Until an issue lands, its file is a placeholder with a `placeholder` field, and the page shows a preview banner. `_data/implementations.yml` holds placeholder repos too; delete them when the first real one is listed.
-- `assets/diagrams/` holds the pages' diagrams: hand-written SVGs with their own light and dark colours. Add one only where it explains something words don't.
+- `_layouts/algorithm.html` is every algorithm page's template. A page's `index.md` holds its explanation as the body and its other parts as front matter; don't add sections in a page, change the template.
+- `assets/diagrams/` holds the pages' diagrams: hand-written SVGs that follow the palette and rules on `styles.md`. Add one only where it explains something words don't.
 - `assets/css/pico.min.css` is Pico 2.1.1, copied in. `assets/css/site.css` holds the site's own rules; `table.ref` stacks a table below 64rem.
 - `icon.svg` is the source of `favicon.192x192.png` and `apple-touch-icon.png`.
 

@@ -1,0 +1,19 @@
+{
+  "placeholder": "Made-up values to show the page layout. This is not test data.",
+  "algorithm": "moon",
+  "version": 1,
+  "publishedAt": "2026-01-01",
+  "earthModel": "WGS84",
+  "sources": [
+    { "role": "Method", "name": "Astronomical Algorithms, 2nd edition", "by": "Jean Meeus", "url": "", "licence": "Book" },
+    { "role": "Reference", "name": "Astronomical Applications API", "by": "US Naval Observatory", "url": "https://aa.usno.navy.mil/data/api", "licence": "Public domain" }
+  ],
+  "tolerances": { "timesInMinutes": "2", "illuminationFraction": "0.01", "phaseTimesInMinutes": "2" },
+  "history": [{ "version": 1, "publishedAt": "2026-01-01", "change": "Placeholder: the first version" }],
+  "cases": [
+    { "id": "placeholder-1", "operation": "events", "tags": ["reference"], "input": { "latitudeInDegrees": 11.11, "longitudeInDegrees": 22.22, "startUtc": "2026-01-01T00:00Z", "hours": 24 }, "expected": { "rise": "2026-01-01T03:21Z", "set": "2026-01-01T15:43Z" } },
+    { "id": "placeholder-2", "operation": "events", "tags": ["edge"], "input": { "latitudeInDegrees": 11.11, "longitudeInDegrees": 22.22, "startUtc": "2026-01-02T00:00Z", "hours": 24 }, "expected": { "rise": null, "set": "2026-01-02T16:30Z" } },
+    { "id": "placeholder-3", "operation": "phase", "tags": ["reference"], "input": { "instantUtc": "2026-01-01T00:00Z" }, "expected": { "illuminationFraction": 0.12, "phase": "Waxing crescent" } },
+    { "id": "placeholder-4", "operation": "nextPhases", "tags": ["reference"], "input": { "startUtc": "2026-01-01T00:00Z" }, "expected": { "firstQuarter": "2026-01-02T12:34Z", "full": "2026-01-09T12:34Z" } }
+  ]
+}
