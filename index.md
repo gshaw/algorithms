@@ -37,9 +37,18 @@ Sunrise, magnetic declination, grid references and bearings are pure functions: 
 
 ## Implementations
 
-None yet. Each will be a public repo anyone can fork. `mise install` sets up its tools and `mise run test` checks it against the current test data, the same way in every language. Each listed implementation shows, for every algorithm, whether it passes, fails or is incomplete. New test cases can turn an implementation red; that's the prompt to fix it.
+Each is a public repo anyone can fork. `mise install` sets up its tools and `mise run test` checks it against the current test data, the same way in every language. Each listed implementation shows, for every algorithm, whether it passes, fails or is incomplete. New test cases can turn an implementation red; that's the prompt to fix it.
 
-The first is in Swift, with the magnetic declination data.
+<div class="fields compact">
+  <table>
+    <thead><tr><th>Repo</th><th>Status</th></tr></thead>
+    <tbody>
+      {%- for implementation in site.data.implementations %}
+      <tr><td>{{ implementation.repo }}<small>{{ implementation.language }}</small></td><td class="status"><span class="dot caution"></span>Incomplete</td></tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+</div>
 
 ## Licence
 

@@ -1,7 +1,6 @@
 {
   "placeholder": "Made-up values to show the page layout. This is not test data.",
   "algorithm": "wmm",
-  "version": 1,
   "publishedAt": "2026-01-01",
   "expiresAt": "2029-12-31",
   "earthModel": "WGS84",
@@ -24,15 +23,8 @@
   "tolerances": {
     "declinationInDegrees": "0.01",
     "inclinationInDegrees": "0.01",
-    "fInNanoteslas": "1.000000"
+    "fInNanoteslas": "1"
   },
-  "history": [
-    {
-      "version": 1,
-      "publishedAt": "2026-01-01",
-      "change": "Placeholder: the first version"
-    }
-  ],
   "cases": [
     {
       "id": "placeholder-1",

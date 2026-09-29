@@ -59,6 +59,7 @@ drift. Colours and diagram rules are on the site's [Styles](https://algorithms.g
 2. **Title**: what it computes, in plain words.
 3. **Subtitle**: the standard, whose it is, its licence.
 4. **Headline**: the number of cases, and the expiry date if there is one.
+   A page whose test data is a placeholder opens with a warning, drawn like a GitHub alert.
 5. **What it is**: the problem in plain words, for someone who hasn't met it, with a
    diagram where one explains it better than words. LandNav's declination help sheet is
    the model. Diagrams are SVGs in `assets/diagrams/`, drawn for light and dark.
@@ -70,8 +71,7 @@ drift. Colours and diagram rules are on the site's [Styles](https://algorithms.g
    traps. A paragraph, not code.
 10. **Implementations**: one row per repo, with its language and whether it passes, fails
     or is incomplete on the current data.
-11. **History**: each version of the file and what changed.
-12. **Source**: each source by role (standard, test values, reference program), with its
+11. **Source**: each source by role (standard, test values, reference program), with its
     credit verbatim.
 
 Each planned algorithm has a preview page now, built from a placeholder test file in
@@ -83,7 +83,6 @@ file is replaced by the real one when its issue lands.
 ```json
 {
   "algorithm": "wmm",
-  "version": 1,
   "publishedAt": "2026-10-01",
   "expiresAt": "2029-12-31",
   "earthModel": "WGS84",
@@ -91,7 +90,6 @@ file is replaced by the real one when its issue lands.
     { "role": "test values", "name": "WMM2025 test values", "url": "…", "licence": "Public domain" }
   ],
   "tolerances": { "declinationInDegrees": "0.01" },
-  "history": [{ "version": 1, "publishedAt": "2026-10-01", "change": "NOAA's test values and the edge cases" }],
   "cases": [
     {
       "id": "noaa-1",
@@ -107,9 +105,8 @@ file is replaced by the real one when its issue lands.
 The values above are placeholders; #1 fills in real ones. `tags` says where a case came
 from (`published`, `reference`, `hand`) and what it tests (`edge`, `polar`). `operation`
 names what to compute, for an algorithm with more than one. Tolerances are decimal
-strings, so `0.000001` never shows as `1e-06`. A new version
-may add cases, change a tolerance or rename a field. There are no compatibility rules:
-implementations are checked against the current file only.
+strings, so `0.000001` never shows as `1e-06`. The file has no version for now: it
+changes in place, and implementations are checked against the current file only.
 
 ## Implementations
 

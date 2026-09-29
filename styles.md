@@ -40,6 +40,8 @@ One colour per item, in this order, for lines and marks that are told apart rath
 
 A diagram goes on a page only where it explains something words don't. Every diagram is a hand-written SVG in `assets/diagrams/`, with the same parts and colours, and its own light and dark versions through `prefers-color-scheme`.
 
+<figure class="diagram"><img src="/assets/diagrams/style-guide.svg" alt="A sample diagram: a muted reference arrow, an ink subject arrow, the accent angle between them, a sun in the light colour, a dashed guide, and a key of each colour, line weight and type size"></figure>
+
 <div class="fields">
   <table>
     <thead><tr><th>Role</th><th>Light · dark</th><th>Used for</th></tr></thead>

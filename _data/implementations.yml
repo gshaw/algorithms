@@ -1,25 +1,8 @@
-# One entry per implementation repo. Each algorithm's result comes from the repo's
-# own conformance.json; until the checker exists, these are placeholders to show
-# the layout. Delete them when the first real implementation is listed.
-- repo: placeholder/swift-example
+# One entry per implementation repo. Each algorithm's result will come from the
+# repo's own conformance.json once the checker exists (issue #1). An algorithm
+# with no result shows as incomplete. planned: the repo doesn't exist yet, so
+# it isn't linked.
+- repo: gshaw/algorithms-swift
   language: Swift
-  placeholder: true
-  results:
-    wmm: { status: passes }
-    utm-mgrs: { status: passes }
-    bearings: { status: fails, failed: 1 }
-- repo: placeholder/rust-example
-  language: Rust
-  placeholder: true
-  results:
-    wmm: { status: fails, failed: 2 }
-    astronomical-time: { status: passes }
-    sun: { status: passes }
-    moon: { status: fails, failed: 1 }
-- repo: placeholder/kotlin-example
-  language: Kotlin
-  placeholder: true
-  results:
-    utm-mgrs: { status: incomplete }
-    astronomical-time: { status: passes }
-    sun: { status: incomplete }
+  planned: true
+  results: {}

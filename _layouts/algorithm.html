@@ -6,10 +6,13 @@ layout: page
 <p class="muted">{{ algorithm.standard }} · {{ algorithm.authority }}</p>
 
 {% if data.placeholder -%}
-<p class="preview"><strong>Preview.</strong> The test data isn't published yet; the work is in <a href="{{ site.repo }}/issues/{{ algorithm.issue }}">issue #{{ algorithm.issue }}</a>. Every value under Test data, Implementations and History is made up to show how the finished page will look.</p>
+<blockquote class="alert warning">
+  <p class="alert-title">Preview</p>
+  <p>The test data isn't published yet; the work is in <a href="{{ site.repo }}/issues/{{ algorithm.issue }}">issue #{{ algorithm.issue }}</a>. Every value under Test data is made up to show how the finished page will look.</p>
+</blockquote>
 {%- endif %}
 
-<p class="headline"><strong>{{ data.cases.size }} cases</strong>{% if data.expiresAt %} · valid until {{ data.expiresAt }}{% endif %} · <a href="/{{ page.slug }}/vectors.json">vectors.json</a></p>
+<p class="headline"><strong>{{ data.cases.size }} cases</strong>{% if data.expiresAt %} · valid until {{ data.expiresAt }}{% endif %}</p>
 
 <h2>What it is</h2>
 {{ content }}
@@ -34,8 +37,8 @@ layout: page
 
 
 <h2>Test data</h2>
-<p>Version {{ data.version }}, published {{ data.publishedAt }}. Earth model: {{ data.earthModel }}.</p>
-<div class="fields">
+<p>{{ data.cases.size }} cases in <a href="/{{ page.slug }}/vectors.json">vectors.json</a>, published {{ data.publishedAt }}. Earth model: {{ data.earthModel }}.</p>
+<div class="fields compact">
   <table>
     <thead><tr><th>Output</th><th>Tolerance</th></tr></thead>
     <tbody>
@@ -65,14 +68,14 @@ layout: page
 </div>
 
 <h2>Implementations</h2>
-<div class="fields">
+<div class="fields compact">
   <table>
-    <thead><tr><th>Repo</th><th>Status on version {{ data.version }}</th></tr></thead>
+    <thead><tr><th>Repo</th><th>Status</th></tr></thead>
     <tbody>
       {%- for implementation in site.data.implementations %}
       {%- assign result = implementation.results[page.slug] %}
       <tr>
-        <td>{% if implementation.placeholder %}{{ implementation.repo }}{% else %}<a href="https://github.com/{{ implementation.repo }}">{{ implementation.repo }}</a>{% endif %}<small>{{ implementation.language }}</small></td>
+        <td>{% if implementation.planned %}{{ implementation.repo }}{% else %}<a href="https://github.com/{{ implementation.repo }}">{{ implementation.repo }}</a>{% endif %}<small>{{ implementation.language }}</small></td>
         <td>
           {%- if result.status == "passes" %}<span class="dot ok"></span>Passes
           {%- elsif result.status == "fails" %}<span class="dot avoid"></span>Fails {{ result.failed }} of {{ data.cases.size }}
@@ -85,16 +88,6 @@ layout: page
 </div>
 <p class="muted">Each is a public repo that runs this page's test data with <code>mise run test</code>. See <a href="/#implementations">how implementations work</a>.</p>
 
-<h2>History</h2>
-<div class="fields">
-  <table>
-    <tbody>
-      {%- for entry in data.history %}
-      <tr><td>{{ entry.publishedAt }}</td><td>Version {{ entry.version }}: {{ entry.change }}</td></tr>
-      {%- endfor %}
-    </tbody>
-  </table>
-</div>
 
 <h2>Source</h2>
 <div class="fields">
@@ -107,4 +100,3 @@ layout: page
   </table>
 </div>
 
-<p><a href="/{{ page.slug }}/vectors.json">vectors.json</a></p>

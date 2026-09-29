@@ -1,7 +1,6 @@
 {
   "placeholder": "Made-up values to show the page layout. This is not test data.",
   "algorithm": "utm-mgrs",
-  "version": 1,
   "publishedAt": "2026-01-01",
   "earthModel": "WGS84",
   "sources": [
@@ -26,13 +25,6 @@
     "convergenceInDegrees": "0.000001",
     "mgrs": "exact"
   },
-  "history": [
-    {
-      "version": 1,
-      "publishedAt": "2026-01-01",
-      "change": "Placeholder: the first version"
-    }
-  ],
   "cases": [
     {
       "id": "placeholder-1",

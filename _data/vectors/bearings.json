@@ -1,7 +1,6 @@
 {
   "placeholder": "Made-up values to show the page layout. This is not test data.",
   "algorithm": "bearings",
-  "version": 1,
   "publishedAt": "2026-01-01",
   "earthModel": "Sphere, radius 6,371,008.8 m",
   "sources": [
@@ -25,13 +24,6 @@
     "bearingInDegrees": "0.000001",
     "text": "exact"
   },
-  "history": [
-    {
-      "version": 1,
-      "publishedAt": "2026-01-01",
-      "change": "Placeholder: the first version"
-    }
-  ],
   "cases": [
     {
       "id": "placeholder-1",

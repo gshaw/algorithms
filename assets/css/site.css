@@ -152,27 +152,67 @@ figure.diagram img {
 td.status {
   white-space: nowrap;
 }
+/* On a phone, a field table stacks: each row a block, its first cell the title,
+   the rest under it. A small table marked compact stays a table. */
 @media (max-width: 40rem) {
-  .fields td:first-child,
-  .fields th:first-child {
-    width: 40%;
+  .fields:not(.compact) thead {
+    display: none;
+  }
+  .fields:not(.compact) tr,
+  .fields:not(.compact) td {
+    display: block;
+    width: auto !important;
+  }
+  .fields:not(.compact) td {
+    padding: 0;
+    border: 0;
+  }
+  .fields:not(.compact) tr {
+    padding: 0.6rem 0;
+    border-bottom: var(--pico-border-width) solid var(--pico-table-border-color);
+  }
+  .fields:not(.compact) tr:last-child {
+    border-bottom: 0;
+  }
+  .fields:not(.compact) td:first-child {
+    margin-bottom: 0.2rem;
+    font-weight: 600;
+  }
+  .fields.compact td:first-child,
+  .fields.compact th:first-child {
+    width: 45%;
   }
 }
 
-/* A page built from placeholder data says so, loudly. */
-.preview {
-  padding: 0.75rem 1rem;
-  border-radius: var(--pico-border-radius);
-  background: #fef3c7;
-  color: #78350f;
-}
-.preview a {
+/* An alert, as GitHub draws one: a coloured rule and title, the text as usual.
+   A page built from placeholder data opens with a warning. */
+blockquote.alert {
+  margin: 0 0 var(--pico-spacing);
+  padding: 0.5rem 1rem;
+  border-left: 0.25rem solid var(--alert-color);
+  font-style: normal;
   color: inherit;
 }
+blockquote.alert p {
+  margin: 0;
+}
+blockquote.alert p + p {
+  margin-top: 0.25rem;
+}
+blockquote.alert .alert-title {
+  color: var(--alert-color);
+  font-weight: 600;
+}
+blockquote.alert .alert-title::before {
+  content: "\26A0\FE0E";
+  margin-right: 0.5rem;
+}
+blockquote.warning {
+  --alert-color: #9a6700;
+}
 @media (prefers-color-scheme: dark) {
-  .preview {
-    background: #422006;
-    color: #fde68a;
+  blockquote.warning {
+    --alert-color: #d29922;
   }
 }
 .cases .arrow {

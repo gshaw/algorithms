@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 320" role="img" aria-label="A sample diagram with every colour role, line weight and type size the diagrams use">
+  <style>
+    text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; fill: #1f2937; }
+    .bg { fill: #ffffff; }
+    .ink { stroke: #1f2937; fill: none; }
+    .fill { fill: #1f2937; }
+    .muted { stroke: #6b7280; fill: none; }
+    .mutedfill { fill: #6b7280; }
+    text.muted { fill: #6b7280; stroke: none; }
+    .accent { stroke: #2a78d6; fill: none; }
+    .accentfill { fill: #2a78d6; }
+    text.accent { fill: #2a78d6; stroke: none; }
+    .small { font-size: 13px; }
+    .band1 { fill: #bfdbfe; } .band2 { fill: #93c5fd; } .band3 { fill: #60a5fa; } .band4 { fill: #3b82f6; } .night { fill: #1e3a8a; }
+    .day { fill: #fef9c3; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; }
+      .bg { fill: #161b22; }
+      .ink { stroke: #e5e7eb; }
+      .fill { fill: #e5e7eb; }
+      .muted { stroke: #9aa5b1; } .mutedfill { fill: #9aa5b1; } text.muted { fill: #9aa5b1; }
+      .accent { stroke: #6aa7ee; } .accentfill { fill: #6aa7ee; } text.accent { fill: #6aa7ee; }
+      .band1 { fill: #1e3a5f; } .band2 { fill: #1b3354; } .band3 { fill: #172a47; } .band4 { fill: #12213a; } .night { fill: #0b1220; }
+      .day { fill: #3b3a1e; }
+    }
+    .dark-only { display: none; }
+    .lightfill { fill: #eda100; }
+    @media (prefers-color-scheme: dark) { .dark-only { display: inline; } .light-only { display: none; } }
+  </style>
+  <rect class="bg" width="560" height="320" rx="12"/>
+  <!-- A sample: a reference, the subject, and the angle between them. -->
+  <line class="muted" x1="40" y1="240" x2="270" y2="240" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="266" y="232" class="small muted" text-anchor="end">Guide</text>
+  <line class="muted" x1="100" y1="240" x2="100" y2="72" stroke-width="2"/>
+  <path class="mutedfill" d="M100 60 l-7 16 h14 z"/>
+  <text class="muted" x="100" y="48" text-anchor="middle">Reference</text>
+  <g transform="rotate(25 100 240)">
+    <line class="ink" x1="100" y1="240" x2="100" y2="72" stroke-width="2"/>
+    <path class="fill" d="M100 60 l-7 16 h14 z"/>
+  </g>
+  <text x="186" y="74">Subject</text>
+  <path class="accent" d="M100 140 A100 100 0 0 1 142.3 149.4" stroke-width="1.5"/>
+  <text class="accent" x="152" y="170">The angle</text>
+  <circle cx="240" cy="118" r="12" class="lightfill"/>
+  <text x="240" y="148" class="small" text-anchor="middle">Light</text>
+  <rect x="310" y="39" width="16" height="16" rx="3" class="bg" stroke="#6b7280" stroke-width="1"/>
+  <text x="336" y="52">Background</text>
+  <text x="436" y="52" class="small muted light-only">#ffffff</text>
+  <text x="436" y="52" class="small muted dark-only">#161b22</text>
+  <circle cx="318" cy="77" r="8" class="fill"/>
+  <text x="336" y="82">Ink</text>
+  <text x="436" y="82" class="small muted light-only">#1f2937</text>
+  <text x="436" y="82" class="small muted dark-only">#e5e7eb</text>
+  <circle cx="318" cy="107" r="8" class="mutedfill"/>
+  <text x="336" y="112">Muted</text>
+  <text x="436" y="112" class="small muted light-only">#6b7280</text>
+  <text x="436" y="112" class="small muted dark-only">#9aa5b1</text>
+  <circle cx="318" cy="137" r="8" class="accentfill"/>
+  <text x="336" y="142">Accent</text>
+  <text x="436" y="142" class="small muted light-only">#2a78d6</text>
+  <text x="436" y="142" class="small muted dark-only">#6aa7ee</text>
+  <circle cx="318" cy="167" r="8" class="lightfill"/>
+  <text x="336" y="172">Light</text>
+  <text x="436" y="172" class="small muted light-only">#eda100</text>
+  <text x="436" y="172" class="small muted dark-only">#eda100</text>
+  <line class="ink" x1="310" y1="215" x2="360" y2="215" stroke-width="2"/>
+  <text x="372" y="220" class="small">2 px, the subject</text>
+  <line class="accent" x1="310" y1="240" x2="360" y2="240" stroke-width="1.5"/>
+  <text x="372" y="245" class="small">1.5 px, an angle</text>
+  <line class="muted" x1="310" y1="265" x2="360" y2="265" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="372" y="270" class="small">1 px dashed, a guide</text>
+  <text class="muted small" x="20" y="302">Labels 15 px, notes 13 px, system font. The caption goes here, in one sentence.</text>
+</svg>
