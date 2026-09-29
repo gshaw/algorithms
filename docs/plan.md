@@ -51,9 +51,8 @@ for a number.
 At `algorithms.gshaw.ca/{name}/`, with its test data at `/{name}/vectors.json`. **Every
 algorithm page is the same template**, `_layouts/algorithm.html`, with the same parts in the
 same order. A page supplies only its words: the explanation as its body, and its diagram,
-points, inputs and outputs (or operations), edge cases and agent brief as front matter. The
-test data, implementations, history and sources come from the test file, so the two can't
-drift. Colours and diagram rules are on the site's [Styles](https://algorithms.gshaw.ca/styles/) page.
+points and agent brief as front matter. Operations, fields, edge cases, the test data
+summary and sources come from the test file, so the two can't drift. Colours and diagram rules are on the site's [Styles](https://algorithms.gshaw.ca/styles/) page.
 
 1. **Breadcrumb**: back to the home page.
 2. **Title**: what it computes, in plain words.
@@ -65,17 +64,17 @@ drift. Colours and diagram rules are on the site's [Styles](https://algorithms.g
    the model. Diagrams follow the [Styles](https://algorithms.gshaw.ca/styles/) page.
 6. **Operations** and **Fields**: from the test file, with each operation's id and the
    names of its inputs and outputs, and what each field means.
-7. **Edge cases**: the named cases and what's right for each.
+7. **Edge cases**: every case in the file with a `note`, and the note.
 8. **For agents**: a short brief to paste into an agent, naming the method and the
    traps. A paragraph, not code.
-9. **Test data**: a link to the file, the tolerances, and the cases.
+9. **Test data**: a link to the file, how many cases each operation has and where they came from, and the tolerances. The cases themselves are only in the file, formatted to be read.
 10. **Implementations**: one row per repo, with its language and whether it passes, fails
     or is incomplete on the current data.
 11. **Source**: each source by role, with its credit verbatim.
 
-Each planned algorithm has a preview page now, built from a placeholder test file in
-`_data/vectors/` that says it's a placeholder, so the finished layout can be reviewed. Each
-file is replaced by the real one when its issue lands.
+A new algorithm starts as a preview page built from a placeholder test file, one with a
+`placeholder` property, so the layout can be reviewed before the data lands. The real file
+replaces it when the algorithm's issue lands.
 
 ## The test file
 

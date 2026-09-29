@@ -26,7 +26,7 @@ from logged import OFFLINE, USNO, Program  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCES = ROOT / "sun" / "sources"
-VECTORS = ROOT / "_data" / "vectors" / "sun.json"
+VECTORS = ROOT / "sun" / "vectors.json"
 usno = USNO(SOURCES / "usno.jsonl")
 
 PLACES = [
@@ -238,6 +238,20 @@ def invalid_cases():
     ]
 
 
+# Why a case exists, for the reader of the file and the page's list of edge cases.
+NOTES = {
+    "usno-events-alert-2026-06-21": "Midnight sun: no rise or set, always up, and a transit.",
+    "usno-events-mcmurdo-2026-06-21": "Polar night: always down, but nautical and astronomical twilight still come and go.",
+    "usno-events-tromso-2026-12-21": "Polar night with civil twilight at midday.",
+    "usno-events-helsinki-2026-06-21": "It never gets darker than civil twilight: nautical and astronomical dawn and dusk are null.",
+    "usno-events-vancouver-2026-09-21": "A UTC day: the set (evening before, local time) comes before the rise.",
+    "usno-events-vancouver-local-day": "A window from local midnight, 08:00Z.",
+    "usno-events-tonga-local-day": "A window from local midnight across the date line.",
+    "usno-events-amundsen-scott-2026-12-21": "Near the south pole in December: always up.",
+    "skyfield-position-below-horizon": "USNO lists the sun only when it's up; below the horizon Skyfield answers.",
+    "usno-position-midnight-sun": "Midnight sun, low in the north.",
+}
+
 def main():
     sky = Sky()
     try:
@@ -254,6 +268,7 @@ def main():
     if data.get("cases") != cases:
         data["publishedDate"] = datetime.date.today().isoformat()
     data["cases"] = cases
+    vectors_json.add_notes(data["cases"], NOTES)
     VECTORS.write_text(vectors_json.dumps(data))
     print(f"Wrote {len(cases)} cases to {VECTORS.relative_to(ROOT)}")
 

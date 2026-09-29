@@ -22,7 +22,7 @@ import vectors_json  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 LOG = ROOT / "utm-mgrs" / "sources" / "geoconvert.txt"
-VECTORS = ROOT / "_data" / "vectors" / "utm-mgrs.json"
+VECTORS = ROOT / "utm-mgrs" / "vectors.json"
 RANDOM_POINTS = 400
 
 OFFLINE = "--offline" in sys.argv
@@ -264,6 +264,47 @@ def parse_and_invalid_cases():
     return cases
 
 
+# Why a case exists, for the reader of the file and the page's list of edge cases.
+NOTES = {
+    "edge-to-utm-norway-32v": "Norway: at 60° N, 5° E is zone 32, not 31.",
+    "edge-to-utm-norway-32v-west-edge": "Zone 32V is widened west to 3° E.",
+    "edge-to-utm-norway-31v-west-of-edge": "Just west of 3° E: still zone 31.",
+    "edge-to-utm-norway-32v-south-edge": "Exactly 56° N is band V, so the Norway rule applies.",
+    "edge-to-utm-norway-31u-south-of-edge": "Just south of 56° N is band U: zone 31.",
+    "edge-to-utm-norway-31w-north-of-band": "Exactly 64° N is band W: zone 31 again.",
+    "edge-to-utm-svalbard-31x": "Svalbard: zone 31X runs to 9° E.",
+    "edge-to-utm-svalbard-33x-west": "Zones 32X, 34X and 36X don't exist: 9° E is 33X.",
+    "edge-to-utm-svalbard-37x": "33° E starts zone 37X.",
+    "edge-to-utm-svalbard-32w-below-band": "Just below 72° N is band W: the Svalbard rule doesn't apply.",
+    "edge-to-utm-utm-last-north": "Just below 84° N: still UTM.",
+    "edge-to-utm-ups-first-north": "Exactly 84° N is UPS, zone 0.",
+    "edge-to-utm-utm-last-south": "Exactly 80° S is still UTM.",
+    "edge-to-utm-ups-first-south": "Just past 80° S: UPS.",
+    "edge-to-utm-antimeridian-east": "180° is the same meridian as −180°: zone 1.",
+    "edge-to-utm-zone-60": "Just west of 180°: zone 60.",
+    "edge-to-utm-equator": "The equator is north, with northing 0.",
+    "edge-to-utm-just-south-of-equator": "A hair south: northing just under 10,000,000.",
+    "edge-to-utm-north-pole": "The pole is UPS easting and northing 2,000,000, scale 0.994.",
+    "edge-to-utm-central-meridian": "On the central meridian: easting exactly 500,000, convergence 0, scale 0.9996.",
+    "edge-from-utm-truncation": "The point the page's diagram draws: easting 85234.9, northing 71665.8 in its square.",
+    "edge-to-mgrs-truncation-5": "Truncated, not rounded: 85234 71665, not 85235 71666.",
+    "edge-to-mgrs-truncation-3": "Three digits truncate further: 852 716.",
+    "edge-to-mgrs-equator": "Northing 0 at the equator: 00000.",
+    "edge-to-mgrs-north-pole": "UPS has no zone number: ZAH.",
+    "edge-from-mgrs-unpadded-zone": "4Q reads the same as 04Q.",
+    "edge-from-mgrs-lower-case": "Lower case reads the same.",
+    "edge-from-mgrs-100-km-square": "No digits: the centre of the 100 km square.",
+    "parse-longitude-first": "Hemisphere letters say which is which, so the longitude can come first.",
+    "parse-degrees-minutes-seconds": "Degrees, minutes and seconds with ° ' and \" marks.",
+    "parse-colons": "Colons instead of marks.",
+    "parse-utm": "Three parts: a UTM zone and hemisphere, easting and northing.",
+    "parse-mgrs": "One part: an MGRS reference, read as its square's centre.",
+    "invalid-parse-two-latitudes": "Both lettered N: invalidInput.",
+    "invalid-from-mgrs-odd-digits": "An odd number of digits: invalidInput.",
+    "invalid-from-utm-easting-1500-km": "Past the zone's easting limits: outOfRange.",
+    "invalid-to-mgrs-precision-6": "Past this file's 0 to 5 digits.",
+}
+
 def main():
     if OFFLINE:
         read_log()
@@ -284,6 +325,7 @@ def main():
     if data.get("cases") != cases:
         data["publishedDate"] = datetime.date.today().isoformat()
     data["cases"] = cases
+    vectors_json.add_notes(data["cases"], NOTES)
     VECTORS.write_text(vectors_json.dumps(data))
     print(f"Wrote {len(cases)} cases to {VECTORS.relative_to(ROOT)}")
 

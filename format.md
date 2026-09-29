@@ -15,19 +15,21 @@ Every algorithm's test data is one JSON file in the same shape, with fields name
     <tbody>
       <tr><td><code>algorithm</code></td><td>The algorithm's slug, as in its page's address: <code>wmm</code></td></tr>
       <tr><td><code>placeholder</code></td><td>Only while the values are made up, saying so. Never test against a file that has it.</td></tr>
-      <tr><td><code>publishedDate</code></td><td>When this file was last changed</td></tr>
+      <tr><td><code>publishedDate</code></td><td>When a case last changed</td></tr>
       <tr><td><code>expiresDate</code></td><td>Only when the data behind it runs out, like a magnetic model's last day</td></tr>
       <tr><td><code>earthModel</code></td><td>The earth the numbers are on: <code>WGS84</code>, or a sphere and its radius</td></tr>
       <tr><td><code>sources</code></td><td>Where the values come from: each with <code>role</code>, <code>name</code>, <code>by</code>, <code>url</code> and <code>licence</code></td></tr>
       <tr><td><code>operations</code></td><td>What can be computed: each with an <code>id</code>, what it <code>gives</code>, and the names of its <code>inputs</code> and <code>outputs</code></td></tr>
       <tr><td><code>fields</code></td><td>Every input and output name, with what it means and its range</td></tr>
       <tr><td><code>tolerances</code></td><td>How close each numeric output must be</td></tr>
-      <tr><td><code>cases</code></td><td>The tests: each with an <code>id</code>, an <code>operation</code>, <code>tags</code>, an <code>input</code> and what's <code>expected</code></td></tr>
+      <tr><td><code>cases</code></td><td>The tests: each with an <code>id</code>, an <code>operation</code>, <code>tags</code>, an optional <code>note</code> saying why it exists, an <code>input</code> and what's <code>expected</code></td></tr>
     </tbody>
   </table>
 </div>
 
-The file has no version. It changes in place, and an implementation is always checked against the current file.
+The file has no version. It changes in place, and an implementation is always checked against the current file. <code>publishedDate</code> moves when a case's input or expected values change; a new note doesn't move it.
+
+The file is written to be read: indented two spaces, with its properties in the order above and each case's as <code>id</code>, <code>operation</code>, <code>tags</code>, <code>note</code>, <code>input</code>, <code>expected</code>. A named case has a <code>note</code>; its algorithm's page lists those as its edge cases. Cases at random points don't.
 
 ## Naming
 
