@@ -1,15 +1,16 @@
 {
   "placeholder": "Made-up values to show the page layout. This is not test data.",
   "algorithm": "sun",
-  "publishedAt": "2026-01-01",
+  "publishedDate": "2026-01-01",
+  "expiresDate": "2027-12-31",
   "earthModel": "WGS84",
   "sources": [
     {
       "role": "Method",
-      "name": "Astronomical Algorithms, 2nd edition",
+      "name": "Astronomical Algorithms, 2nd edition, 1998",
       "by": "Jean Meeus",
       "url": "",
-      "licence": "Book"
+      "licence": ""
     },
     {
       "role": "Reference",
@@ -19,8 +20,74 @@
       "licence": "Public domain"
     }
   ],
+  "operations": [
+    {
+      "id": "events",
+      "gives": "Rise, set, transit and twilight in a window",
+      "inputs": [
+        "latitudeInDegrees",
+        "longitudeInDegrees",
+        "startUtc",
+        "windowInHours"
+      ],
+      "outputs": [
+        "riseUtc",
+        "setUtc",
+        "transitUtc",
+        "civilDawnUtc",
+        "civilDuskUtc",
+        "nauticalDawnUtc",
+        "nauticalDuskUtc",
+        "astronomicalDawnUtc",
+        "astronomicalDuskUtc",
+        "isAlwaysUp",
+        "isAlwaysDown"
+      ]
+    },
+    {
+      "id": "position",
+      "gives": "The sun's azimuth and altitude from a place",
+      "inputs": [
+        "latitudeInDegrees",
+        "longitudeInDegrees",
+        "instantUtc"
+      ],
+      "outputs": [
+        "azimuthInDegrees",
+        "altitudeInDegrees"
+      ]
+    }
+  ],
+  "fields": {
+    "latitudeInDegrees": "−90 to 90, WGS84, north positive",
+    "longitudeInDegrees": "−180 to 180, WGS84, east positive",
+    "startUtc": "The window's start, ISO 8601 in UTC",
+    "windowInHours": "The window's length, 24 unless a case says otherwise",
+    "isAlwaysUp": "true when it's above the horizon for the whole window",
+    "isAlwaysDown": "true when it's below the horizon for the whole window",
+    "instantUtc": "An instant, ISO 8601 in UTC",
+    "riseUtc": "The top of the sun reaches the horizon; its centre at −0.833°. null if it doesn't happen in the window",
+    "setUtc": "As rise, going down",
+    "transitUtc": "Highest in the sky",
+    "civilDawnUtc": "Centre at −6°, rising",
+    "civilDuskUtc": "Centre at −6°, setting",
+    "nauticalDawnUtc": "Centre at −12°, rising",
+    "nauticalDuskUtc": "Centre at −12°, setting",
+    "astronomicalDawnUtc": "Centre at −18°, rising",
+    "astronomicalDuskUtc": "Centre at −18°, setting",
+    "azimuthInDegrees": "0 to 360, clockwise from north",
+    "altitudeInDegrees": "−90 to 90, up from the horizon"
+  },
   "tolerances": {
-    "timesInMinutes": "1",
+    "riseUtc": "60",
+    "setUtc": "60",
+    "transitUtc": "60",
+    "civilDawnUtc": "60",
+    "civilDuskUtc": "60",
+    "nauticalDawnUtc": "60",
+    "nauticalDuskUtc": "60",
+    "astronomicalDawnUtc": "60",
+    "astronomicalDuskUtc": "60",
     "azimuthInDegrees": "0.01",
     "altitudeInDegrees": "0.01"
   },
@@ -34,13 +101,13 @@
       "input": {
         "latitudeInDegrees": 11.11,
         "longitudeInDegrees": 22.22,
-        "startUtc": "2026-01-01T00:00Z",
-        "hours": 24
+        "startUtc": "2026-01-01T00:00:00Z",
+        "windowInHours": 24
       },
       "expected": {
-        "rise": "2026-01-01T01:23Z",
-        "set": "2026-01-01T12:34Z",
-        "nauticalDawn": "2026-01-01T00:12Z"
+        "riseUtc": "2026-01-01T01:23:00Z",
+        "setUtc": "2026-01-01T12:34:00Z",
+        "nauticalDawnUtc": "2026-01-01T00:12:00Z"
       }
     },
     {
@@ -53,13 +120,13 @@
       "input": {
         "latitudeInDegrees": 82.5,
         "longitudeInDegrees": -62.3,
-        "startUtc": "2026-06-21T00:00Z",
-        "hours": 24
+        "startUtc": "2026-06-21T00:00:00Z",
+        "windowInHours": 24
       },
       "expected": {
-        "rise": null,
-        "set": null,
-        "alwaysUp": true
+        "riseUtc": null,
+        "setUtc": null,
+        "isAlwaysUp": true
       }
     },
     {
@@ -71,7 +138,7 @@
       "input": {
         "latitudeInDegrees": 11.11,
         "longitudeInDegrees": 22.22,
-        "instantUtc": "2026-01-01T00:00Z"
+        "instantUtc": "2026-01-01T00:00:00Z"
       },
       "expected": {
         "azimuthInDegrees": 123.45,

@@ -23,9 +23,7 @@
       .band1 { fill: #1e3a5f; } .band2 { fill: #1b3354; } .band3 { fill: #172a47; } .band4 { fill: #12213a; } .night { fill: #0b1220; }
       .day { fill: #3b3a1e; }
     }
-    .dark-only { display: none; }
     .lightfill { fill: #eda100; }
-    @media (prefers-color-scheme: dark) { .dark-only { display: inline; } .light-only { display: none; } }
   </style>
   <rect class="bg" width="560" height="320" rx="12"/>
   <!-- A sample: a reference, the subject, and the angle between them. -->
@@ -45,24 +43,14 @@
   <text x="240" y="148" class="small" text-anchor="middle">Light</text>
   <rect x="310" y="39" width="16" height="16" rx="3" class="bg" stroke="#6b7280" stroke-width="1"/>
   <text x="336" y="52">Background</text>
-  <text x="436" y="52" class="small muted light-only">#ffffff</text>
-  <text x="436" y="52" class="small muted dark-only">#161b22</text>
   <circle cx="318" cy="77" r="8" class="fill"/>
   <text x="336" y="82">Ink</text>
-  <text x="436" y="82" class="small muted light-only">#1f2937</text>
-  <text x="436" y="82" class="small muted dark-only">#e5e7eb</text>
   <circle cx="318" cy="107" r="8" class="mutedfill"/>
   <text x="336" y="112">Muted</text>
-  <text x="436" y="112" class="small muted light-only">#6b7280</text>
-  <text x="436" y="112" class="small muted dark-only">#9aa5b1</text>
   <circle cx="318" cy="137" r="8" class="accentfill"/>
   <text x="336" y="142">Accent</text>
-  <text x="436" y="142" class="small muted light-only">#2a78d6</text>
-  <text x="436" y="142" class="small muted dark-only">#6aa7ee</text>
   <circle cx="318" cy="167" r="8" class="lightfill"/>
   <text x="336" y="172">Light</text>
-  <text x="436" y="172" class="small muted light-only">#eda100</text>
-  <text x="436" y="172" class="small muted dark-only">#eda100</text>
   <line class="ink" x1="310" y1="215" x2="360" y2="215" stroke-width="2"/>
   <text x="372" y="220" class="small">2 px, the subject</text>
   <line class="accent" x1="310" y1="240" x2="360" y2="240" stroke-width="1.5"/>

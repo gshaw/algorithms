@@ -1,0 +1,20 @@
+---
+layout: null
+permalink: /algorithms.json
+---
+{%- assign list = "" | split: "" -%}
+[
+{%- for algorithm in site.data.algorithms %}
+  {%- assign data = site.data.vectors[algorithm.slug] %}
+  {
+    "slug": {{ algorithm.slug | jsonify }},
+    "name": {{ algorithm.name | jsonify }},
+    "status": {{ algorithm.status | jsonify }},
+    "page": {{ algorithm.slug | prepend: "/" | append: "/" | absolute_url | jsonify }},
+    "vectors": {{ algorithm.slug | prepend: "/" | append: "/vectors.json" | absolute_url | jsonify }},
+    "placeholder": {% if data.placeholder %}true{% else %}false{% endif %},
+    "cases": {{ data.cases.size }},
+    "expiresDate": {{ data.expiresDate | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+{%- endfor %}
+]

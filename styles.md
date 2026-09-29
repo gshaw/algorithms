@@ -40,7 +40,9 @@ One colour per item, in this order, for lines and marks that are told apart rath
 
 A diagram goes on a page only where it explains something words don't. Every diagram is a hand-written SVG in `assets/diagrams/`, with the same parts and colours, and its own light and dark versions through `prefers-color-scheme`.
 
-<figure class="diagram"><img src="/assets/diagrams/style-guide.svg" alt="A sample diagram: a muted reference arrow, an ink subject arrow, the accent angle between them, a sun in the light colour, a dashed guide, and a key of each colour, line weight and type size"></figure>
+<figure class="diagram"><img src="/assets/diagrams/style-guide.svg" alt="A sample diagram: a muted reference arrow, an ink subject arrow, the accent angle between them, a sun in the light colour, a dashed guide, and a key of each colour role, line weight and type size"></figure>
+
+The sample above shows each role in use; the table gives its colours.
 
 <div class="fields">
   <table>
@@ -63,4 +65,4 @@ A diagram goes on a page only where it explains something words don't. Every dia
 
 ## Ink
 
-`#0b0b0b` rings every dot and swatch, so a colour holds on a light page and a dark one.
+`#0b0b0b` rings every dot and swatch, so a colour holds on a light page and a dark one. The site's icon uses the OK green.

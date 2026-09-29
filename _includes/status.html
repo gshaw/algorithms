@@ -1,0 +1,7 @@
+{%- case include.status -%}
+{%- when "published" or "passes" -%}<span class="dot ok"></span>{% if include.status == "passes" %}Passes{% else %}Published{% endif %}
+{%- when "incomplete" -%}<span class="dot caution"></span>Incomplete
+{%- when "fails" -%}<span class="dot avoid"></span>Fails
+{%- when "expired" -%}<span class="dot avoid"></span>Expired
+{%- else -%}<span class="dot unknown"></span>Planned
+{%- endcase -%}

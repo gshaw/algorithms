@@ -57,22 +57,21 @@ drift. Colours and diagram rules are on the site's [Styles](https://algorithms.g
 
 1. **Breadcrumb**: back to the home page.
 2. **Title**: what it computes, in plain words.
-3. **Subtitle**: the standard, whose it is, its licence.
-4. **Headline**: the number of cases, and the expiry date if there is one.
+3. **Subtitle**: the standard, and what the values are checked against.
+4. **Headline**: the status, the number of cases, and the expiry date if there is one.
    A page whose test data is a placeholder opens with a warning, drawn like a GitHub alert.
 5. **What it is**: the problem in plain words, for someone who hasn't met it, with a
    diagram where one explains it better than words. LandNav's declination help sheet is
-   the model. Diagrams are SVGs in `assets/diagrams/`, drawn for light and dark.
-6. **Inputs** and **Outputs**, or **Operations** for an algorithm with several: a unit in
-   every name, and the range each takes.
-7. **Accuracy**: each output's tolerance and why.
-8. **Edge cases**: the named cases and what's right for each.
-9. **For agents**: a short brief to paste into an agent, naming the method and the
+   the model. Diagrams follow the [Styles](https://algorithms.gshaw.ca/styles/) page.
+6. **Operations** and **Fields**: from the test file, with each operation's id and the
+   names of its inputs and outputs, and what each field means.
+7. **Edge cases**: the named cases and what's right for each.
+8. **For agents**: a short brief to paste into an agent, naming the method and the
    traps. A paragraph, not code.
+9. **Test data**: a link to the file, the tolerances, and the cases.
 10. **Implementations**: one row per repo, with its language and whether it passes, fails
     or is incomplete on the current data.
-11. **Source**: each source by role (standard, test values, reference program), with its
-    credit verbatim.
+11. **Source**: each source by role, with its credit verbatim.
 
 Each planned algorithm has a preview page now, built from a placeholder test file in
 `_data/vectors/` that says it's a placeholder, so the finished layout can be reviewed. Each
@@ -80,33 +79,14 @@ file is replaced by the real one when its issue lands.
 
 ## The test file
 
-```json
-{
-  "algorithm": "wmm",
-  "publishedAt": "2026-10-01",
-  "expiresAt": "2029-12-31",
-  "earthModel": "WGS84",
-  "sources": [
-    { "role": "test values", "name": "WMM2025 test values", "url": "…", "licence": "Public domain" }
-  ],
-  "tolerances": { "declinationInDegrees": "0.01" },
-  "cases": [
-    {
-      "id": "noaa-1",
-      "operation": "field",
-      "tags": ["published"],
-      "input": { "latitudeInDegrees": 80, "longitudeInDegrees": 0, "heightInKilometers": 0, "decimalYear": 2025.0 },
-      "expected": { "declinationInDegrees": 0.0 }
-    }
-  ]
-}
-```
+**The site's [Test data format](https://algorithms.gshaw.ca/format/) page is the standard**:
+the file's shape, how fields are named, how results are compared, and the implementation
+contract. `format.md` in this repo is its source; change the standard there, then every
+file to match. [algorithms.json](https://algorithms.gshaw.ca/algorithms.json) lists every
+file for a program to find.
 
-The values above are placeholders; #1 fills in real ones. `tags` says where a case came
-from (`published`, `reference`, `hand`) and what it tests (`edge`, `polar`). `operation`
-names what to compute, for an algorithm with more than one. Tolerances are decimal
-strings, so `0.000001` never shows as `1e-06`. The file has no version for now: it
-changes in place, and implementations are checked against the current file only.
+Each file carries its own `operations` and `fields`, so a page and its file can't disagree,
+and a checker can reject a case that uses a field its operation doesn't have.
 
 ## Implementations
 
@@ -114,21 +94,8 @@ changes in place, and implementations are checked against the current file only.
 works the same way in every language.** A repo is an implementation; several in one
 language are fine.
 
-- `mise install` sets up the language's tools and the checker.
-- `mise run evaluate` reads cases as JSON Lines on standard input and writes one result
-  per line. The implementation never sees an expected value:
-
-  ```text
-  in:  {"algorithm":"wmm","id":"noaa-1","input":{…}}
-  out: {"id":"noaa-1","output":{"declinationInDegrees":…}}
-  out: {"id":"bad-latitude","error":"outOfRange"}
-  out: {"id":"utm-1","error":"notImplemented"}
-  ```
-
-- `mise run test` runs the checker against the current test data and prints each case's
-  result and error against its tolerance.
-- A scheduled CI run, weekly and on every push, publishes the checker's `conformance.json`
-  as a release asset.
+The contract (`mise install`, `mise run evaluate` over JSON Lines, `mise run test`, and a
+weekly `conformance.json`) is on the [format page](https://algorithms.gshaw.ca/format/#implementations).
 
 **The checker does all the judging, and it's the one piece of code this repo owns.** It
 feeds the cases, applies the tolerances and writes the results, so no implementation

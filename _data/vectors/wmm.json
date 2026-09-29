@@ -1,8 +1,8 @@
 {
   "placeholder": "Made-up values to show the page layout. This is not test data.",
   "algorithm": "wmm",
-  "publishedAt": "2026-01-01",
-  "expiresAt": "2029-12-31",
+  "publishedDate": "2026-01-01",
+  "expiresDate": "2029-12-31",
   "earthModel": "WGS84",
   "sources": [
     {
@@ -20,10 +20,65 @@
       "licence": "Public domain"
     }
   ],
+  "operations": [
+    {
+      "id": "field",
+      "gives": "The magnetic field at a place and time",
+      "inputs": [
+        "latitudeInDegrees",
+        "longitudeInDegrees",
+        "heightInKilometers",
+        "decimalYear"
+      ],
+      "outputs": [
+        "magneticDeclinationInDegrees",
+        "inclinationInDegrees",
+        "northIntensityInNanoteslas",
+        "eastIntensityInNanoteslas",
+        "downIntensityInNanoteslas",
+        "horizontalIntensityInNanoteslas",
+        "totalIntensityInNanoteslas",
+        "gridVariationInDegrees",
+        "blackout"
+      ]
+    },
+    {
+      "id": "decimalYear",
+      "gives": "The decimal year for a date",
+      "inputs": [
+        "date"
+      ],
+      "outputs": [
+        "decimalYear"
+      ]
+    }
+  ],
+  "fields": {
+    "latitudeInDegrees": "−90 to 90, WGS84, north positive",
+    "longitudeInDegrees": "−180 to 180, WGS84, east positive",
+    "heightInKilometers": "Above the WGS84 ellipsoid, −1 to 850",
+    "decimalYear": "2025.0 to 2030.0: the year plus the day of the year over the year's length",
+    "date": "A calendar date, YYYY-MM-DD",
+    "magneticDeclinationInDegrees": "The angle from true north to magnetic north, east positive",
+    "inclinationInDegrees": "The field's dip below the horizontal, down positive",
+    "northIntensityInNanoteslas": "The field's north component, X",
+    "eastIntensityInNanoteslas": "The field's east component, Y",
+    "downIntensityInNanoteslas": "The field's down component, Z",
+    "horizontalIntensityInNanoteslas": "The field's horizontal strength, H",
+    "totalIntensityInNanoteslas": "The field's total strength, F",
+    "gridVariationInDegrees": "Declination measured from grid north; null between 55° S and 55° N",
+    "blackout": "none, caution (H under 6000 nT) or unreliable (H under 2000 nT)"
+  },
   "tolerances": {
-    "declinationInDegrees": "0.01",
+    "magneticDeclinationInDegrees": "0.01",
     "inclinationInDegrees": "0.01",
-    "fInNanoteslas": "1"
+    "northIntensityInNanoteslas": "1",
+    "eastIntensityInNanoteslas": "1",
+    "downIntensityInNanoteslas": "1",
+    "horizontalIntensityInNanoteslas": "1",
+    "totalIntensityInNanoteslas": "1",
+    "gridVariationInDegrees": "0.01",
+    "decimalYear": "0.0001"
   },
   "cases": [
     {
@@ -39,9 +94,9 @@
         "decimalYear": 2025.0
       },
       "expected": {
-        "declinationInDegrees": 1.23,
+        "magneticDeclinationInDegrees": 1.23,
         "inclinationInDegrees": 4.56,
-        "fInNanoteslas": 12345.6
+        "totalIntensityInNanoteslas": 12345.6
       }
     },
     {
@@ -57,9 +112,9 @@
         "decimalYear": 2027.5
       },
       "expected": {
-        "declinationInDegrees": -7.89,
+        "magneticDeclinationInDegrees": -7.89,
         "inclinationInDegrees": -10.11,
-        "fInNanoteslas": 23456.7
+        "gridVariationInDegrees": null
       }
     },
     {
@@ -76,7 +131,7 @@
         "decimalYear": 2026.0
       },
       "expected": {
-        "declinationInDegrees": 12.34,
+        "magneticDeclinationInDegrees": 12.34,
         "blackout": "unreliable"
       }
     },
