@@ -38,9 +38,9 @@ One colour per item, in this order, for lines and marks that are told apart rath
 
 ## Diagrams
 
-A diagram goes on a page only where it explains something words don't. Every diagram is a hand-written SVG in `assets/diagrams/`, with the same parts and colours, and its own light and dark versions through `prefers-color-scheme`.
+A diagram goes on a page only where it explains something words don't. Every diagram is a hand-written SVG in `assets/diagrams/`, with the same parts and colours, and its own light and dark versions through `prefers-color-scheme`. A page embeds one with `<object>`, not `<img>`: Safari ignores the dark version inside an `<img>`.
 
-<figure class="diagram"><img src="/assets/diagrams/style-guide.svg" alt="A sample diagram: a muted reference arrow, an ink subject arrow, the accent angle between them, a sun in the light colour, a dashed guide, and a key of each colour role, line weight and type size"></figure>
+<figure class="diagram"><object type="image/svg+xml" data="/assets/diagrams/style-guide.svg" role="img" aria-label="A sample diagram: a muted reference arrow, an ink subject arrow, the accent angle between them, a sun in the light colour, a dashed guide, and a key of each colour role, line weight and type size">A sample diagram: a muted reference arrow, an ink subject arrow, the accent angle between them, a sun in the light colour, a dashed guide, and a key of each colour role, line weight and type size</object></figure>
 
 The sample above shows each role in use; the table gives its colours.
 

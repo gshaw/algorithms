@@ -145,7 +145,8 @@ nav.crumbs + h1 {
 .fields code {
   overflow-wrap: anywhere;
 }
-figure.diagram img {
+figure.diagram object {
+  display: block;
   max-width: 40rem;
   width: 100%;
 }
