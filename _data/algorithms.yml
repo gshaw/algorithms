@@ -33,8 +33,8 @@
   slug: sun
   gives: Rise, set, transit, the three twilights, azimuth and altitude
   standard: Meeus, Astronomical Algorithms
-  checked_against: USNO
-  status: planned
+  checked_against: USNO and Skyfield
+  status: published
   issue: 5
 - name: Moon
   slug: moon

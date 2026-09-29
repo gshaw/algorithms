@@ -14,7 +14,8 @@ ignorePaths:
   - "wmm/sources" # NOAA's files, verbatim
   - "utm-mgrs/sources" # GeoConvert's output, verbatim
   - "astronomical-time/sources" # USNO's and ERFA's output, verbatim
-  - "bearings/sources" # GeodSolve's output and the manuals' text, verbatim
+  - "bearings/sources"
+  - "sun/sources" # USNO's and Skyfield's output, verbatim # GeodSolve's output and the manuals' text, verbatim
 words:
   - gshaw
   - jsonify # Liquid filter
@@ -30,6 +31,12 @@ words:
   - Karney
   - ERFA # Essential Routines for Fundamental Astronomy
   - pyerfa
+  - rstt # a USNO API path
+  - celnav # a USNO API path
+  - Skyfield
+  - altaz # Skyfield's method
+  - phen # USNO's phenomenon field
+  - phens
   - preds # USNO's deltat.preds
   - gmst # USNO's and ERFA's Greenwich mean sidereal time
   - lmst # USNO's local mean sidereal time
@@ -46,6 +53,10 @@ words:
   - NCEI
   - USNO
   # Other names.
+  - McMurdo
+  - Tromsø
+  - tromso
+  - Ushuaia
   - humidex
   - Tobler
   - tzdb
