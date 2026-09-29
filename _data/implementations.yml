@@ -4,4 +4,3 @@
 # planned: the repo doesn't exist yet, so it isn't linked.
 - repo: gshaw/algorithms-swift
   language: Swift
-  planned: true

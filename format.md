@@ -86,11 +86,11 @@ A case expecting refusal has `"expected": { "error": "outOfRange" }`. The errors
 
 An implementation is a public repo that follows one contract, so it can be checked the same way in any language. [algorithms-template](https://github.com/gshaw/algorithms-template) is a GitHub template with the contract already wired up; [algorithms-swift](https://github.com/gshaw/algorithms-swift) is a worked example.
 
-- `mise install` sets up its tools, including the checker, `algorithms-check`, from [this repo's releases](https://github.com/gshaw/algorithms/releases):
+- `mise install` sets up its tools, including the checker, `algorithms-check`, pinned to a version from [this repo's releases](https://github.com/gshaw/algorithms/releases):
 
   ```toml
   [tools]
-  "github:gshaw/algorithms" = { version = "latest", exe = "algorithms-check" }
+  "github:gshaw/algorithms" = { version = "0.1.0", exe = "algorithms-check" }
   ```
 
 - `mise run evaluate` reads cases on standard input, one JSON object per line, and writes one result per line in any order. It never sees `expected`. It runs once per algorithm, and answers `notImplemented` for an algorithm it doesn't have.

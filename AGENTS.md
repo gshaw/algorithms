@@ -63,7 +63,7 @@ together.
 - `_layouts/algorithm.html` is every algorithm page's template. A page's `index.md` holds its explanation as the body, and its diagram, points, edge cases and agent brief as front matter; operations, fields, test data and sources come from the test file; don't add sections in a page, change the template.
 - `assets/diagrams/` holds the pages' diagrams: hand-written SVGs that follow the palette and rules on `styles.md`. Add one only where it explains something words don't.
 - `assets/css/pico.min.css` is Pico 2.1.1, copied in. `assets/css/site.css` holds the site's own rules; `table.ref` stacks a table below 64rem.
-- `checker/` is `algorithms-check`, in Go. `mise run checker` vets and tests it; pushing a `vX.Y.Z` tag releases binaries through `.github/workflows/checker.yml`, and implementations install the latest with mise.
+- `checker/` is `algorithms-check`, in Go. `mise run checker` vets and tests it; pushing a `vX.Y.Z` tag releases binaries through `.github/workflows/checker.yml`, and implementations pin a version in mise.
 - `icon.svg` is the source of `favicon.192x192.png` and `apple-touch-icon.png`.
 
 ## Writing
