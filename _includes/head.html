@@ -32,6 +32,40 @@
     td {
       vertical-align: top
     }
+    /* Tables sit flush with the text around them: no cell padding at the edges. */
+    th:first-child,
+    td:first-child {
+      padding-left: 0
+    }
+    th:last-child,
+    td:last-child {
+      padding-right: 0
+    }
+    /* On a phone, a stacked table shows each row as a block: the first cell as its
+       title, the rest under it. Four columns at 390 px leave a word per line. */
+    @media (max-width: 575px) {
+      table.stacked thead {
+        display: none
+      }
+      table.stacked tr,
+      table.stacked td {
+        display: block
+      }
+      table.stacked tr {
+        padding: 0.75rem 0;
+        border-bottom: var(--border-width) solid var(--table-border-color)
+      }
+      table.stacked td {
+        padding: 0;
+        border: 0
+      }
+      table.stacked td:first-child {
+        font-weight: 600
+      }
+      table.stacked td + td {
+        margin-top: 0.25rem
+      }
+    }
     .muted,
     td small {
       color: var(--muted-color)

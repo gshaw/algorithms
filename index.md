@@ -8,7 +8,7 @@ Sunrise, magnetic declination, grid references and bearings are pure functions: 
 
 ## Algorithms
 
-<table>
+<table class="stacked">
   <thead>
     <tr>
       <th>Algorithm</th>
