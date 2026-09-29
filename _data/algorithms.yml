@@ -40,6 +40,6 @@
   slug: moon
   gives: Rise, set, transit, illumination, phase, and the dates of the next phases
   standard: Meeus, Astronomical Algorithms
-  checked_against: USNO
-  status: planned
+  checked_against: USNO and Skyfield
+  status: published
   issue: 6

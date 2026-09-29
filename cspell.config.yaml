@@ -15,7 +15,8 @@ ignorePaths:
   - "utm-mgrs/sources" # GeoConvert's output, verbatim
   - "astronomical-time/sources" # USNO's and ERFA's output, verbatim
   - "bearings/sources"
-  - "sun/sources" # USNO's and Skyfield's output, verbatim # GeodSolve's output and the manuals' text, verbatim
+  - "sun/sources" # USNO's and Skyfield's output, verbatim
+  - "moon/sources" # USNO's and Skyfield's output, verbatim # GeodSolve's output and the manuals' text, verbatim
 words:
   - gshaw
   - jsonify # Liquid filter
@@ -37,6 +38,9 @@ words:
   - altaz # Skyfield's method
   - phen # USNO's phenomenon field
   - phens
+  - fracillum # USNO's fraction lit
+  - nump # a USNO API parameter
+  - curphase # USNO's phase name
   - preds # USNO's deltat.preds
   - gmst # USNO's and ERFA's Greenwich mean sidereal time
   - lmst # USNO's local mean sidereal time
