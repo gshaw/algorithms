@@ -6,14 +6,16 @@ Background for AI agents working in this repo.
 
 Test data for pure calculations (sun and moon, magnetic declination, grid references,
 bearings) and a Jekyll site at [algorithms.gshaw.ca](https://algorithms.gshaw.ca) that
-publishes it and links to implementations that pass it. The design is
-[docs/plan.md](docs/plan.md); read it before a structural change.
+publishes it and links to implementations that pass it. The design is on the site's home,
+`format.md` and `styles.md`; read them before a structural change. Every algorithm,
+published, planned or an idea, is listed with a stable ID in
+[#26](https://github.com/gshaw/algorithms/issues/26).
 
 **The repo and the site are both public.** Anything committed here is published.
 
 **It stands alone.** Don't link to, load from or mention Gerry's other projects' sites or
-services, except gshaw.ca in the footer and the apps by name where the plan explains why
-an algorithm exists. The site has its own copy of everything it serves.
+services or apps, except gshaw.ca in the footer. The site has its own copy of everything
+it serves.
 
 ## Rules
 

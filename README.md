@@ -4,7 +4,24 @@ Test data for the calculations an app does on the device, checked against each
 authority's own published values. Live at [algorithms.gshaw.ca](https://algorithms.gshaw.ca).
 
 There's no implementation code here. Implementations live in their own repos and are
-linked from the site. The design and what's next are in [docs/plan.md](docs/plan.md).
+linked from the site. The list of algorithms, published, planned and ideas, is
+[#26](https://github.com/gshaw/algorithms/issues/26).
+
+## How it fits together
+
+The design is on the site: [how it works](https://algorithms.gshaw.ca/), the
+[test data format](https://algorithms.gshaw.ca/format/) and the
+[styles](https://algorithms.gshaw.ca/styles/). Three repos make it work:
+
+| Repo | What |
+| --- | --- |
+| `gshaw/algorithms` | This one: test data, generators, the site, the checker |
+| [`gshaw/algorithms-template`](https://github.com/gshaw/algorithms-template) | A GitHub template: `.mise.toml`, the CI workflow and the contract. No language in it. |
+| [`gshaw/algorithms-swift`](https://github.com/gshaw/algorithms-swift) | The Swift implementation, made from the template, and the worked example |
+
+A new algorithm gets its own issue and starts as a preview page built from a test file
+with a `placeholder` property, so the layout can be reviewed before the data lands. The
+real file replaces it when the issue lands.
 
 ## Develop
 
