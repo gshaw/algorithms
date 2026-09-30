@@ -22,7 +22,6 @@ exclude:
   - README.md
   - LICENSE
   - LICENSE-DATA
-  - docs
   - cspell.config.yaml
   - wrangler.jsonc
   - scripts
