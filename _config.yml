@@ -18,7 +18,6 @@ kramdown:
 # The repo's own docs and tooling stay off the site.
 exclude:
   - AGENTS.md
-  - CLAUDE.md
   - README.md
   - LICENSE
   - LICENSE-DATA
