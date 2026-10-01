@@ -10,10 +10,14 @@ Needs skyfield and JPL's de421.bsp for the first. Where the values come from:
 - nextPhases: USNO's primary phases (/api/moon/phases/date), to the minute.
 - phase: Skyfield on DE421 for illumination, phase angle and elongation, checked against
   USNO's percentage lit; phaseName from the elongation by the rule in the file's fields.
+- position: Skyfield on DE421, seen from the place, checked against USNO's celestial
+  navigation data (/api/celnav). USNO's Hc is from the Earth's centre, so the check is
+  against Hc minus its parallax in altitude.
 """
 
 import datetime
 import json
+import math
 import random
 import sys
 from pathlib import Path
@@ -44,7 +48,9 @@ class Sky:
             self.ts = load.timescale()
             self.log.header = (f"Skyfield {__version__} on JPL DE421. 'events' lines: latitude longitude start => risings "
                                "and settings in the next 24 h (find_risings, find_settings) and the moon's lowest and highest "
-                               "altitude. 'phase' lines: instant => fraction illuminated, phase angle, elongation (degrees).")
+                               "altitude. 'phase' lines: instant => fraction illuminated, phase angle, elongation (degrees). "
+                               "'position' lines: place and instant => azimuth and altitude seen from the place, no "
+                               "refraction.")
 
     def t(self, moment):
         return self.ts.from_datetime(moment.replace(tzinfo=datetime.timezone.utc))
@@ -84,6 +90,13 @@ class Sky:
             return f"{fraction:.6f} {angle:.6f} {elongation:.6f}"
         fraction, angle, elongation = (float(v) for v in self.log.call(f"phase {iso(moment)}", compute).split())
         return fraction, angle, elongation
+
+    def position(self, lat, lon, moment):
+        def compute():
+            observer = self.eph["earth"] + self.wgs84.latlon(lat, lon)
+            alt, az, _ = observer.at(self.t(moment)).observe(self.eph["moon"]).apparent().altaz()
+            return f"{az.degrees:.6f} {alt.degrees:.6f}"
+        return (float(v) for v in self.log.call(f"position {lat} {lon} {iso(moment)}", compute).split())
 
     def _ecliptic(self):
         from skyfield.framelib import ecliptic_frame
@@ -203,6 +216,39 @@ def phase_cases(sky):
     return cases
 
 
+def position_cases(sky):
+    rows = [("low", 49.2827, -123.1207, datetime.datetime(2026, 9, 30, 3, 0)),
+            ("below-horizon", 49.2827, -123.1207, datetime.datetime(2026, 9, 29, 20, 0)),
+            ("always-up", 82.5018, -62.3481, datetime.datetime(2026, 3, 21, 12, 0)),
+            ("south-pole", -89.99, 0.0, datetime.datetime(2026, 6, 21, 0, 0))]
+    rng = random.Random(11)
+    for n in range(1, 41):
+        moment = datetime.datetime(2026, 1, 1) + datetime.timedelta(seconds=rng.randrange(0, 365 * 86400))
+        rows.append((f"random-{n}", round(math.degrees(math.asin(2 * rng.random() - 1)) * 0.95, 4),
+                     round(rng.uniform(-180, 180), 4), moment))
+    cases = []
+    for name, lat, lon, moment in rows:
+        az, alt = sky.position(lat, lon, moment)
+        date, clock = iso(moment).rstrip("Z").split("T")
+        data = usno.get(f"https://aa.usno.navy.mil/api/celnav?date={date}&time={clock}&coords={lat},{lon}")
+        moon = [b for b in data["properties"]["data"] if b["object"] == "Moon"]
+        if moon and moon[0]["altitude_corrections"]["isCorrected"]:
+            # USNO lists the moon only when it's up, from the Earth's centre, with its
+            # parallax in altitude (pa) beside it.
+            usno_alt = moon[0]["almanac_data"]["hc"] - moon[0]["altitude_corrections"]["pa"]
+            usno_az = moon[0]["almanac_data"]["zn"]
+            assert abs(alt - usno_alt) < 0.005, (name, alt, usno_alt)
+            assert abs((az - usno_az + 180) % 360 - 180) * math.cos(math.radians(alt)) < 0.01, (name, az, usno_az)
+        expected = {"azimuthInDegrees": round(az, 4), "altitudeInDegrees": round(alt, 4)}
+        if alt > 89.9:
+            del expected["azimuthInDegrees"]
+        cases.append({"id": f"skyfield-position-{name}", "operation": "position",
+                      "tags": ["reference"] if name.startswith("random") else ["reference", "edge"],
+                      "input": {"latitudeInDegrees": lat, "longitudeInDegrees": lon, "instantUtc": iso(moment)},
+                      "expected": expected})
+    return cases
+
+
 def invalid_cases():
     return [
         {"id": "invalid-events-latitude-91", "operation": "events", "tags": ["invalid"],
@@ -210,6 +256,9 @@ def invalid_cases():
          "expected": {"error": "outOfRange"}},
         {"id": "invalid-phase-not-an-instant", "operation": "phase", "tags": ["invalid"],
          "input": {"instantUtc": "tonight"}, "expected": {"error": "invalidInput"}},
+        {"id": "invalid-position-latitude-91", "operation": "position", "tags": ["invalid"],
+         "input": {"latitudeInDegrees": 91, "longitudeInDegrees": 0, "instantUtc": "2026-01-01T00:00:00Z"},
+         "expected": {"error": "outOfRange"}},
     ]
 
 
@@ -222,13 +271,17 @@ NOTES = {
     "skyfield-phase-at-first-quarter-2026-03-25": "Exactly at first quarter: firstQuarter, not a neighbour.",
     "skyfield-phase-at-full-moon-2026-03-03": "Exactly at full moon.",
     "skyfield-phase-at-new-moon-2026-03-19": "Exactly at new moon: almost nothing lit.",
+    "skyfield-position-low": "Just risen: seen from the place, almost 1° lower than from the Earth's centre.",
+    "skyfield-position-below-horizon": "Below the horizon: a negative altitude, not an error.",
+    "skyfield-position-always-up": "Up all day at Alert, low in the sky.",
+    "skyfield-position-south-pole": "A kilometre from the South Pole: azimuth is still clockwise from true north.",
     "usno-next-phases-2026-03-16": "The four phases come in order from the start, crossing into April.",
 }
 
 def main():
     sky = Sky()
     try:
-        cases = events_cases(sky) + next_phase_cases() + phase_cases(sky) + invalid_cases()
+        cases = events_cases(sky) + next_phase_cases() + phase_cases(sky) + position_cases(sky) + invalid_cases()
     finally:
         usno.save()
     ids = [c["id"] for c in cases]
