@@ -11,7 +11,7 @@ linked from the site. The list of algorithms, published, planned and ideas, is
 
 The design is on the site: [how it works](https://algorithms.gshaw.ca/), the
 [test data format](https://algorithms.gshaw.ca/format/) and the
-[styles](https://algorithms.gshaw.ca/styles/). Three repos make it work:
+[design](https://algorithms.gshaw.ca/design/). Three repos make it work:
 
 | Repo | What |
 | --- | --- |

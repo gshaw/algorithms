@@ -1,8 +1,8 @@
 ---
-title: Styles
+title: Design
 description: The colours, statuses and diagram rules every page on this site follows.
 layout: page
-permalink: /styles/
+permalink: /design/
 ---
 
 One palette for every page and diagram here. It changes rarely, so it lives on a page rather than in each file.
