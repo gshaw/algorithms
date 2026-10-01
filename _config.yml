@@ -2,7 +2,7 @@
 title: Algorithms
 description: Test data for the calculations an app does on the device, from the authorities' own published values.
 url: https://algorithms.gshaw.ca
-icon: /icon.svg
+icon: /icon.svg?v=2
 repo: https://github.com/gshaw/algorithms
 start_year: 2026
 author:
