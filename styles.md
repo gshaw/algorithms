@@ -70,4 +70,4 @@ The sample above shows each role in use; the table gives its colours.
 
 ## Ink
 
-`#0b0b0b` rings every dot and swatch, so a colour holds on a light page and a dark one. The site's icon uses the OK green.
+`#0b0b0b` rings every dot and swatch, so a colour holds on a light page and a dark one. The site's icon has no tile: accent blue rings around an OK green dot, which hold on light and dark tabs. `apple-touch-icon.png` puts it on white, because iOS fills transparency with black.
