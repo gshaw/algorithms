@@ -7,7 +7,7 @@ Background for AI agents working in this repo.
 Test data for pure calculations (sun and moon, magnetic declination, grid references,
 bearings) and a Jekyll site at [algorithms.gshaw.ca](https://algorithms.gshaw.ca) that
 publishes it and links to implementations that pass it. The design is on the site's home,
-`format.md` and `styles.md`; read them before a structural change. Every algorithm,
+`format.md` and `design.md`; read them before a structural change. Every algorithm,
 published, planned or an idea, is listed with a stable ID in
 [#26](https://github.com/gshaw/algorithms/issues/26).
 
@@ -63,7 +63,7 @@ together.
 - `format.md` is the test data standard: the file's shape, naming, comparing and the implementation contract. Every file in `_data/vectors/` follows it; change the standard there first.
 - `/{slug}/vectors.json` is each algorithm's test file, beside its page, published byte for byte. `_data/vectors/{slug}.json` is a symlink to it so `_layouts/algorithm.html` can read it. `scripts/{slug}/` builds it from the raw sources in `/{slug}/sources/`, which the site publishes so anyone can audit a value; `scripts/lib/vectors_json.py` writes it, formatted and ordered. A case's `note` says why it exists, and the page lists the noted cases as its edge cases; edit notes in the generator's `NOTES`, never the JSON. `_data/implementations.yml` lists implementations; `planned: true` until the repo exists. `mise run results` copies each one's `conformance.json` into `_data/conformance/`; commit it, then deploy.
 - `_layouts/algorithm.html` is every algorithm page's template. A page's `index.md` holds its explanation as the body, and its diagram, points and agent brief as front matter; operations, fields, edge cases, the test data summary and sources come from the test file; don't add sections in a page, change the template.
-- `assets/diagrams/` holds the pages' diagrams: hand-written SVGs that follow the palette and rules on `styles.md`. Add one only where it explains something words don't.
+- `assets/diagrams/` holds the pages' diagrams: hand-written SVGs that follow the palette and rules on `design.md`. Add one only where it explains something words don't.
 - `assets/css/pico.min.css` is Pico 2.1.1, copied in. `assets/css/site.css` holds the site's own rules; `table.ref` stacks a table below 64rem.
 - `checker/` is `algorithms-check`, in Go. `mise run checker` vets and tests it; pushing a `vX.Y.Z` tag releases binaries through `.github/workflows/checker.yml`, and implementations pin a version in mise.
 - `icon.svg` is the source of `favicon.192x192.png` and `apple-touch-icon.png`. When it changes, re-render both and bump `?v=` in `_includes/head.html` and `_config.yml`: browsers keep favicons in their own cache.

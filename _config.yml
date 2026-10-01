@@ -15,6 +15,10 @@ markdown: kramdown
 kramdown:
   input: GFM
 
+# _redirects is the Worker's, copied as is: Jekyll skips underscore files otherwise.
+include:
+  - _redirects
+
 # The repo's own docs and tooling stay off the site.
 exclude:
   - AGENTS.md
