@@ -37,6 +37,7 @@ mise run check     # build + spell + markdownlint + internal links
 mise run deploy    # guard, check, wrangler deploy, verify
 mise run verify    # curl the live site
 mise run deploy-status  # is main live?
+mise run refresh        # implementations' results onto the site, then deploy
 ```
 
 **Read the counts, not just the exit code.** html-proofer prints `Ran on N files` and
@@ -61,7 +62,7 @@ together.
 - `_layouts/page.html` and `_includes/head.html` are the only layout.
 - `_data/algorithms.yml` lists the algorithms in build order, with their slug, status and issue. Each has a page at `/{slug}/index.md`.
 - `format.md` is the test data standard: the file's shape, naming, comparing and the implementation contract. Every file in `_data/vectors/` follows it; change the standard there first.
-- `/{slug}/vectors.json` is each algorithm's test file, beside its page, published byte for byte. `_data/vectors/{slug}.json` is a symlink to it so `_layouts/algorithm.html` can read it. `scripts/{slug}/` builds it from the raw sources in `/{slug}/sources/`, which the site publishes so anyone can audit a value; `scripts/lib/vectors_json.py` writes it, formatted and ordered. A case's `note` says why it exists, and the page lists the noted cases as its edge cases; edit notes in the generator's `NOTES`, never the JSON. `_data/implementations.yml` lists implementations; `planned: true` until the repo exists. `mise run results` copies each one's `conformance.json` into `_data/conformance/`; commit it, then deploy.
+- `/{slug}/vectors.json` is each algorithm's test file, beside its page, published byte for byte. `_data/vectors/{slug}.json` is a symlink to it so `_layouts/algorithm.html` can read it. `scripts/{slug}/` builds it from the raw sources in `/{slug}/sources/`, which the site publishes so anyone can audit a value; `scripts/lib/vectors_json.py` writes it, formatted and ordered. A case's `note` says why it exists, and the page lists the noted cases as its edge cases; edit notes in the generator's `NOTES`, never the JSON. `_data/implementations.yml` lists implementations; `planned: true` until the repo exists. `mise run results` copies each one's `conformance.json` into `_data/conformance/`. `mise run refresh` does that, commits straight to `main` and deploys; it's the one commit that skips a PR, because it only copies results the implementations already published. Rota's `algorithms-refresh` runs it daily.
 - `_layouts/algorithm.html` is every algorithm page's template. A page's `index.md` holds its explanation as the body, and its diagram, points and agent brief as front matter; operations, fields, edge cases, the test data summary and sources come from the test file; don't add sections in a page, change the template.
 - `assets/diagrams/` holds the pages' diagrams: hand-written SVGs that follow the palette and rules on `design.md`. Add one only where it explains something words don't.
 - `assets/css/pico.min.css` is Pico 2.1.1, copied in. `assets/css/site.css` holds the site's own rules; `table.ref` stacks a table below 64rem.

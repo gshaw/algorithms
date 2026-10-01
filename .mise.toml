@@ -77,5 +77,9 @@ echo "404 page works"
 [tasks.results]
 run = "scripts/results.sh"
 
+# Results, then commit straight to main and deploy if anything changed. Rota runs it daily.
+[tasks.refresh]
+run = "scripts/refresh.sh"
+
 [tasks.deploy-status]
 run = "scripts/deploy-status.sh"
