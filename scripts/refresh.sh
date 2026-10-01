@@ -2,7 +2,7 @@
 # Puts every implementation's latest results on the site: copies their conformance.json,
 # commits straight to main if any changed, and deploys if main isn't live. Safe to run
 # again: with nothing new it changes nothing. Implementations re-test themselves on every
-# push and weekly; this only carries the results here.
+# push and daily; this only carries the results here.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
