@@ -10,6 +10,7 @@ Needs skyfield and JPL's de421.bsp for the first. Where the values come from:
 - nextPhases: USNO's primary phases (/api/moon/phases/date), to the minute.
 - phase: Skyfield on DE421 for illumination, phase angle and elongation, checked against
   USNO's percentage lit; phaseName from the elongation by the rule in the file's fields.
+  Elongation is left out within 0.5° of new moon, where it wraps from 360 to 0.
 - position: Skyfield on DE421, seen from the place, checked against USNO's celestial
   navigation data (/api/celnav). USNO's Hc is from the Earth's centre, so the check is
   against Hc minus its parallax in altitude.
@@ -208,11 +209,13 @@ def phase_cases(sky):
         percent = int(data["properties"]["data"]["fracillum"].rstrip("%"))
         noon_fraction, _, _ = sky.phase(datetime.datetime.combine(moment.date(), datetime.time(12)))
         assert abs(percent / 100 - noon_fraction) <= 0.006, (label, percent, noon_fraction)
+        expected = {"illuminationFraction": round(fraction, 4), "phaseAngleInDegrees": round(angle, 3),
+                    "elongationInDegrees": round(elongation, 4), "phaseName": name_for(elongation)}
+        if min(elongation, 360 - elongation) < 0.5:
+            del expected["elongationInDegrees"]  # 359.996 and 0.002 are the same answer
         cases.append({"id": f"skyfield-phase-{label}", "operation": "phase",
                       "tags": ["reference", "edge"] if label.startswith("at-") else ["reference"],
-                      "input": {"instantUtc": iso(moment)},
-                      "expected": {"illuminationFraction": round(fraction, 4), "phaseAngleInDegrees": round(angle, 3),
-                                   "phaseName": name_for(elongation)}})
+                      "input": {"instantUtc": iso(moment)}, "expected": expected})
     return cases
 
 

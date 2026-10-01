@@ -1,6 +1,6 @@
 {
   "algorithm": "moon",
-  "publishedDate": "2026-09-30",
+  "publishedDate": "2026-10-01",
   "earthModel": "WGS84 latitude and longitude; UT1 read from the UTC given",
   "sources": [
     {
@@ -59,13 +59,14 @@
     },
     {
       "id": "phase",
-      "gives": "How much is lit, and the phase's name, at an instant",
+      "gives": "How much is lit, how far it is from the sun, and the phase's name, at an instant",
       "inputs": [
         "instantUtc"
       ],
       "outputs": [
         "illuminationFraction",
         "phaseAngleInDegrees",
+        "elongationInDegrees",
         "phaseName"
       ]
     },
@@ -109,6 +110,7 @@
     "isAlwaysDown": "true when it's down for the whole window",
     "illuminationFraction": "0 to 1, the part of the face that's lit, seen from the Earth's centre",
     "phaseAngleInDegrees": "The Sun–Moon–Earth angle: 0 at full, 180 at new",
+    "elongationInDegrees": "The moon's apparent ecliptic longitude minus the sun's, seen from the Earth's centre: 0 to 360, 0 at new, 90 at first quarter, 180 at full. Under 180 the moon is waxing. Left out within 0.5° of new moon, where it wraps.",
     "phaseName": "From the moon's elongation, its ecliptic longitude minus the sun's, in eight 45° bands each centred on its phase: new within 22.5° of 0, then waxingCrescent, firstQuarter (centred on 90), waxingGibbous, full (180), waningGibbous, lastQuarter (270) and waningCrescent. Instants within 0.5° of a band's edge aren't cases.",
     "newMoonUtc": "The first new moon from the start",
     "firstQuarterUtc": "The first first quarter from the start",
@@ -127,6 +129,7 @@
     "lastQuarterUtc": "120",
     "illuminationFraction": "0.01",
     "phaseAngleInDegrees": "0.5",
+    "elongationInDegrees": "0.01",
     "azimuthInDegrees": "0.01",
     "altitudeInDegrees": "0.01"
   },
@@ -12184,6 +12187,7 @@
       "expected": {
         "illuminationFraction": 0.0473,
         "phaseAngleInDegrees": 154.86,
+        "elongationInDegrees": 335.1081,
         "phaseName": "waningCrescent"
       }
     },
@@ -12199,6 +12203,7 @@
       "expected": {
         "illuminationFraction": 0.2322,
         "phaseAngleInDegrees": 122.386,
+        "elongationInDegrees": 302.6636,
         "phaseName": "waningCrescent"
       }
     },
@@ -12214,6 +12219,7 @@
       "expected": {
         "illuminationFraction": 0.033,
         "phaseAngleInDegrees": 159.076,
+        "elongationInDegrees": 20.5747,
         "phaseName": "new"
       }
     },
@@ -12229,6 +12235,7 @@
       "expected": {
         "illuminationFraction": 0.5451,
         "phaseAngleInDegrees": 84.828,
+        "elongationInDegrees": 264.968,
         "phaseName": "lastQuarter"
       }
     },
@@ -12244,6 +12251,7 @@
       "expected": {
         "illuminationFraction": 0.0082,
         "phaseAngleInDegrees": 169.632,
+        "elongationInDegrees": 10.3478,
         "phaseName": "new"
       }
     },
@@ -12259,6 +12267,7 @@
       "expected": {
         "illuminationFraction": 0.8585,
         "phaseAngleInDegrees": 44.196,
+        "elongationInDegrees": 224.2979,
         "phaseName": "waningGibbous"
       }
     },
@@ -12274,6 +12283,7 @@
       "expected": {
         "illuminationFraction": 0.1169,
         "phaseAngleInDegrees": 140.022,
+        "elongationInDegrees": 39.6682,
         "phaseName": "waxingCrescent"
       }
     },
@@ -12289,6 +12299,7 @@
       "expected": {
         "illuminationFraction": 0.9975,
         "phaseAngleInDegrees": 5.718,
+        "elongationInDegrees": 176.175,
         "phaseName": "full"
       }
     },
@@ -12304,6 +12315,7 @@
       "expected": {
         "illuminationFraction": 0.1165,
         "phaseAngleInDegrees": 140.082,
+        "elongationInDegrees": 39.6445,
         "phaseName": "waxingCrescent"
       }
     },
@@ -12319,6 +12331,7 @@
       "expected": {
         "illuminationFraction": 0.1852,
         "phaseAngleInDegrees": 129.019,
+        "elongationInDegrees": 309.3205,
         "phaseName": "waningCrescent"
       }
     },
@@ -12334,6 +12347,7 @@
       "expected": {
         "illuminationFraction": 0.4393,
         "phaseAngleInDegrees": 96.969,
+        "elongationInDegrees": 82.882,
         "phaseName": "firstQuarter"
       }
     },
@@ -12349,6 +12363,7 @@
       "expected": {
         "illuminationFraction": 0.0257,
         "phaseAngleInDegrees": 161.554,
+        "elongationInDegrees": 17.8033,
         "phaseName": "new"
       }
     },
@@ -12364,6 +12379,7 @@
       "expected": {
         "illuminationFraction": 0.0055,
         "phaseAngleInDegrees": 171.534,
+        "elongationInDegrees": 8.0995,
         "phaseName": "new"
       }
     },
@@ -12379,6 +12395,7 @@
       "expected": {
         "illuminationFraction": 0.061,
         "phaseAngleInDegrees": 151.399,
+        "elongationInDegrees": 28.1831,
         "phaseName": "waxingCrescent"
       }
     },
@@ -12394,6 +12411,7 @@
       "expected": {
         "illuminationFraction": 0.9937,
         "phaseAngleInDegrees": 9.105,
+        "elongationInDegrees": 189.0488,
         "phaseName": "full"
       }
     },
@@ -12409,6 +12427,7 @@
       "expected": {
         "illuminationFraction": 0.1786,
         "phaseAngleInDegrees": 129.997,
+        "elongationInDegrees": 310.3157,
         "phaseName": "waningCrescent"
       }
     },
@@ -12424,6 +12443,7 @@
       "expected": {
         "illuminationFraction": 0.5744,
         "phaseAngleInDegrees": 81.446,
+        "elongationInDegrees": 98.4408,
         "phaseName": "firstQuarter"
       }
     },
@@ -12439,6 +12459,7 @@
       "expected": {
         "illuminationFraction": 0.2303,
         "phaseAngleInDegrees": 122.634,
+        "elongationInDegrees": 302.9012,
         "phaseName": "waningCrescent"
       }
     },
@@ -12454,6 +12475,7 @@
       "expected": {
         "illuminationFraction": 0.6548,
         "phaseAngleInDegrees": 71.965,
+        "elongationInDegrees": 252.0896,
         "phaseName": "lastQuarter"
       }
     },
@@ -12469,6 +12491,7 @@
       "expected": {
         "illuminationFraction": 0.9242,
         "phaseAngleInDegrees": 31.957,
+        "elongationInDegrees": 148.2616,
         "phaseName": "waxingGibbous"
       }
     },
@@ -12484,6 +12507,7 @@
       "expected": {
         "illuminationFraction": 0.6972,
         "phaseAngleInDegrees": 66.769,
+        "elongationInDegrees": 246.8263,
         "phaseName": "waningGibbous"
       }
     },
@@ -12499,6 +12523,7 @@
       "expected": {
         "illuminationFraction": 0.3948,
         "phaseAngleInDegrees": 102.145,
+        "elongationInDegrees": 77.6829,
         "phaseName": "firstQuarter"
       }
     },
@@ -12514,6 +12539,7 @@
       "expected": {
         "illuminationFraction": 0.2651,
         "phaseAngleInDegrees": 118.027,
+        "elongationInDegrees": 61.8208,
         "phaseName": "waxingCrescent"
       }
     },
@@ -12529,6 +12555,7 @@
       "expected": {
         "illuminationFraction": 0.0038,
         "phaseAngleInDegrees": 172.894,
+        "elongationInDegrees": 354.011,
         "phaseName": "new"
       }
     },
@@ -12544,6 +12571,7 @@
       "expected": {
         "illuminationFraction": 0.0545,
         "phaseAngleInDegrees": 152.988,
+        "elongationInDegrees": 333.4892,
         "phaseName": "waningCrescent"
       }
     },
@@ -12559,6 +12587,7 @@
       "expected": {
         "illuminationFraction": 0.5235,
         "phaseAngleInDegrees": 87.308,
+        "elongationInDegrees": 267.4599,
         "phaseName": "lastQuarter"
       }
     },
@@ -12574,6 +12603,7 @@
       "expected": {
         "illuminationFraction": 0.4261,
         "phaseAngleInDegrees": 98.501,
+        "elongationInDegrees": 81.3275,
         "phaseName": "firstQuarter"
       }
     },
@@ -12589,6 +12619,7 @@
       "expected": {
         "illuminationFraction": 0.7824,
         "phaseAngleInDegrees": 55.609,
+        "elongationInDegrees": 124.383,
         "phaseName": "waxingGibbous"
       }
     },
@@ -12604,6 +12635,7 @@
       "expected": {
         "illuminationFraction": 0.0662,
         "phaseAngleInDegrees": 150.175,
+        "elongationInDegrees": 29.4325,
         "phaseName": "waxingCrescent"
       }
     },
@@ -12619,6 +12651,7 @@
       "expected": {
         "illuminationFraction": 0.9562,
         "phaseAngleInDegrees": 24.157,
+        "elongationInDegrees": 156.2177,
         "phaseName": "waxingGibbous"
       }
     },
@@ -12634,6 +12667,7 @@
       "expected": {
         "illuminationFraction": 0.0375,
         "phaseAngleInDegrees": 157.658,
+        "elongationInDegrees": 338.2627,
         "phaseName": "new"
       }
     },
@@ -12649,6 +12683,7 @@
       "expected": {
         "illuminationFraction": 0.1854,
         "phaseAngleInDegrees": 128.999,
+        "elongationInDegrees": 50.7252,
         "phaseName": "waxingCrescent"
       }
     },
@@ -12664,6 +12699,7 @@
       "expected": {
         "illuminationFraction": 0.5625,
         "phaseAngleInDegrees": 82.819,
+        "elongationInDegrees": 97.0351,
         "phaseName": "firstQuarter"
       }
     },
@@ -12679,6 +12715,7 @@
       "expected": {
         "illuminationFraction": 0.6201,
         "phaseAngleInDegrees": 76.095,
+        "elongationInDegrees": 103.7942,
         "phaseName": "firstQuarter"
       }
     },
@@ -12694,6 +12731,7 @@
       "expected": {
         "illuminationFraction": 0.2465,
         "phaseAngleInDegrees": 120.462,
+        "elongationInDegrees": 300.6035,
         "phaseName": "waningCrescent"
       }
     },
@@ -12709,6 +12747,7 @@
       "expected": {
         "illuminationFraction": 0.9392,
         "phaseAngleInDegrees": 28.555,
+        "elongationInDegrees": 151.7885,
         "phaseName": "waxingGibbous"
       }
     },
@@ -12724,6 +12763,7 @@
       "expected": {
         "illuminationFraction": 0.6473,
         "phaseAngleInDegrees": 72.868,
+        "elongationInDegrees": 252.9488,
         "phaseName": "lastQuarter"
       }
     },
@@ -12739,6 +12779,7 @@
       "expected": {
         "illuminationFraction": 0.9396,
         "phaseAngleInDegrees": 28.449,
+        "elongationInDegrees": 151.4867,
         "phaseName": "waxingGibbous"
       }
     },
@@ -12754,6 +12795,7 @@
       "expected": {
         "illuminationFraction": 0.9137,
         "phaseAngleInDegrees": 34.168,
+        "elongationInDegrees": 145.8221,
         "phaseName": "waxingGibbous"
       }
     },
@@ -12769,6 +12811,7 @@
       "expected": {
         "illuminationFraction": 0.1631,
         "phaseAngleInDegrees": 132.37,
+        "elongationInDegrees": 47.3304,
         "phaseName": "waxingCrescent"
       }
     },
@@ -12784,6 +12827,7 @@
       "expected": {
         "illuminationFraction": 0.3229,
         "phaseAngleInDegrees": 110.752,
+        "elongationInDegrees": 69.1068,
         "phaseName": "firstQuarter"
       }
     },
@@ -12799,6 +12843,7 @@
       "expected": {
         "illuminationFraction": 0.1956,
         "phaseAngleInDegrees": 127.512,
+        "elongationInDegrees": 52.2804,
         "phaseName": "waxingCrescent"
       }
     },
@@ -12814,6 +12859,7 @@
       "expected": {
         "illuminationFraction": 0.9408,
         "phaseAngleInDegrees": 28.15,
+        "elongationInDegrees": 152.2011,
         "phaseName": "waxingGibbous"
       }
     },
@@ -12829,6 +12875,7 @@
       "expected": {
         "illuminationFraction": 0.9984,
         "phaseAngleInDegrees": 4.589,
+        "elongationInDegrees": 180.318,
         "phaseName": "full"
       }
     },
@@ -12844,6 +12891,7 @@
       "expected": {
         "illuminationFraction": 0.5282,
         "phaseAngleInDegrees": 86.762,
+        "elongationInDegrees": 266.9131,
         "phaseName": "lastQuarter"
       }
     },
@@ -12859,6 +12907,7 @@
       "expected": {
         "illuminationFraction": 0.9643,
         "phaseAngleInDegrees": 21.788,
+        "elongationInDegrees": 201.4352,
         "phaseName": "full"
       }
     },
@@ -12874,6 +12923,7 @@
       "expected": {
         "illuminationFraction": 0.3792,
         "phaseAngleInDegrees": 103.986,
+        "elongationInDegrees": 75.8769,
         "phaseName": "firstQuarter"
       }
     },
@@ -12889,6 +12939,7 @@
       "expected": {
         "illuminationFraction": 0.9899,
         "phaseAngleInDegrees": 11.531,
+        "elongationInDegrees": 168.4649,
         "phaseName": "full"
       }
     },
@@ -12904,6 +12955,7 @@
       "expected": {
         "illuminationFraction": 0.8116,
         "phaseAngleInDegrees": 51.441,
+        "elongationInDegrees": 128.5179,
         "phaseName": "waxingGibbous"
       }
     },
@@ -12919,6 +12971,7 @@
       "expected": {
         "illuminationFraction": 0.0052,
         "phaseAngleInDegrees": 171.718,
+        "elongationInDegrees": 352.7043,
         "phaseName": "new"
       }
     },
@@ -12934,6 +12987,7 @@
       "expected": {
         "illuminationFraction": 0.0892,
         "phaseAngleInDegrees": 145.244,
+        "elongationInDegrees": 34.6045,
         "phaseName": "waxingCrescent"
       }
     },
@@ -12949,6 +13003,7 @@
       "expected": {
         "illuminationFraction": 0.9878,
         "phaseAngleInDegrees": 12.661,
+        "elongationInDegrees": 168.2318,
         "phaseName": "full"
       }
     },
@@ -12964,6 +13019,7 @@
       "expected": {
         "illuminationFraction": 0.9974,
         "phaseAngleInDegrees": 5.905,
+        "elongationInDegrees": 184.944,
         "phaseName": "full"
       }
     },
@@ -12979,6 +13035,7 @@
       "expected": {
         "illuminationFraction": 0.2315,
         "phaseAngleInDegrees": 122.483,
+        "elongationInDegrees": 57.3045,
         "phaseName": "waxingCrescent"
       }
     },
@@ -12994,6 +13051,7 @@
       "expected": {
         "illuminationFraction": 0.0224,
         "phaseAngleInDegrees": 162.788,
+        "elongationInDegrees": 342.8374,
         "phaseName": "new"
       }
     },
@@ -13009,6 +13067,7 @@
       "expected": {
         "illuminationFraction": 0.8018,
         "phaseAngleInDegrees": 52.868,
+        "elongationInDegrees": 127.1815,
         "phaseName": "waxingGibbous"
       }
     },
@@ -13024,6 +13083,7 @@
       "expected": {
         "illuminationFraction": 0.9083,
         "phaseAngleInDegrees": 35.258,
+        "elongationInDegrees": 144.7214,
         "phaseName": "waxingGibbous"
       }
     },
@@ -13039,6 +13099,7 @@
       "expected": {
         "illuminationFraction": 0.983,
         "phaseAngleInDegrees": 14.975,
+        "elongationInDegrees": 165.3538,
         "phaseName": "full"
       }
     },
@@ -13054,6 +13115,7 @@
       "expected": {
         "illuminationFraction": 0.4722,
         "phaseAngleInDegrees": 93.191,
+        "elongationInDegrees": 86.6711,
         "phaseName": "firstQuarter"
       }
     },
@@ -13071,6 +13133,7 @@
       "expected": {
         "illuminationFraction": 1.0,
         "phaseAngleInDegrees": 0.361,
+        "elongationInDegrees": 180.0009,
         "phaseName": "full"
       }
     },
@@ -13087,6 +13150,7 @@
       "expected": {
         "illuminationFraction": 0.5014,
         "phaseAngleInDegrees": 89.835,
+        "elongationInDegrees": 269.9961,
         "phaseName": "lastQuarter"
       }
     },
@@ -13121,6 +13185,7 @@
       "expected": {
         "illuminationFraction": 0.5012,
         "phaseAngleInDegrees": 89.861,
+        "elongationInDegrees": 90.0026,
         "phaseName": "firstQuarter"
       }
     },
@@ -13137,6 +13202,7 @@
       "expected": {
         "illuminationFraction": 0.9994,
         "phaseAngleInDegrees": 2.871,
+        "elongationInDegrees": 180.0003,
         "phaseName": "full"
       }
     },
@@ -13153,6 +13219,7 @@
       "expected": {
         "illuminationFraction": 0.5014,
         "phaseAngleInDegrees": 89.836,
+        "elongationInDegrees": 269.995,
         "phaseName": "lastQuarter"
       }
     },
@@ -13185,6 +13252,7 @@
       "expected": {
         "illuminationFraction": 0.5012,
         "phaseAngleInDegrees": 89.861,
+        "elongationInDegrees": 90.0022,
         "phaseName": "firstQuarter"
       }
     },
