@@ -1,6 +1,6 @@
 {
   "algorithm": "moon",
-  "publishedDate": "2026-09-29",
+  "publishedDate": "2026-09-30",
   "earthModel": "WGS84 latitude and longitude; UT1 read from the UTC given",
   "sources": [
     {
@@ -18,11 +18,18 @@
       "licence": "Public domain"
     },
     {
-      "role": "Illumination, phase angle and name",
+      "role": "Illumination, phase angle, name and position",
       "name": "Skyfield 1.55 on JPL's DE421",
-      "by": "Brandon Rhodes. Checked against USNO's percentage lit at 12:00 UT. Every call is in /moon/sources/skyfield.txt",
+      "by": "Brandon Rhodes. Illumination checked against USNO's percentage lit at 12:00 UT; position against USNO's celestial navigation data. Every call is in /moon/sources/skyfield.txt",
       "url": "https://rhodesmill.org/skyfield/",
       "licence": "MIT"
+    },
+    {
+      "role": "Position check",
+      "name": "Astronomical Applications API 4.0.1: Celestial Navigation Data, Hc and Zn",
+      "by": "US Naval Observatory. Its Hc is from the Earth's centre, so Skyfield's altitude is checked against Hc minus the parallax in altitude it gives. USNO lists the moon only when it's up",
+      "url": "https://aa.usno.navy.mil/data/api",
+      "licence": "Public domain"
     },
     {
       "role": "Method",
@@ -74,6 +81,19 @@
         "fullMoonUtc",
         "lastQuarterUtc"
       ]
+    },
+    {
+      "id": "position",
+      "gives": "The moon's azimuth and altitude from a place",
+      "inputs": [
+        "latitudeInDegrees",
+        "longitudeInDegrees",
+        "instantUtc"
+      ],
+      "outputs": [
+        "azimuthInDegrees",
+        "altitudeInDegrees"
+      ]
     }
   ],
   "fields": {
@@ -93,7 +113,9 @@
     "newMoonUtc": "The first new moon from the start",
     "firstQuarterUtc": "The first first quarter from the start",
     "fullMoonUtc": "The first full moon from the start",
-    "lastQuarterUtc": "The first last quarter from the start"
+    "lastQuarterUtc": "The first last quarter from the start",
+    "azimuthInDegrees": "0 to 360, clockwise from north, seen from the place. Left out near the zenith.",
+    "altitudeInDegrees": "−90 to 90, of the moon's centre, seen from the place (with parallax, up to about 1° lower than from the Earth's centre), geometric: no refraction"
   },
   "tolerances": {
     "riseUtc": "120",
@@ -104,7 +126,9 @@
     "fullMoonUtc": "120",
     "lastQuarterUtc": "120",
     "illuminationFraction": "0.01",
-    "phaseAngleInDegrees": "0.5"
+    "phaseAngleInDegrees": "0.5",
+    "azimuthInDegrees": "0.01",
+    "altitudeInDegrees": "0.01"
   },
   "cases": [
     {
@@ -13165,6 +13189,718 @@
       }
     },
     {
+      "id": "skyfield-position-low",
+      "operation": "position",
+      "tags": [
+        "reference",
+        "edge"
+      ],
+      "note": "Just risen: seen from the place, almost 1° lower than from the Earth's centre.",
+      "input": {
+        "latitudeInDegrees": 49.2827,
+        "longitudeInDegrees": -123.1207,
+        "instantUtc": "2026-09-30T03:00:00Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 55.2511,
+        "altitudeInDegrees": 0.5224
+      }
+    },
+    {
+      "id": "skyfield-position-below-horizon",
+      "operation": "position",
+      "tags": [
+        "reference",
+        "edge"
+      ],
+      "note": "Below the horizon: a negative altitude, not an error.",
+      "input": {
+        "latitudeInDegrees": 49.2827,
+        "longitudeInDegrees": -123.1207,
+        "instantUtc": "2026-09-29T20:00:00Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 324.533,
+        "altitudeInDegrees": -12.2973
+      }
+    },
+    {
+      "id": "skyfield-position-always-up",
+      "operation": "position",
+      "tags": [
+        "reference",
+        "edge"
+      ],
+      "note": "Up all day at Alert, low in the sky.",
+      "input": {
+        "latitudeInDegrees": 82.5018,
+        "longitudeInDegrees": -62.3481,
+        "instantUtc": "2026-03-21T12:00:00Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 84.9528,
+        "altitudeInDegrees": 15.1257
+      }
+    },
+    {
+      "id": "skyfield-position-south-pole",
+      "operation": "position",
+      "tags": [
+        "reference",
+        "edge"
+      ],
+      "note": "A kilometre from the South Pole: azimuth is still clockwise from true north.",
+      "input": {
+        "latitudeInDegrees": -89.99,
+        "longitudeInDegrees": 0.0,
+        "instantUtc": "2026-06-21T00:00:00Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 259.8234,
+        "altitudeInDegrees": -4.0663
+      }
+    },
+    {
+      "id": "skyfield-position-random-1",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": 44.6604,
+        "longitudeInDegrees": 128.4707,
+        "instantUtc": "2026-06-25T16:28:58Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 238.5224,
+        "altitudeInDegrees": -0.6443
+      }
+    },
+    {
+      "id": "skyfield-position-random-2",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": -3.7423,
+        "longitudeInDegrees": 2.8229,
+        "instantUtc": "2026-10-31T09:28:48Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 296.9245,
+        "altitudeInDegrees": 11.9704
+      }
+    },
+    {
+      "id": "skyfield-position-random-3",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": -36.4139,
+        "longitudeInDegrees": 109.4041,
+        "instantUtc": "2026-08-17T02:49:24Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 93.3545,
+        "altitudeInDegrees": 14.2282
+      }
+    },
+    {
+      "id": "skyfield-position-random-4",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": 14.3033,
+        "longitudeInDegrees": 105.4717,
+        "instantUtc": "2026-07-04T18:26:05Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 123.215,
+        "altitudeInDegrees": 49.3321
+      }
+    },
+    {
+      "id": "skyfield-position-random-5",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": -5.8251,
+        "longitudeInDegrees": -128.9538,
+        "instantUtc": "2026-02-06T13:17:39Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 258.4822,
+        "altitudeInDegrees": 74.7567
+      }
+    },
+    {
+      "id": "skyfield-position-random-6",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": 36.351,
+        "longitudeInDegrees": 69.6379,
+        "instantUtc": "2026-07-29T04:59:14Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 287.0219,
+        "altitudeInDegrees": -58.5081
+      }
+    },
+    {
+      "id": "skyfield-position-random-7",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": 10.4535,
+        "longitudeInDegrees": -37.3824,
+        "instantUtc": "2026-01-17T06:21:10Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 115.7224,
+        "altitudeInDegrees": -19.7727
+      }
+    },
+    {
+      "id": "skyfield-position-random-8",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": 17.0329,
+        "longitudeInDegrees": 41.6026,
+        "instantUtc": "2026-06-25T22:13:05Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 239.325,
+        "altitudeInDegrees": 15.9384
+      }
+    },
+    {
+      "id": "skyfield-position-random-9",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": 13.5433,
+        "longitudeInDegrees": 119.4126,
+        "instantUtc": "2026-03-03T03:57:04Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 358.3156,
+        "altitudeInDegrees": -68.4344
+      }
+    },
+    {
+      "id": "skyfield-position-random-10",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": -58.6633,
+        "longitudeInDegrees": -111.525,
+        "instantUtc": "2026-01-25T12:44:23Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 178.791,
+        "altitudeInDegrees": -45.9551
+      }
+    },
+    {
+      "id": "skyfield-position-random-11",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": 10.9177,
+        "longitudeInDegrees": 100.119,
+        "instantUtc": "2026-04-04T23:04:20Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 238.8627,
+        "altitudeInDegrees": 25.5639
+      }
+    },
+    {
+      "id": "skyfield-position-random-12",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": -6.4893,
+        "longitudeInDegrees": 123.2738,
+        "instantUtc": "2026-05-07T17:16:28Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 117.5897,
+        "altitudeInDegrees": 40.4337
+      }
+    },
+    {
+      "id": "skyfield-position-random-13",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": -30.5792,
+        "longitudeInDegrees": -74.1054,
+        "instantUtc": "2026-07-21T14:35:14Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 121.6987,
+        "altitudeInDegrees": -18.8008
+      }
+    },
+    {
+      "id": "skyfield-position-random-14",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": 18.0115,
+        "longitudeInDegrees": -15.3612,
+        "instantUtc": "2026-01-02T18:49:01Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 64.3398,
+        "altitudeInDegrees": 11.9
+      }
+    },
+    {
+      "id": "skyfield-position-random-15",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": -10.208,
+        "longitudeInDegrees": 18.4564,
+        "instantUtc": "2026-04-19T00:39:58Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 34.4043,
+        "altitudeInDegrees": -75.1596
+      }
+    },
+    {
+      "id": "skyfield-position-random-16",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": 40.7335,
+        "longitudeInDegrees": 74.8115,
+        "instantUtc": "2026-12-28T19:56:08Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 112.8428,
+        "altitudeInDegrees": 30.4818
+      }
+    },
+    {
+      "id": "skyfield-position-random-17",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": 29.5098,
+        "longitudeInDegrees": 4.6385,
+        "instantUtc": "2026-05-03T10:35:47Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 269.4208,
+        "altitudeInDegrees": -60.2277
+      }
+    },
+    {
+      "id": "skyfield-position-random-18",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": -56.3031,
+        "longitudeInDegrees": 95.8636,
+        "instantUtc": "2026-01-12T13:18:28Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 171.9414,
+        "altitudeInDegrees": -14.1293
+      }
+    },
+    {
+      "id": "skyfield-position-random-19",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": -49.0814,
+        "longitudeInDegrees": -75.275,
+        "instantUtc": "2026-06-05T11:59:48Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 293.9743,
+        "altitudeInDegrees": 42.9991
+      }
+    },
+    {
+      "id": "skyfield-position-random-20",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": 63.0422,
+        "longitudeInDegrees": 125.0315,
+        "instantUtc": "2026-01-26T22:52:05Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 10.6024,
+        "altitudeInDegrees": -5.9826
+      }
+    },
+    {
+      "id": "skyfield-position-random-21",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": -33.2115,
+        "longitudeInDegrees": 153.7352,
+        "instantUtc": "2026-01-01T05:04:45Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 69.9783,
+        "altitudeInDegrees": -20.4635
+      }
+    },
+    {
+      "id": "skyfield-position-random-22",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": -3.2692,
+        "longitudeInDegrees": 172.9292,
+        "instantUtc": "2026-01-21T07:40:54Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 258.3811,
+        "altitudeInDegrees": 13.4219
+      }
+    },
+    {
+      "id": "skyfield-position-random-23",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": -8.7696,
+        "longitudeInDegrees": 23.847,
+        "instantUtc": "2026-06-04T08:15:49Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 244.9235,
+        "altitudeInDegrees": -7.0119
+      }
+    },
+    {
+      "id": "skyfield-position-random-24",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": 32.1576,
+        "longitudeInDegrees": -82.8808,
+        "instantUtc": "2026-03-19T02:03:43Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 292.5425,
+        "altitudeInDegrees": -30.3213
+      }
+    },
+    {
+      "id": "skyfield-position-random-25",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": -21.0747,
+        "longitudeInDegrees": -174.5462,
+        "instantUtc": "2026-02-03T20:14:34Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 273.2346,
+        "altitudeInDegrees": -14.9373
+      }
+    },
+    {
+      "id": "skyfield-position-random-26",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": 29.5163,
+        "longitudeInDegrees": -137.523,
+        "instantUtc": "2026-06-09T05:57:05Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 49.8557,
+        "altitudeInDegrees": -47.4371
+      }
+    },
+    {
+      "id": "skyfield-position-random-27",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": 23.2355,
+        "longitudeInDegrees": -176.0562,
+        "instantUtc": "2026-04-06T16:30:07Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 202.9428,
+        "altitudeInDegrees": 35.3862
+      }
+    },
+    {
+      "id": "skyfield-position-random-28",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": 34.6222,
+        "longitudeInDegrees": -116.0359,
+        "instantUtc": "2026-06-30T13:33:12Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 242.447,
+        "altitudeInDegrees": -7.3397
+      }
+    },
+    {
+      "id": "skyfield-position-random-29",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": -36.6247,
+        "longitudeInDegrees": 3.1916,
+        "instantUtc": "2026-08-06T05:00:30Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 8.8491,
+        "altitudeInDegrees": 30.7745
+      }
+    },
+    {
+      "id": "skyfield-position-random-30",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": 30.9877,
+        "longitudeInDegrees": -29.077,
+        "instantUtc": "2026-10-12T05:44:54Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 83.4203,
+        "altitudeInDegrees": -48.7786
+      }
+    },
+    {
+      "id": "skyfield-position-random-31",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": -47.5796,
+        "longitudeInDegrees": -28.528,
+        "instantUtc": "2026-05-30T00:49:33Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 357.6471,
+        "altitudeInDegrees": 65.5838
+      }
+    },
+    {
+      "id": "skyfield-position-random-32",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": -83.1375,
+        "longitudeInDegrees": 131.1602,
+        "instantUtc": "2026-03-24T16:03:06Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 247.0488,
+        "altitudeInDegrees": -31.8263
+      }
+    },
+    {
+      "id": "skyfield-position-random-33",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": 10.1547,
+        "longitudeInDegrees": 179.2453,
+        "instantUtc": "2026-11-09T00:20:16Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 202.7799,
+        "altitudeInDegrees": 56.2276
+      }
+    },
+    {
+      "id": "skyfield-position-random-34",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": -33.5832,
+        "longitudeInDegrees": -38.0611,
+        "instantUtc": "2026-01-08T14:58:17Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 253.1465,
+        "altitudeInDegrees": -25.5907
+      }
+    },
+    {
+      "id": "skyfield-position-random-35",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": 11.1845,
+        "longitudeInDegrees": 27.7055,
+        "instantUtc": "2026-11-28T19:22:11Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 67.3372,
+        "altitudeInDegrees": -7.7103
+      }
+    },
+    {
+      "id": "skyfield-position-random-36",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": 74.2199,
+        "longitudeInDegrees": -103.2324,
+        "instantUtc": "2026-01-17T08:28:23Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 45.868,
+        "altitudeInDegrees": -39.8377
+      }
+    },
+    {
+      "id": "skyfield-position-random-37",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": -74.8304,
+        "longitudeInDegrees": 39.7199,
+        "instantUtc": "2026-04-11T07:19:16Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 312.1511,
+        "altitudeInDegrees": 32.1211
+      }
+    },
+    {
+      "id": "skyfield-position-random-38",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": -22.8366,
+        "longitudeInDegrees": -153.5765,
+        "instantUtc": "2026-11-19T10:51:31Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 272.6342,
+        "altitudeInDegrees": 10.8628
+      }
+    },
+    {
+      "id": "skyfield-position-random-39",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": -33.8475,
+        "longitudeInDegrees": 49.1715,
+        "instantUtc": "2026-02-04T23:57:10Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 344.5248,
+        "altitudeInDegrees": 53.8521
+      }
+    },
+    {
+      "id": "skyfield-position-random-40",
+      "operation": "position",
+      "tags": [
+        "reference"
+      ],
+      "input": {
+        "latitudeInDegrees": 11.1028,
+        "longitudeInDegrees": -46.1865,
+        "instantUtc": "2026-01-07T00:33:18Z"
+      },
+      "expected": {
+        "azimuthInDegrees": 80.1861,
+        "altitudeInDegrees": 3.3439
+      }
+    },
+    {
       "id": "invalid-events-latitude-91",
       "operation": "events",
       "tags": [
@@ -13191,6 +13927,21 @@
       },
       "expected": {
         "error": "invalidInput"
+      }
+    },
+    {
+      "id": "invalid-position-latitude-91",
+      "operation": "position",
+      "tags": [
+        "invalid"
+      ],
+      "input": {
+        "latitudeInDegrees": 91,
+        "longitudeInDegrees": 0,
+        "instantUtc": "2026-01-01T00:00:00Z"
+      },
+      "expected": {
+        "error": "outOfRange"
       }
     }
   ]
