@@ -15,7 +15,7 @@ if [[ -n $(git status --porcelain _data/conformance) ]]; then
   git push --quiet origin main
 fi
 if scripts/deploy-status.sh | grep -q "is live\.$"; then
-  echo "✅ Nothing new: the site already shows every implementation's latest results."
+  echo "✅ Nothing new: the site already shows the latest results."
 else
   mise run deploy
 fi
