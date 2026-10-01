@@ -66,7 +66,7 @@ together.
 - `assets/diagrams/` holds the pages' diagrams: hand-written SVGs that follow the palette and rules on `styles.md`. Add one only where it explains something words don't.
 - `assets/css/pico.min.css` is Pico 2.1.1, copied in. `assets/css/site.css` holds the site's own rules; `table.ref` stacks a table below 64rem.
 - `checker/` is `algorithms-check`, in Go. `mise run checker` vets and tests it; pushing a `vX.Y.Z` tag releases binaries through `.github/workflows/checker.yml`, and implementations pin a version in mise.
-- `icon.svg` is the source of `favicon.192x192.png` and `apple-touch-icon.png`.
+- `icon.svg` is the source of `favicon.192x192.png` and `apple-touch-icon.png`. When it changes, re-render both and bump `?v=` in `_includes/head.html` and `_config.yml`: browsers keep favicons in their own cache.
 
 ## Writing
 
