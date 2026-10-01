@@ -105,7 +105,7 @@ An implementation is a public repo that follows one contract, so it can be check
   ```
 
 - `mise run test` runs `algorithms-check`, which feeds every published file to `mise run evaluate`, prints each case's result and writes `conformance.json`. It skips placeholder files.
-- Its CI runs the check weekly and on every push, and commits `conformance.json` to the root of `main`, where this site reads it.
+- Its CI runs the check daily and on every push, and commits `conformance.json` to the root of `main`. This site copies it within a day.
 
   ```json
   {
