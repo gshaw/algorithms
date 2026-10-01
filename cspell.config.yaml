@@ -17,6 +17,7 @@ ignorePaths:
   - "bearings/sources"
   - "sun/sources" # USNO's and Skyfield's output, verbatim
   - "moon/sources" # USNO's and Skyfield's output, verbatim # GeodSolve's output and the manuals' text, verbatim
+  - "tides/sources" # NOAA's and XTide's output, verbatim
 words:
   - gshaw
   - jsonify # Liquid filter
@@ -56,6 +57,12 @@ words:
   - NOAA
   - NCEI
   - USNO
+  - Schureman # author of SP 98, the tide manual
+  - harcon # a NOAA CO-OPS API path, harmonic constituents
+  - hilo # a NOAA CO-OPS API parameter, highs and lows
+  - XTide # David Flater's tide program, the tides check
+  - libtcd # XTide's library
+  - flaterco # XTide's site
   # Other names.
   - McMurdo
   - Tromsø
