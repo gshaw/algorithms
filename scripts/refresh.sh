@@ -14,7 +14,7 @@ if [[ -n $(git status --porcelain _data/conformance) ]]; then
   git commit --quiet -m "Implementations' results, from their conformance.json"
   git push --quiet origin main
 fi
-if scripts/deploy-status.sh | grep -q "is live\.$"; then
+if scripts/deploy-status.sh | grep -q "^origin/main (.*) is live\.$"; then
   echo "✅ Nothing new: the site already shows the latest results."
 else
   mise run deploy
