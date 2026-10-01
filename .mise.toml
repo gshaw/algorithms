@@ -79,7 +79,7 @@ run = "scripts/results.sh"
 
 # Results, then commit straight to main and deploy if anything changed. Rota runs it daily.
 [tasks.refresh]
-run = "scripts/refresh.sh"
+run = ["git pull --ff-only --quiet origin main", "scripts/refresh.sh"]
 
 [tasks.deploy-status]
 run = "scripts/deploy-status.sh"

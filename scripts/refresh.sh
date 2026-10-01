@@ -6,7 +6,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-git pull --ff-only --quiet origin main
+# The mise task pulls first: a pull here would change this file while bash runs it.
 scripts/deploy-guard.sh
 scripts/results.sh
 if [[ -n $(git status --porcelain _data/conformance) ]]; then
