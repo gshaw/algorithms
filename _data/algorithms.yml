@@ -43,3 +43,10 @@
   checked_against: USNO and Skyfield
   status: published
   issue: 6
+- name: Tide prediction
+  slug: tides
+  gives: The height at any instant, and the next high and low, from a station's harmonic constants
+  standard: Harmonic method, Schureman's SP 98 as NOAA runs it
+  checked_against: NOAA CO-OPS's predictions
+  status: published
+  issue: 38

@@ -47,6 +47,7 @@ A field's name says what it is and, for a number, its unit. The same name means 
       <tr><td>Text for a person</td><td>Ends in <code>Text</code></td><td><code>bearingText</code> <code>"000°"</code></td></tr>
       <tr><td>A choice</td><td>A lowerCamelCase word from the list in the field's meaning</td><td><code>hemisphere</code> <code>"north"</code>, <code>phaseName</code> <code>"waxingCrescent"</code></td></tr>
       <tr><td>Yes or no</td><td>Starts with <code>is</code> or <code>has</code></td><td><code>isAlwaysUp</code></td></tr>
+      <tr><td>A list</td><td>Named for what it holds, plural. An array of objects whose fields follow these rules. Only inputs are lists; every output is a single value.</td><td><code>constituents</code></td></tr>
       <tr><td>A pair of places or bearings</td><td>Starts with <code>from</code> and <code>to</code></td><td><code>fromLatitudeInDegrees</code></td></tr>
       <tr><td>Angles</td><td>Degrees, except where a field says hours. East and north positive; bearings clockwise from north, 0 to 360.</td><td><code>rightAscensionInHours</code></td></tr>
       <tr><td>Operations</td><td>lowerCamelCase, a verb or the thing given</td><td><code>toMgrs</code>, <code>events</code></td></tr>
