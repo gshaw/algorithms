@@ -233,6 +233,21 @@ PARSE = [
     ("mgrs-unpadded", "4QFJ1234567890"),
 ]
 
+# UTM typed with a latitude band letter, as GPS units write it. GeoConvert reads the
+# letter as a hemisphere and refuses other bands, so each is run in its hemisphere form.
+BANDS = [
+    ("utm-band", "31T 401505 4606374", "31n 401505 4606374"),
+    ("utm-band-s", "10S 585822 4132180", "10n 585822 4132180"),
+    ("utm-hemisphere-s", "56s 334431 6251060", "56s 334431 6251060"),
+    ("utm-band-south", "56H 334431 6251060", "56s 334431 6251060"),
+]
+
+# Band letters that don't match the point: the band's latitudes, from NGA.STND.0037,
+# and the point's latitude from GeoConvert must be more than 0.01° apart.
+WRONG_BANDS = [
+    ("utm-wrong-band", "31P 401505 4606374", "31n 401505 4606374", (8, 16)),
+]
+
 KEBAB = {"toUtm": "to-utm", "fromUtm": "from-utm", "toMgrs": "to-mgrs", "fromMgrs": "from-mgrs", "parse": "parse"}
 
 INVALID = [
@@ -253,10 +268,18 @@ def parse_and_invalid_cases():
     out = geoconvert("-g -p 9", [text for _, text in PARSE])
     cases = [{"id": f"parse-{name}", "operation": "parse", "tags": ["reference", "edge"],
               "input": {"text": text}, "expected": latlon(o)} for (name, text), o in zip(PARSE, out)]
+    out = geoconvert("-g -p 9", [hemisphere_form for _, _, hemisphere_form in BANDS])
+    cases += [{"id": f"parse-{name}", "operation": "parse", "tags": ["reference", "edge"],
+               "input": {"text": text}, "expected": latlon(o)} for (name, text, _), o in zip(BANDS, out)]
     for operation, name, case_input, error, text, mode in INVALID:
         assert geoconvert(mode, [text])[0].startswith("ERROR"), (name, text)
         cases.append({"id": f"invalid-{KEBAB[operation]}-{name}", "operation": operation, "tags": ["reference", "invalid"],
                       "input": case_input, "expected": {"error": error}})
+    for name, text, hemisphere_form, (south, north) in WRONG_BANDS:
+        latitude = latlon(geoconvert("-g -p 9", [hemisphere_form])[0])["latitudeInDegrees"]
+        assert not south - 0.01 <= latitude <= north + 0.01, (name, latitude)
+        cases.append({"id": f"invalid-parse-{name}", "operation": "parse", "tags": ["reference", "invalid"],
+                      "input": {"text": text}, "expected": {"error": "invalidInput"}})
     # Past the range this file defines; GeoConvert would give 6 digits.
     cases.append({"id": "invalid-to-mgrs-precision-6", "operation": "toMgrs", "tags": ["invalid"],
                   "input": {"latitudeInDegrees": 49.2827, "longitudeInDegrees": -123.1207, "precisionInDigits": 6},
@@ -299,6 +322,11 @@ NOTES = {
     "parse-colons": "Colons instead of marks.",
     "parse-utm": "Three parts: a UTM zone and hemisphere, easting and northing.",
     "parse-mgrs": "One part: an MGRS reference, read as its square's centre.",
+    "parse-utm-band": "A latitude band letter after the zone, as GPS units write UTM: T is 40° N to 48° N.",
+    "parse-utm-band-s": "S is band S, 32° N to 40° N, when the point falls in it. GeoConvert reads it as south.",
+    "parse-utm-hemisphere-s": "Read as band S this would be 56° N, outside the band, so S is the southern hemisphere.",
+    "parse-utm-band-south": "Band H, 40° S to 32° S: the southern hemisphere.",
+    "invalid-parse-utm-wrong-band": "Band P is 8° N to 16° N, but the point is at 41.6° N: invalidInput.",
     "invalid-parse-two-latitudes": "Both lettered N: invalidInput.",
     "invalid-from-mgrs-odd-digits": "An odd number of digits: invalidInput.",
     "invalid-from-utm-easting-1500-km": "Past the zone's easting limits: outOfRange.",
