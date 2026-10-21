@@ -1,6 +1,6 @@
 {
   "algorithm": "utm-mgrs",
-  "publishedDate": "2026-09-29",
+  "publishedDate": "2026-10-21",
   "earthModel": "WGS84",
   "sources": [
     {
@@ -102,7 +102,7 @@
     "pointScale": "The grid's scale at the point: 0.9996 on a UTM central meridian, 0.994 at a pole",
     "precisionInDigits": "0 to 5 digits each for easting and northing: 0 names the 100 km square, 5 is 1 m",
     "mgrs": "GeographicLib's form: the zone padded to two digits, the band, the square's two letters and the digits, with no spaces, like 04QFJ1234567890. UPS has no zone: ZAH0000000000. fromMgrs also takes an unpadded zone and lower case.",
-    "text": "A coordinate as a person types it: decimal degrees; degrees and minutes, or degrees, minutes and seconds, with ° ' \" or colons; hemisphere letters before or after, and either order when lettered. Or UTM as 10n 491221 5458889, or MGRS."
+    "text": "A coordinate as a person types it: decimal degrees; degrees and minutes, or degrees, minutes and seconds, with ° ' \" or colons; hemisphere letters before or after, and either order when lettered. Or UTM as 10n 491221 5458889, where the letter is a hemisphere (n, s, north, south) or a latitude band (10U 491221 5458889); S is band S when the point falls in 32° N to 40° N, and the southern hemisphere otherwise. Or MGRS."
   },
   "tolerances": {
     "latitudeInDegrees": "0.0000001",
@@ -1416,6 +1416,70 @@
       }
     },
     {
+      "id": "parse-utm-band",
+      "operation": "parse",
+      "tags": [
+        "reference",
+        "edge"
+      ],
+      "note": "A latitude band letter after the zone, as GPS units write UTM: T is 40° N to 48° N.",
+      "input": {
+        "text": "31T 401505 4606374"
+      },
+      "expected": {
+        "latitudeInDegrees": 41.6030009064906,
+        "longitudeInDegrees": 1.81802833074185
+      }
+    },
+    {
+      "id": "parse-utm-band-s",
+      "operation": "parse",
+      "tags": [
+        "reference",
+        "edge"
+      ],
+      "note": "S is band S, 32° N to 40° N, when the point falls in it. GeoConvert reads it as south.",
+      "input": {
+        "text": "10S 585822 4132180"
+      },
+      "expected": {
+        "latitudeInDegrees": 37.33233109897628,
+        "longitudeInDegrees": -122.03122824153604
+      }
+    },
+    {
+      "id": "parse-utm-hemisphere-s",
+      "operation": "parse",
+      "tags": [
+        "reference",
+        "edge"
+      ],
+      "note": "Read as band S this would be 56° N, outside the band, so S is the southern hemisphere.",
+      "input": {
+        "text": "56s 334431 6251060"
+      },
+      "expected": {
+        "latitudeInDegrees": -33.86780326102274,
+        "longitudeInDegrees": 151.20999499141942
+      }
+    },
+    {
+      "id": "parse-utm-band-south",
+      "operation": "parse",
+      "tags": [
+        "reference",
+        "edge"
+      ],
+      "note": "Band H, 40° S to 32° S: the southern hemisphere.",
+      "input": {
+        "text": "56H 334431 6251060"
+      },
+      "expected": {
+        "latitudeInDegrees": -33.86780326102274,
+        "longitudeInDegrees": 151.20999499141942
+      }
+    },
+    {
       "id": "invalid-to-utm-latitude-91",
       "operation": "toUtm",
       "tags": [
@@ -1532,6 +1596,21 @@
       "note": "Both lettered N: invalidInput.",
       "input": {
         "text": "49.2827N 49.2827N"
+      },
+      "expected": {
+        "error": "invalidInput"
+      }
+    },
+    {
+      "id": "invalid-parse-utm-wrong-band",
+      "operation": "parse",
+      "tags": [
+        "reference",
+        "invalid"
+      ],
+      "note": "Band P is 8° N to 16° N, but the point is at 41.6° N: invalidInput.",
+      "input": {
+        "text": "31P 401505 4606374"
       },
       "expected": {
         "error": "invalidInput"
