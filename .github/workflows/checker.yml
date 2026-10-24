@@ -35,4 +35,4 @@ jobs:
         run: |
           gh release create "$GITHUB_REF_NAME" checker/dist/*.tar.gz \
             --title "Checker $GITHUB_REF_NAME" \
-            --notes 'algorithms-check. Install with mise: "github:gshaw/algorithms" = { version = "latest", exe = "algorithms-check" }'
+            --notes 'algorithms-check. Install with mise: "github:gshaw/algorithms" = "latest"'

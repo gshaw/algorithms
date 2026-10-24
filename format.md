@@ -93,7 +93,7 @@ An implementation is a public repo that follows one contract, so it can be check
 
   ```toml
   [tools]
-  "github:gshaw/algorithms" = { version = "0.2.0", exe = "algorithms-check" }
+  "github:gshaw/algorithms" = "0.2.0"
   ```
 
 - `mise run evaluate` reads cases on standard input, one JSON object per line, and writes one result per line in any order. It never sees `expected`. It runs once per algorithm, and answers `notImplemented` for an algorithm it doesn't have.
